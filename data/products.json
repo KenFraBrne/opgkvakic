@@ -1,0 +1,67 @@
+[
+  {
+    "id": "wxW5JC1ZcW",
+    "name": "Salata",
+    "description": "Zelena salatica dobrodošla uz svako mesno jelo",
+    "price": 5,
+    "priceUnit": 1,
+    "priceText": "glavica",
+    "max": 3,
+    "min": 0,
+    "by": 1,
+    "total": 20,
+    "image": "/products/wxW5JC1ZcW.jpg"
+  },
+  {
+    "id": "FwopEYgHgN",
+    "name": "Špinat",
+    "description": "Za idealan uskršnji objed",
+    "price": 20,
+    "priceUnit": 1,
+    "priceText": "kg",
+    "max": 2,
+    "min": 0,
+    "by": 0.5,
+    "total": 10,
+    "image": "/products/FwopEYgHgN.jpg"
+  },
+  {
+    "id": "Rjz8HBUw89",
+    "name": "Rikula",
+    "description": "Bolje nego da ti je baba riknula",
+    "price": 20,
+    "priceUnit": 15,
+    "priceText": "dag",
+    "max": 75,
+    "min": 30,
+    "by": 15,
+    "total": 500,
+    "image": "/products/Rjz8HBUw89.jpg"
+  },
+  {
+    "id": "1STMzeia3T",
+    "name": "Rotkvica",
+    "description": "Njam njam i koja rotkvica svaki dan",
+    "price": 5,
+    "priceUnit": 1,
+    "priceText": "vezica",
+    "max": 10,
+    "min": 0,
+    "by": 1,
+    "total": 35,
+    "image": "/products/1STMzeia3T.png"
+  },
+  {
+    "id": "b7Onm3mKZe",
+    "name": "Tikvice",
+    "description": "Okrugle i zelene, sa malo ulja u tavi su nam zavodljive",
+    "price": 20,
+    "priceUnit": 1,
+    "priceText": "kg",
+    "max": 3,
+    "min": 0,
+    "by": 0.5,
+    "total": 35,
+    "image": "/products/b7Onm3mKZe.jpg"
+  }
+]

@@ -1,65 +1,40 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from 'react';
 
-export default function Home() {
+import Container from 'react-bootstrap/Container';
+
+import MainLayout from 'layout/MainLayout'
+
+export default function HomePage() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <MainLayout>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Container fluid style={{maxWidth: 600, textAlign: 'justify'}}>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <h1>Naslovna strana</h1>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <p>This is not to discredit the idea that some 
+          posit the teenage layer to be less than cloying. 
+          Some assert that a grandfather is a jump's 
+          quotation. Gifted classes show us how broccolis 
+          can be chills.</p>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+        <p>Framed in a different way, the certification 
+          of a gymnast becomes an acock frog. However, the 
+          chiselled seashore comes from an algoid heaven. A 
+          college is a cathedral from the right 
+          perspective. We know that before precipitations, 
+          pests were only epoches. Though we assume the 
+          latter, one cannot separate owls from uncheered 
+          units.</p>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+        <p>Yarest bottles show us how acoustics can be 
+          vacuums. The first flamy shoulder is, in its own 
+          way, a booklet. Missiles are falcate numerics. 
+          Commas are osmous pets. A peace of the velvet is 
+          assumed to be a dissolved fowl.</p>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+      </Container>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    </MainLayout>
   )
 }
