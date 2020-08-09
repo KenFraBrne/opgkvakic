@@ -36,14 +36,19 @@ export const subProduct = (order, id, products) => {
   if (newAmount === 0){
     delete newOrder.products[id];
   }
-  console.log(order);
-  console.log(newOrder);
   return newOrder;
 
 }
 
-export const setOrder = (localOrder) => {
+export const setOrder = (order) => {
   return {
-    ...localOrder,
+    ...order,
+  }
+}
+
+export const setDelivery = (order, id) => {
+  return {
+    ...order,
+    delivery: id,
   }
 }

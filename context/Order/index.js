@@ -8,7 +8,7 @@ const OrderProvider = ({children}) => {
 
   const initialOrder = {
     products: {},
-    delivery: {},
+    delivery: null,
   };
 
   const resetOrder = () => {
