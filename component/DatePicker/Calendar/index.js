@@ -3,11 +3,13 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
-const Calendar = ({deliveries, calendarDate, onClick}) => {
+const Calendar = ({deliveries, calendarDate, calendarDayChoose}) => {
 
+  // current date
   const date = new Date();
   date.setHours(0, 0, 0, 0);
 
+  // delivery epoch times (rounded to nearest day)
   const deliveryTimes = deliveries.map( delivery => {
     const day = new Date(delivery.from);
     day.setHours(0);
@@ -26,14 +28,15 @@ const Calendar = ({deliveries, calendarDate, onClick}) => {
   // calendar body
   const cols = (ir, ic) => {
 
+    // align date with weekday
     const day = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 1, 0);
     day.setDate(ir*7+ic+1-(day.getDay()+6)%7);
 
+    // style according to criteria
     const isDelivery = deliveryTimes.includes(day.getTime());
     const isMonth = day.getMonth() === calendarDate.getMonth();
     const isTime = day.getTime() === date.getTime();
     const isLate = day.getTime() - date.getTime() < 1000*3600*24*2;
-
     const style = {
       textDecoration: isTime ? 'underline' : 'none',
       color: isMonth && !isLate ? 'black' : '#dddddd',
@@ -43,11 +46,12 @@ const Calendar = ({deliveries, calendarDate, onClick}) => {
       padding: '0 0',
     };
 
+    // if delivery, make it a button
     const col = isDelivery && isMonth && !isLate ?
       <Button
         variant="light"
         className="p-0 font-weight-bold"
-        onClick={() => onClick(day)}>
+        onClick={() => calendarDayChoose(day)}>
         {day.getDate()}
       </Button> :
       day.getDate();
@@ -56,11 +60,13 @@ const Calendar = ({deliveries, calendarDate, onClick}) => {
 
   };
 
+  // rows of days
   const rows = (ir) => {
     const row = [...Array(7)].map((col, ic) => cols(ir, ic));
     return <tr key={ir}>{row}</tr>;
   };
 
+  // 6 week calendar
   const body = [...Array(6)].map((row, ir) => rows(ir));
 
   return (
