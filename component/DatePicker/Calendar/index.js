@@ -6,8 +6,8 @@ import Button from 'react-bootstrap/Button';
 const Calendar = ({deliveries, calendarDate, calendarDayChoose}) => {
 
   // current date
-  const date = new Date();
-  date.setHours(0, 0, 0, 0);
+  const nowDate = new Date();
+  nowDate.setHours(0);
 
   // delivery epoch times (rounded to nearest day)
   const deliveryTimes = deliveries.map( delivery => {
@@ -35,8 +35,8 @@ const Calendar = ({deliveries, calendarDate, calendarDayChoose}) => {
     // style according to criteria
     const isDelivery = deliveryTimes.includes(day.getTime());
     const isMonth = day.getMonth() === calendarDate.getMonth();
-    const isTime = day.getTime() === date.getTime();
-    const isLate = day.getTime() - date.getTime() < 1000*3600*24*2;
+    const isTime = day.getTime() === nowDate.getTime();
+    const isLate = day.getTime() - nowDate.getTime() < 1000*3600*24*2;
     const style = {
       textDecoration: isTime ? 'underline' : 'none',
       color: isMonth && !isLate ? 'black' : '#dddddd',

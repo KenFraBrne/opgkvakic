@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
+
+import { OrderContext } from 'context/Order';
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -10,7 +12,21 @@ import Calendar from './Calendar'
 
 import { FiCalendar, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 
-const DatePicker = ({deliveries, orderDate, setOrderDate}) => {
+const DatePicker = ({deliveries, deliveryDay, setDeliveryDay}) => {
+
+  // order context
+  const { order } = useContext(OrderContext);
+
+  // set delivery date if already in order
+  useEffect(() => {
+    if (order.delivery) {
+      const id = order.delivery;
+      const delivery = deliveries.find(delivery => delivery.id === id);
+      let date = new Date(delivery.from);
+      date.setHours(0);
+      setDeliveryDay(date);
+    }
+  }, [])
 
   // dates
   const nowDate = new Date();
@@ -28,97 +44,71 @@ const DatePicker = ({deliveries, orderDate, setOrderDate}) => {
   };
 
   const calendarDayChoose = (day) => {
-    setOrderDate(day);
+    setDeliveryDay(day);
     setOverlayShow(!overlayShow);
   };
 
-  // orderDateString
-  const orderDateString =
-    orderDate ?
-    orderDate.toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}) :
+  // deliveryDayString
+  const deliveryDayString =
+    deliveryDay ?
+    deliveryDay.toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric'}) :
     "";
 
   return (
-
-    <Container fluid className="d-flex px-0 py-2">
-
-      <div className="h4 pr-3">Dostava:</div>
-
-      <div>
-
-        <InputGroup className="mb-3">
-
-          <FormControl
-            readOnly
-            disabled
-            ref={overlayRef}
-            value={orderDateString}
-            placeholder="Izaberite datum dostave"/>
-
-          <InputGroup.Append>
-
-            <Button
-              onClick={() => setOverlayShow(!overlayShow)}
-              variant="outline-secondary">
-              <FiCalendar />
-            </Button>
-
-          </InputGroup.Append>
-
-        </InputGroup>
-
-        <Overlay
-          show={overlayShow}
-          target={overlayRef.current}
-          placement="bottom">
-          <Popover show id="popover-bottom">
-
-            <PopoverTitle>
-
-              <div className="d-flex">
-
-                <div className="flex-grow-1 text-right pr-1">
-                  <Button
-                    variant=""
-                    className="p-0"
-                    disabled={calendarDate < nowDate}
-                    onClick={() => calendarMonthChange(-1)}>
-                    <FiChevronsLeft size="2em"/>
-                  </Button>
-                </div>
-
-                <div className="h6 px-1 my-auto">
-                  {calendarDate.toLocaleString([], {month: 'short', year: 'numeric'})}
-                </div>
-
-                <div className="flex-grow-1 pl-1">
-                  <Button 
-                    variant=""
-                    className="p-0"
-                    onClick={() => calendarMonthChange(+1)}>
-                    <FiChevronsRight size="2em"/>
-                  </Button>
-                </div>
-
+    <React.Fragment>
+      <InputGroup className="mb-3">
+        <FormControl
+          readOnly
+          disabled
+          ref={overlayRef}
+          value={deliveryDayString}
+          placeholder="Izaberite datum dostave"/>
+        <InputGroup.Append>
+          <Button
+            onClick={() => setOverlayShow(!overlayShow)}
+            variant="outline-secondary">
+            <FiCalendar />
+          </Button>
+        </InputGroup.Append>
+      </InputGroup>
+      <Overlay
+        show={overlayShow}
+        target={overlayRef.current}
+        placement="bottom">
+        <Popover show id="popover-bottom">
+          <PopoverTitle>
+            <div className="d-flex">
+              <div className="flex-grow-1 text-right pr-1">
+                <Button
+                  variant=""
+                  className="p-0"
+                  disabled={calendarDate < nowDate}
+                  onClick={() => calendarMonthChange(-1)}>
+                  <FiChevronsLeft size="2em"/>
+                </Button>
               </div>
-            </PopoverTitle>
-
-            <PopoverContent>
-              <Calendar
-                deliveries={deliveries}
-                calendarDate={calendarDate}
-                calendarDayChoose={(day) => calendarDayChoose(day)}/>
-            </PopoverContent>
-
-          </Popover>
-        </Overlay>
-
-      </div>
-
-    </Container>
-
-
-
+              <div className="h6 px-1 my-auto">
+                {calendarDate.toLocaleString([], {month: 'short', year: 'numeric'})}
+              </div>
+              <div className="flex-grow-1 pl-1">
+                <Button 
+                  variant=""
+                  className="p-0"
+                  onClick={() => calendarMonthChange(+1)}>
+                  <FiChevronsRight size="2em"/>
+                </Button>
+              </div>
+            </div>
+          </PopoverTitle>
+          <PopoverContent>
+            <Calendar
+              deliveries={deliveries}
+              calendarDate={calendarDate}
+              calendarDayChoose={(day) => calendarDayChoose(day)}/>
+          </PopoverContent>
+        </Popover>
+      </Overlay>
+    </React.Fragment>
   )
 }
 

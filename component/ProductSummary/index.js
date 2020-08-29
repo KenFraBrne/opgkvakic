@@ -42,7 +42,7 @@ const ProductSummary = ({ products }) => {
 
   return (
 
-    <Table striped bordered hover size="sm" className="my-3">
+    <Table striped bordered hover size="sm">
       <thead>
         <tr>
           <th></th>
