@@ -13,10 +13,10 @@ import Footer from 'component/Footer';
 
 const MainLayout = ({children}) => {
 
+  // order context
   const { order, orderDispatch } = useContext(OrderContext);
 
   // load local order
-  // ----------------
   useEffect(() => {
     const localOrderJSON = localStorage.getItem('localOrder');
     const localOrder = JSON.parse(localOrderJSON);
@@ -27,6 +27,12 @@ const MainLayout = ({children}) => {
       });
     };
   }, []);
+
+  // save order locally when changed
+  useEffect(() => {
+    const localOrderJSON = JSON.stringify(order)
+    localStorage.setItem('localOrder', localOrderJSON);
+  }, [order]);
 
   return (
     <Container fluid className="d-flex flex-column h-100 p-0">

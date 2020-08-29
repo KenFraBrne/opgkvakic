@@ -14,16 +14,11 @@ var removeDiacritics = require('diacritics').remove;
 
 const OrderPage = ({products}) => {
 
-  const { order, orderDispatch } = useContext(OrderContext);
+  // order context
+  const { orderDispatch } = useContext(OrderContext);
 
+  // form text state
   const [formText, setFormText] = useState('');
-
-  // save order locally
-  // ------------------
-  useEffect(() => {
-    const localOrderJSON = JSON.stringify(order)
-    localStorage.setItem('localOrder', localOrderJSON);
-  }, [order]);
 
   // product change handlers
   // -----------------------
