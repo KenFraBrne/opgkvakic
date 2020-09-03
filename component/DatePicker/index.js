@@ -12,6 +12,8 @@ import Calendar from './Calendar'
 
 import { FiCalendar, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 
+import getFloorDate from 'util/getFloorDate';
+
 const DatePicker = ({deliveries, deliveryDay, setDeliveryDay}) => {
 
   // order context
@@ -20,10 +22,8 @@ const DatePicker = ({deliveries, deliveryDay, setDeliveryDay}) => {
   // set delivery date if already in order
   useEffect(() => {
     if (order.delivery) {
-      const id = order.delivery;
-      const delivery = deliveries.find(delivery => delivery.id === id);
-      let date = new Date(delivery.from);
-      date.setHours(0);
+      const delivery = deliveries.find(delivery => delivery._id === order.delivery);
+      const date = getFloorDate(delivery.from);
       setDeliveryDay(date);
     }
   }, [])

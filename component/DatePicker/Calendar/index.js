@@ -3,17 +3,17 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
+import getFloorDate from 'util/getFloorDate';
+
 const Calendar = ({deliveries, calendarDate, calendarDayChoose}) => {
 
   // current date
-  const nowDate = new Date();
-  nowDate.setHours(0);
+  const nowDate = getFloorDate();
 
   // delivery epoch times (rounded to nearest day)
   const deliveryTimes = deliveries.map( delivery => {
-    const day = new Date(delivery.from);
-    day.setHours(0);
-    return day.getTime();
+    const date = new Date(delivery.from);
+    return getFloorDate(delivery.from).getTime();
   })
 
   // calendar head
@@ -36,10 +36,9 @@ const Calendar = ({deliveries, calendarDate, calendarDayChoose}) => {
     const isDelivery = deliveryTimes.includes(day.getTime());
     const isMonth = day.getMonth() === calendarDate.getMonth();
     const isTime = day.getTime() === nowDate.getTime();
-    const isLate = day.getTime() - nowDate.getTime() < 1000*3600*24*2;
     const style = {
       textDecoration: isTime ? 'underline' : 'none',
-      color: isMonth && !isLate ? 'black' : '#dddddd',
+      color: isMonth ? 'black' : '#dddddd',
       verticalAlign: 'middle',
       textAlign: 'center',
       fontSize: '1rem',
@@ -47,7 +46,7 @@ const Calendar = ({deliveries, calendarDate, calendarDayChoose}) => {
     };
 
     // if delivery, make it a button
-    const col = isDelivery && isMonth && !isLate ?
+    const col = isDelivery && isMonth ?
       <Button
         variant="light"
         className="p-0 font-weight-bold"
