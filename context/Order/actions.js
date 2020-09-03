@@ -1,5 +1,5 @@
 export const addProduct = (order, id, products) => {
-  const product = products.find(product => product.id === id);
+  const product = products.find(product => product._id === id);
   const amount = order.products[id] ? order.products[id] : 0;
   const newAmount =
     ( amount < product.max ) && ( amount < product.total ) ?
@@ -18,7 +18,7 @@ export const addProduct = (order, id, products) => {
 }
 
 export const subProduct = (order, id, products) => {
-  const product = products.find(product => product.id === id);
+  const product = products.find(product => product._id === id);
   const amount = order.products[id] ? order.products[id] : 0;
   const newAmount = 
     ( amount > 0 ) ?

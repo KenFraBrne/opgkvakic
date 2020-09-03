@@ -14,7 +14,7 @@ const ProductSummary = ({ products }) => {
   let orderVerbose = [];
   for (let [id, amount] of Object.entries(order.products)){
     if (amount>0){
-      let product = products.find(product => product.id === id);
+      let product = products.find(product => product._id === id);
       product.amount = amount;
       product.priceTotal = amount * product.price/product.priceUnit;
       orderVerbose.push(product);

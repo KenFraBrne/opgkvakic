@@ -8,11 +8,11 @@ import ProductCard from 'component/ProductCards/ProductCard';
 const ProductCards = ({products, addProduct, subProduct}) => {
 
   const cards = products.map(product => (
-    <Col key={product.id} className="p-2">
+    <Col key={product._id} className="p-2">
       <ProductCard
         product={product}
-        addProduct={() => addProduct(product.id)}
-        subProduct={() => subProduct(product.id)}/>
+        addProduct={() => addProduct(product._id)}
+        subProduct={() => subProduct(product._id)}/>
     </Col>
   ));
   

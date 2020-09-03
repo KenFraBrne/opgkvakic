@@ -35,7 +35,7 @@ const ProductCard = ({product, addProduct, subProduct}) => {
             variant="danger"
             onClick={subProduct}> - </Button>
           <Container className="text-center my-auto">
-            {amountPretty(product, order.products[product.id])}
+            {amountPretty(product, order.products[product._id])}
           </Container>
           <Button
             className="flex-shrink-0"

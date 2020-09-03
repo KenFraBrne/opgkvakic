@@ -13,7 +13,7 @@ import ProductCards from 'component/ProductCards';
 var removeDiacritics = require('diacritics').remove;
 
 const OrderPage = ({products}) => {
-
+  
   // order context
   const { orderDispatch } = useContext(OrderContext);
 
@@ -21,7 +21,6 @@ const OrderPage = ({products}) => {
   const [formText, setFormText] = useState('');
 
   // product change handlers
-  // -----------------------
   const addProduct = (id) => {
     orderDispatch({
       type: types.ADD_PRODUCT,
@@ -39,7 +38,6 @@ const OrderPage = ({products}) => {
   };
 
   // filter products with form input
-  // -------------------------------
   const re = new RegExp(removeDiacritics(formText), 'i');
   const filteredProducts = products.filter(product => re.test(removeDiacritics(product.name)));
 
@@ -69,10 +67,10 @@ const OrderPage = ({products}) => {
 
 
 export async function getServerSideProps(){
-  let products = await require('data/products.json');
+  const products = await fetch('http://localhost:3000/api/products').then(res => res.json());
   return {
     props: {
-      products: products
+      products: products,
     }
   }
 }

@@ -47,13 +47,17 @@ const CartPage = ({products, deliveries}) => {
         </div>
       </Container>
 
-      <Button variant="primary" size="lg" className="my-3">
+      <Button
+        disabled
+        variant="primary"
+        size="lg"
+        className="my-3">
         Naručite
       </Button>
 
     </Container>;
 
-  // body if order not defined
+  // change body if order not defined
   if ( Object.keys(order.products).length === 0 ) {
     body =
       <Container fluid style={{maxWidth: 650}}>
@@ -69,8 +73,8 @@ const CartPage = ({products, deliveries}) => {
 }
 
 export async function getServerSideProps(){
-  let products = await require('data/products.json');
-  let deliveries = await require('data/deliveries.json');
+  const products = await fetch('http://localhost:3000/api/products').then(res => res.json());
+  const deliveries = await fetch('http://localhost:3000/api/deliveries').then(res => res.json());
   return {
     props: {
       products: products,
