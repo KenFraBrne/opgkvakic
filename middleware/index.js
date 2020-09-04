@@ -1,9 +1,12 @@
 import nextConnect from 'next-connect';
-import mongoDatabase from 'middleware/mongoDatabase';
-import mongoSession from 'middleware/mongoSession';
+import database from 'middleware/database';
+import session from 'middleware/session';
+import passport from 'middleware/passport';
 
 const handler = nextConnect()
-  .use(mongoDatabase)
-  .use(mongoSession);
+  .use(database)
+  .use(session)
+  .use(passport.initialize())
+  .use(passport.session());
 
 export default handler;

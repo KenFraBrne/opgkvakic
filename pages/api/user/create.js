@@ -27,9 +27,15 @@ handler.post(async (req, res) => {
           username,
           password: hashedPassword,
           email,
-        });
-      res.statusMessage = 'Korisnik upisan!';
-      res.status(201).end();
+        })
+        .then(res => res.ops[0]);
+      req.login(user, (err) => {
+        if (err){
+          res.status(503).send('Greška pri registraciji');
+        } else {
+          res.status(201).send('Korisnik upisan!');
+        }
+      })
     }
   };
 });
