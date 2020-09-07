@@ -57,10 +57,10 @@ export async function getStaticPaths(){
   const posts = await require('data/posts.json');
   const ids = posts.map(post => post.id);
   const paths = ids.map(id => (
-    { params: { id: id } }
+    { params: { id } }
   ));
   return {
-    paths: paths,
+    paths,
     fallback: false,
   }
 }
@@ -70,7 +70,7 @@ export async function getStaticProps({params}){
   let post = posts.filter(post => post.id === params.id)[0];
   return {
     props: {
-      post: post
+      post
     }
   }
 }

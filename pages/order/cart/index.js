@@ -76,10 +76,7 @@ export async function getServerSideProps(){
   const products = await fetch('http://localhost:3000/api/products').then(res => res.json());
   const deliveries = await fetch('http://localhost:3000/api/deliveries').then(res => res.json());
   return {
-    props: {
-      products: products,
-      deliveries: deliveries,
-    }
+    props: { products, deliveries }
   }
 }
 

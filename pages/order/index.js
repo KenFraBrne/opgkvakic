@@ -69,9 +69,7 @@ const OrderPage = ({products}) => {
 export async function getServerSideProps(){
   const products = await fetch('http://localhost:3000/api/products').then(res => res.json());
   return {
-    props: {
-      products: products,
-    }
+    props: { products }
   }
 }
 export default OrderPage;
