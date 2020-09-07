@@ -40,9 +40,9 @@ export const subProduct = (order, id, products) => {
 
 }
 
-export const setOrder = (order) => {
+export const setOrder = (savedOrder) => {
   return {
-    ...order,
+    ...savedOrder,
   }
 }
 

@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
+import _ from 'lodash';
+
 import { OrderContext } from 'context/Order';
 import * as types from 'context/Order/types';
 
@@ -16,22 +18,31 @@ const MainLayout = ({children}) => {
   // order context
   const { order, orderDispatch } = useContext(OrderContext);
 
-  // load local order
+  // load order
   useEffect(() => {
-    const localOrderJSON = localStorage.getItem('localOrder');
-    const localOrder = JSON.parse(localOrderJSON);
-    if (localOrder) {
-      orderDispatch({
-        type: types.SET_ORDER,
-        localOrder: localOrder,
+    fetch('/api/order').then(res => {
+      res.json().then(res => {
+        console.log('order loaded');
+        if (!_.isEmpty(res) && !_.isEqual(order, res)) {
+          console.log('order dispatched');
+          orderDispatch({
+            type: types.SET_ORDER,
+            savedOrder: res,
+          });
+        };
       });
-    };
+    });
   }, []);
 
-  // save order locally when changed
+  // save order when changed
   useEffect(() => {
-    const localOrderJSON = JSON.stringify(order)
-    localStorage.setItem('localOrder', localOrderJSON);
+    fetch('/api/order', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(order),
+    }).then(res => {
+      console.log('order sent');
+    });
   }, [order]);
 
   return (
@@ -48,7 +59,7 @@ const MainLayout = ({children}) => {
         {children}
       </Container>
 
-      <Footer />
+      {/* <Footer /> */}
 
     </Container>
   );
