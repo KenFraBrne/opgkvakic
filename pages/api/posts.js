@@ -5,12 +5,16 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.get(async (req, res) => {
-  const posts = await req.db
+handler.get( (req, res) => {
+  req.db
     .collection('posts')
     .find({})
-    .toArray();
-  res.send(posts);
+    .toArray()
+    .then(posts => {
+      res.status(200).send({ posts });
+    }).catch(err => {
+      res.status(500).send({ posts: null });
+    });
 });
 
 export default handler;
