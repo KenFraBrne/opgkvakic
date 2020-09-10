@@ -1,6 +1,4 @@
-import React, { useContext } from 'react';
-
-import { OrderContext } from 'context/Order';
+import React from 'react';
 
 import Head from 'next/head';
 import Link from 'next/link';
@@ -14,16 +12,16 @@ import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
 
 import { FiShoppingCart } from 'react-icons/fi';
 
-const MojNavbar = (props) => {
+import getServerData from 'util/getServerData';
 
-  const {order, orderDispatch} = useContext(OrderContext);
-
+const MojNavbar = () => {
+  
+  // order & user
+  const { order } = getServerData('/api/order');
+  const { user } = getServerData('/api/user');
+  
   // cart color
-  const amount = 
-    Object.keys(order.products).length > 0 ?
-    Object.values(order.products).reduce((tot, val) => tot+ +val, 0) :
-    0;
-  const cartColor = amount>0 ? "red" : "inherit";
+  const orderAmount = order?.products && Object.values(order.products).reduce((tot, val) => tot+ +val, 0);
 
   return (
 
@@ -80,14 +78,16 @@ const MojNavbar = (props) => {
         </Nav>
         <Nav>
 
-          <Link href="/order/cart" passHref>
+          <Link href="/cart" passHref>
             <NavLink as="a" className="pr-4">
-              <FiShoppingCart size="1.5em" color={cartColor}/>
+              <FiShoppingCart size="1.5em" color={orderAmount ? "red" : "inherit"}/>
             </NavLink>
           </Link>
 
           <Link href="/login" passHref>
-            <NavLink as="a" className="pr-3">Login </NavLink>
+            <NavLink as="a" className="pr-3">
+              { user?.username || "Prijava" }
+            </NavLink>
           </Link>
 
         </Nav>
