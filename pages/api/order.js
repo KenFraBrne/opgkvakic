@@ -7,8 +7,8 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.get( (req, res) => {
-  const order = req.session.order || {};
-  res.status(200).json(order);
+  const order = req.session.order || null;
+  res.status(200).send({ order });
 });
 
 handler.post( (req, res) => {
