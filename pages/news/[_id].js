@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
@@ -11,10 +11,18 @@ import MainLayout from 'layout/MainLayout';
 
 import { FiArrowLeft } from 'react-icons/fi';
 
-const PostPage = ({post}) => {
+import getServerData from 'util/getServerData';
 
-  const date = new Date(post.date);
-  const dateString = date.toLocaleString([],{
+const PostPage = () => {
+
+  const router = useRouter();
+  const _id = router.query?._id;
+
+  const { posts } = getServerData('/api/posts');
+  const post = _id && posts && posts.find(post => post._id === _id);
+
+  const date = post && new Date(post.date);
+  const dateString = date && date.toLocaleString([],{
     weekday: 'short',
     year: 'numeric',
     month: 'long',
@@ -32,11 +40,11 @@ const PostPage = ({post}) => {
           </NavLink>
         </Link>
 
-        <h1>{post.title}</h1>
+        <h1>{post?.title}</h1>
         <p> <em>{dateString}</em> </p>
 
         <Carousel >
-          {post.images.map(( image, i ) => (
+          {post?.images.map(( image, i ) => (
             <Carousel.Item key={i}>
               <img src={image} className="img-fluid"/>
             </Carousel.Item>
@@ -45,34 +53,12 @@ const PostPage = ({post}) => {
 
         <br />
 
-        {post.body.split('\n').map(( par, i ) => <p key={i}>{ par }</p>)}
+        {post?.body.split('\n').map(( par, i ) => <p key={i}>{ par }</p>)}
 
       </Container>
 
     </MainLayout>
   )
-}
-
-export async function getStaticPaths(){
-  const posts = await require('data/posts.json');
-  const ids = posts.map(post => post.id);
-  const paths = ids.map(id => (
-    { params: { id } }
-  ));
-  return {
-    paths,
-    fallback: false,
-  }
-}
-
-export async function getStaticProps({params}){
-  let posts = await require('data/posts.json');
-  let post = posts.filter(post => post.id === params.id)[0];
-  return {
-    props: {
-      post
-    }
-  }
 }
 
 export default PostPage;

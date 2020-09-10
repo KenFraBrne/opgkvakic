@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Head from 'next/head';
 import Link from 'next/link';
 
 import Container from 'react-bootstrap/Container';
@@ -10,11 +9,16 @@ import Col from 'react-bootstrap/Col';
 
 import MainLayout from 'layout/MainLayout';
 
-const NewsPage = ({posts}) => {
+import getServerData from 'util/getServerData';
 
-  let cards = posts
-    .slice(0)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+const NewsPage = () => {
+
+  // posts
+  const { posts } = getServerData('/api/posts');
+
+  // cards
+  let cards = posts && posts
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .map(post => {
       const date = new Date(post.date);
       const dateString = date.toLocaleString([],{
@@ -25,9 +29,9 @@ const NewsPage = ({posts}) => {
       });
       return (
         <Link
-          key={post.id}
-          href="news/[id]"
-          as={`news/${post.id}`}
+          key={post._id}
+          href="news/[_id]"
+          as={`news/${post._id}`}
           passHref>
           <Col as="a" className="my-1">
             <Card className="h-100" style={{textDecoration: 'none'}}>
@@ -52,15 +56,6 @@ const NewsPage = ({posts}) => {
       </Container>
     </MainLayout>
   )
-}
-
-export async function getStaticProps(){
-  let posts = await require('data/posts.json');
-  return {
-    props: {
-      posts: posts
-    }
-  }
 }
 
 export default NewsPage;
