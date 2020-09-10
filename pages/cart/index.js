@@ -1,8 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-
-import { OrderContext } from 'context/Order';
-import * as actions from 'context/Order/actions';
-import * as types from 'context/Order/types';
+import React, { useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -12,10 +8,12 @@ import ProductSummary from 'component/ProductSummary';
 import DatePicker from 'component/DatePicker';
 import TimePicker from 'component/TimePicker';
 
-const CartPage = ({products, deliveries}) => {
+import getServerData from 'util/getServerData';
 
-  // order context
-  const { order } = useContext(OrderContext);
+const CartPage = () => {
+
+  // order
+  const { order } = getServerData('/api/order');
 
   // delivery date state
   const [ deliveryDay, setDeliveryDay ] = useState(null);
@@ -23,27 +21,28 @@ const CartPage = ({products, deliveries}) => {
   // body
   let body =
     <Container fluid style={{maxWidth: 650}}>
+
       <h1> Vaša narudžba </h1>
+
       <br/>
+
       <h4> Detalji: </h4>
-      <ProductSummary products={products}/>
+
+      <ProductSummary />
 
       <Container fluid className="d-flex px-0 py-2">
         <div className="h4 pr-3"> Dostava: </div>
         <div>
           <DatePicker
             setDeliveryDay={(date) => setDeliveryDay(date)}
-            deliveryDay={deliveryDay}
-            deliveries={deliveries}/>
+            deliveryDay={deliveryDay}/>
         </div>
       </Container>
 
       <Container fluid className="d-flex px-0 py-2">
         <div className="h4 pr-3">Vrijeme:</div>
         <div>
-          <TimePicker
-            deliveryDay={deliveryDay}
-            deliveries={deliveries}/>
+          <TimePicker deliveryDay={deliveryDay}/>
         </div>
       </Container>
 
@@ -58,7 +57,7 @@ const CartPage = ({products, deliveries}) => {
     </Container>;
 
   // change body if order not defined
-  if ( Object.keys(order.products).length === 0 ) {
+  if ( order?.products && Object.keys(order.products).length === 0 ) {
     body =
       <Container fluid style={{maxWidth: 650}}>
         <h1> Košarica prazna </h1>
@@ -70,14 +69,6 @@ const CartPage = ({products, deliveries}) => {
       {body}
     </MainLayout>
   );
-}
-
-export async function getServerSideProps(){
-  const products = await fetch('http://localhost:3000/api/products').then(res => res.json());
-  const deliveries = await fetch('http://localhost:3000/api/deliveries').then(res => res.json());
-  return {
-    props: { products, deliveries }
-  }
 }
 
 export default CartPage;
