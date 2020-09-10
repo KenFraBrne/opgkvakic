@@ -8,7 +8,11 @@ import Button from 'react-bootstrap/Button';
 
 import MainLayout from 'layout/MainLayout'
 
+import getServerData from 'util/getServerData';
+
 export default function HomePage() {
+
+  const { mutateUser } = getServerData('/api/user');
 
   const router = useRouter();
 
@@ -28,7 +32,10 @@ export default function HomePage() {
         body: JSON.stringify(body),
       });
       if (res.status === 200){
-        router.push('/');
+        const user = await res.json();
+        delete user.password;
+        mutateUser({ user });
+        router.replace('/');
       } else {
         setErrorMsg("Email ili lozinka su pogrešni")
       };
