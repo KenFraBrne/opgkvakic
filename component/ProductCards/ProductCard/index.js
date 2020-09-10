@@ -7,10 +7,58 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 import amountPretty from 'util/amountPretty';
+import getServerData from 'util/getServerData';
 
-const ProductCard = ({product, addProduct, subProduct}) => {
+const ProductCard = ({ product }) => {
 
-  const { order } = useContext(OrderContext);
+  // load order
+  // const { order, mutate } = getOrder();
+  const { order, mutateOrder } = getServerData('/api/order');
+
+  // some variables
+  const _id = product._id;
+  const amount = order?.products[_id] || 0;
+
+  // changeProducts
+  const changeProducts = async (newAmount) => {
+    let newOrder = {
+      ...order,
+      products: {
+        ...order?.products,
+        [_id]: newAmount,
+      }
+    };
+    if (newAmount === 0) delete newOrder.products[_id];
+    mutateOrder({ order: newOrder }, false);
+    await fetch('/api/order', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newOrder),
+    });
+    mutateOrder();
+  };
+
+  // subProduct
+  const subProduct = () => {
+    const newAmount = 
+      ( amount > 0 ) ?
+      ( ( amount === product.min ) && ( product.min > 0) ? 
+        amount - product.min :
+        amount - product.by ) :
+      amount;
+    changeProducts(newAmount);
+  };
+
+  // addProduct
+  const addProduct = () => {
+    const newAmount =
+      ( amount < product.max ) && ( amount < product.total ) ?
+      ( ( amount === 0 ) && ( product.min > 0) ?
+        amount + product.min :
+        amount + product.by ) :
+      amount;
+    changeProducts(newAmount);
+  };
 
   return (
     <Card className="h-100 d-flex">
@@ -35,7 +83,7 @@ const ProductCard = ({product, addProduct, subProduct}) => {
             variant="danger"
             onClick={subProduct}> - </Button>
           <Container className="text-center my-auto">
-            {amountPretty(product, order.products[product._id])}
+            {amountPretty(product, amount)}
           </Container>
           <Button
             className="flex-shrink-0"

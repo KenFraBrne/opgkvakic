@@ -1,45 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { OrderContext } from 'context/Order';
-import * as actions from 'context/Order/actions';
-import * as types from 'context/Order/types';
-
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 
 import MainLayout from 'layout/MainLayout';
 import ProductCards from 'component/ProductCards';
 
-var removeDiacritics = require('diacritics').remove;
+import { remove as removeDiacritics } from 'diacritics';
 
-const OrderPage = ({products}) => {
-  
-  // order context
-  const { orderDispatch } = useContext(OrderContext);
+import getServerData from 'util/getServerData';
+
+const OrderPage = () => {
+
+  // products
+  const { products } = getServerData('/api/products');
 
   // form text state
-  const [formText, setFormText] = useState('');
-
-  // product change handlers
-  const addProduct = (id) => {
-    orderDispatch({
-      type: types.ADD_PRODUCT,
-      products: products,
-      productId: id,
-    });
-  };
-
-  const subProduct = (id) => {
-    orderDispatch({
-      type: types.SUB_PRODUCT,
-      products: products,
-      productId: id,
-    });
-  };
+  const [ formText, setFormText ] = useState('');
 
   // filter products with form input
   const re = new RegExp(removeDiacritics(formText), 'i');
-  const filteredProducts = products.filter(product => re.test(removeDiacritics(product.name)));
+  const filteredProducts = products && products.filter(product => re.test(removeDiacritics(product.name)));
 
   return (
     <MainLayout>
@@ -55,21 +36,11 @@ const OrderPage = ({products}) => {
             onChange={(event) => setFormText(event.target.value)}/>
         </Form>
 
-        <ProductCards
-          products={filteredProducts}
-          addProduct={(id) => addProduct(id)}
-          subProduct={(id) => subProduct(id)}/>
+        <ProductCards filteredProducts={filteredProducts}/>
 
       </Container>
     </MainLayout>
   )
 }
 
-
-export async function getServerSideProps(){
-  const products = await fetch('http://localhost:3000/api/products').then(res => res.json());
-  return {
-    props: { products }
-  }
-}
 export default OrderPage;

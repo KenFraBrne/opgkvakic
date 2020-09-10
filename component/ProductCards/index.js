@@ -5,14 +5,11 @@ import Col from 'react-bootstrap/Col';
 
 import ProductCard from 'component/ProductCards/ProductCard';
 
-const ProductCards = ({products, addProduct, subProduct}) => {
+const ProductCards = ({ filteredProducts }) => {
 
-  const cards = products.map(product => (
+  const cards = filteredProducts && filteredProducts.map(product => (
     <Col key={product._id} className="p-2">
-      <ProductCard
-        product={product}
-        addProduct={() => addProduct(product._id)}
-        subProduct={() => subProduct(product._id)}/>
+      <ProductCard product={product}/>
     </Col>
   ));
   
