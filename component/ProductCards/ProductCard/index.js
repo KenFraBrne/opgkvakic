@@ -1,6 +1,4 @@
-import React, { useContext } from 'react';
-
-import { OrderContext } from 'context/Order';
+import React from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
@@ -12,7 +10,6 @@ import getServerData from 'util/getServerData';
 const ProductCard = ({ product }) => {
 
   // load order
-  // const { order, mutate } = getOrder();
   const { order, mutateOrder } = getServerData('/api/order');
 
   // some variables
