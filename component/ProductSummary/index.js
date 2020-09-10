@@ -1,34 +1,33 @@
-import React, { useContext } from 'react';
-
-import { OrderContext } from 'context/Order';
+import React from 'react';
 
 import Table from 'react-bootstrap/Table';
 
 import amountPretty from 'util/amountPretty';
+import getServerData from 'util/getServerData';
 
-const ProductSummary = ({ products }) => {
+const ProductSummary = () => {
 
-  const { order } = useContext(OrderContext);
+  // order & products
+  const { order } = getServerData('/api/order');
+  const { products } = getServerData('/api/products');
 
-  // create a verbose order (with amounts and total price)
-  let orderVerbose = [];
-  for (let [id, amount] of Object.entries(order.products)){
-    if (amount>0){
-      let product = products.find(product => product._id === id);
-      product.amount = amount;
-      product.priceTotal = amount * product.price/product.priceUnit;
-      orderVerbose.push(product);
-    }
-  }
-
-  // sort order products by name
-  orderVerbose.sort((a, b) => a.name.localeCompare(b.name));
+  // create a verbose order (with amounts and total price) and sort it
+  const _ids = order?.products && Object.keys(order.products);
+  const orderVerbose = _ids && products && _ids.map(_id => {
+    const product = products.find(product => product._id === _id );
+    product.amount = order.products[_id];
+    product.priceTotal = product.amount * product.price / product.priceUnit;
+    return product;
+  }).sort((a, b) => a.name.localeCompare(b.name));
 
   // calculate total price
-  const totalPrice = orderVerbose.reduce((total, product) => total+ +product.priceTotal, 0);
+  const totalPrice = 
+    orderVerbose && 
+    orderVerbose.reduce((total, product) => total+ +product.priceTotal, 0) ||
+    0;
 
   // table rows
-  const tableRows = orderVerbose.map( (product, ind) => {
+  const tableRows = orderVerbose && orderVerbose.map( (product, ind) => {
     const amountString = amountPretty(product, product.amount);
     return (
       <tr key={ind}>

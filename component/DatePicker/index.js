@@ -1,6 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-
-import { OrderContext } from 'context/Order';
+import React, { useState, useEffect, useRef } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -13,20 +11,22 @@ import Calendar from './Calendar'
 import { FiCalendar, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 
 import getFloorDate from 'util/getFloorDate';
+import getServerData from 'util/getServerData';
 
-const DatePicker = ({deliveries, deliveryDay, setDeliveryDay}) => {
+const DatePicker = ({ deliveryDay, setDeliveryDay }) => {
 
-  // order context
-  const { order } = useContext(OrderContext);
+  // load order & deliveries
+  const { order } = getServerData('/api/order');
+  const { deliveries } = getServerData('/api/deliveries');
 
   // set delivery date if already in order
   useEffect(() => {
-    if (order.delivery) {
+    if (order?.delivery && deliveries) {
       const delivery = deliveries.find(delivery => delivery._id === order.delivery);
       const date = getFloorDate(delivery.from);
       setDeliveryDay(date);
-    }
-  }, [])
+    };
+  }, [order, deliveries])
 
   // dates
   const nowDate = new Date();

@@ -1,31 +1,32 @@
-import React, { useContext, useState, useEffect } from 'react';
-
-import { OrderContext } from 'context/Order';
-import * as types from 'context/Order/types';
+import React, { useState, useEffect } from 'react';
 
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import Container from 'react-bootstrap/Container';
 
 import getFloorDate from 'util/getFloorDate';
+import getServerData from 'util/getServerData';
 import fromUntilString from 'util/fromUntilString';
 
-const TimePicker = ({deliveries, deliveryDay}) => {
+const TimePicker = ({ deliveryDay }) => {
 
-  // order context
-  const { order, orderDispatch } = useContext(OrderContext);
+  // load order & deliveries
+  // const { order, mutate } = getOrder();
+  // const { deliveries } = getDeliveries();
+  const { order, mutateOrder } = getServerData('/api/order');
+  const { deliveries } = getServerData('/api/deliveries');
 
-  // delivery time state
+  // delivery window state
   const [ deliveryWin, setDeliveryWin ] = useState(null);
   
   // set delivery time if it exists in order
   useEffect(() => {
-    if (order.delivery) {
+    if (order?.delivery && deliveries) {
       const delivery = deliveries.find(delivery => delivery._id === order.delivery);
       let date = new Date(delivery.from);
       setDeliveryWin(date);
     };
-  }, [])
+  }, [order, deliveries])
 
   // delivery time dropdown items
   const dropdownItems = !deliveryDay ? null :
@@ -44,15 +45,27 @@ const TimePicker = ({deliveries, deliveryDay}) => {
         </DropdownItem>
       )
     });
+  
+  // changeDelivery
+  const changeDelivery = async (_id) => {
+    let newOrder = {
+      ...order,
+      delivery: _id,
+    };
+    mutateOrder({ order: newOrder }, false);
+    await fetch('/api/order', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newOrder),
+    });
+    mutateOrder();
+  };
 
   // select delivery time & set delivery in order
-  const selectDeliveryTime = (id) => {
-    const delivery = deliveries.find(delivery => delivery._id === id);
+  const selectDeliveryTime = (_id) => {
+    const delivery = deliveries.find(delivery => delivery._id === _id);
     const date = new Date(delivery.from);
-    orderDispatch({
-      type: types.SET_DELIVERY,
-      deliveryId: id,
-    });
+    changeDelivery(_id);
     setDeliveryWin(date);
   };
   
