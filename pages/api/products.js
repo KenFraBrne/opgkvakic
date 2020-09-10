@@ -5,16 +5,21 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.get(async (req, res) => {
-  const products = await req.db
+handler.get( (req, res) => {
+  req.db
     .collection('products')
     .find({
       total: {
         $gt: 0,
       }
     })
-    .toArray();
-  res.send(products);
+    .toArray()
+    .then(products => {
+      res.status(200).send({ products });
+    })
+    .catch(err => {
+      res.status(500).send({ products: null });
+    });
 });
 
 export default handler;
