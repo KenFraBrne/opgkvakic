@@ -6,7 +6,10 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.post(passport.authenticate('local'), (req, res) => res.end());
+handler.post(passport.authenticate('local'), (req, res) => {
+  const user = req.user;
+  res.status(200).send({ user });
+});
 
 handler.delete((req, res) => {
   req.logout();
