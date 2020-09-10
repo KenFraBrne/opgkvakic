@@ -32,7 +32,7 @@ export default function HomePage() {
         body: JSON.stringify(body),
       });
       if (res.status === 200){
-        const user = await res.json();
+        const user = await res.json().then(res => res?.user);
         delete user.password;
         mutateUser({ user });
         router.replace('/');
