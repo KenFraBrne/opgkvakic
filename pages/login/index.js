@@ -35,7 +35,7 @@ export default function HomePage() {
         const user = await res.json().then(res => res?.user);
         delete user.password;
         mutateUser({ user });
-        router.replace('/');
+        router.back();
       } else {
         setErrorMsg("Email ili lozinka su pogrešni")
       };
