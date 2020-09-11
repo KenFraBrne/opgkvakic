@@ -23,7 +23,7 @@ const DatePicker = ({ deliveryDay, setDeliveryDay }) => {
   useEffect(() => {
     if (order?.delivery && deliveries) {
       const delivery = deliveries.find(delivery => delivery._id === order.delivery);
-      const date = getFloorDate(delivery.from);
+      const date = delivery && getFloorDate(delivery?.from);
       setDeliveryDay(date);
     };
   }, [order, deliveries])

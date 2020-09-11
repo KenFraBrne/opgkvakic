@@ -23,7 +23,7 @@ const TimePicker = ({ deliveryDay }) => {
   useEffect(() => {
     if (order?.delivery && deliveries) {
       const delivery = deliveries.find(delivery => delivery._id === order.delivery);
-      let date = new Date(delivery.from);
+      let date = new Date(delivery?.from);
       setDeliveryWin(date);
     };
   }, [order, deliveries])
@@ -71,7 +71,7 @@ const TimePicker = ({ deliveryDay }) => {
   
   // dropdown title
   let dropdownTitle = "Izaberite vrijeme dostave";
-  if (deliveryWin && deliveryDay.getTime() === getFloorDate(deliveryWin).getTime()) {
+  if (deliveryWin && deliveryDay && deliveryDay.getTime() === getFloorDate(deliveryWin).getTime()) {
     const delivery = deliveries.find(delivery => (new Date(delivery.from)).getTime() === deliveryWin.getTime());
     dropdownTitle = fromUntilString(delivery);
   };
