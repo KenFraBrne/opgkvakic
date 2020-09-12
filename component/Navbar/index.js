@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Head from 'next/head';
 import Link from 'next/link';
 
 import Navbar from 'react-bootstrap/Navbar';
@@ -84,11 +83,19 @@ const MojNavbar = () => {
             </NavLink>
           </Link>
 
-          <Link href="/login" passHref>
-            <NavLink as="a" className="pr-3">
-              { user?.username || "Prijava" }
-            </NavLink>
-          </Link>
+          
+
+          { user ? 
+            <Link href="/user" passHref>
+              <NavLink as="a" className="pr-3">
+                {user.username}
+              </NavLink>
+            </Link> :
+            <Link href="/login" passHref>
+              <NavLink as="a" className="pr-3">
+                Prijava
+              </NavLink>
+            </Link> }
 
         </Nav>
       </NavbarCollapse>
