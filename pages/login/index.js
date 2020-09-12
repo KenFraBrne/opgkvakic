@@ -21,7 +21,7 @@ export default function HomePage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
-    if (form.checkValidity() !== false) {
+    if (form.checkValidity()) {
       const body = {
         password: form.password.value,
         email: form.email.value,
