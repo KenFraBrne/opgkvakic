@@ -20,11 +20,11 @@ passport.use(
     passReqToCallback: true,
   }, async (req, email, password, done) => {
     const user = await req.db.collection('users').findOne({ email });
-    const passOK = await bcrypt.compare(password, user.password);
-    if (user && passOK){
+    const passOK = user && await bcrypt.compare(password, user.password);
+    if (passOK){
       done(null, user);
     } else {
-      done(null, false, { message: 'Email or password is incorrect' });
+      done(null, false, { message: 'Email or password are incorrect' });
     }
   })
 );
