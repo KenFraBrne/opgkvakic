@@ -7,7 +7,7 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.post( (req, res) => {
+handler.put( (req, res) => {
   if (req.isAuthenticated()){
     const body = req.body;
     const user = req.user;
@@ -17,7 +17,9 @@ handler.post( (req, res) => {
       .collection('users')
       .findOneAndUpdate(filter, update)
       .then(ret => {
-        res.status(200).send({ user: ret.value });
+        const newUser = {...user, ...body};
+        delete newUser.password;
+        res.status(200).send({ user: newUser });
       });
   } else {
     res.status(403).end();

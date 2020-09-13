@@ -17,24 +17,32 @@ const UserPage = () => {
 
   const { user, mutateUser } = getServerData('/api/user');
 
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
+
+    // create update body
     const form = event.currentTarget;
     const body = {
       first: form.first.value,
       last: form.last.value,
       address: form.address.value,
-      telephone: form.telephone.value,
+      telephone: Number( form.telephone.value ),
     };
+    
+    // remove empty values
     Object.keys(body).forEach(key => {
       if (body[key] === "") delete body[key]
     });
+
+    // update
     fetch('/api/user/update', {
-      method: 'POST',
+      method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(body),
     }).then(res => {
-      console.log('update poslan')
+      res.json().then(res => {
+        mutateUser({ user: res.user });
+      });
     });
   };
 
