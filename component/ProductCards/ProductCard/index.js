@@ -9,14 +9,42 @@ import getServerData from 'util/getServerData';
 
 const ProductCard = ({ product }) => {
 
-  // load order
   const { order, mutateOrder } = getServerData('/api/order');
-
-  // some variables
   const _id = product._id;
   const amount = order?.products[_id] || 0;
 
-  // changeProducts
+  // sub product
+  const subProduct = () => {
+    const newAmount = 
+      // if bigger than 0
+      ( amount > 0 ) ?
+      // and there is a min amount
+      ( ( amount === product.min ) && ( product.min > 0) ? 
+        // sub the min amount
+        amount - product.min :
+        // otherwise decrement
+        amount - product.by ) :
+      // otherwise return the same
+      amount;
+    changeProducts(newAmount);
+  };
+
+  // add product
+  const addProduct = () => {
+    const newAmount =
+      // if less than max allowed or what is left
+      ( amount < product.max ) && ( amount < product.total ) ?
+      // and there is a min amount
+      ( ( amount === 0 ) && ( product.min > 0) ?
+        // add the min amount
+        amount + product.min :
+        // otherwise increment
+        amount + product.by ) :
+      // otherwise return the same
+      amount;
+    changeProducts(newAmount);
+  };
+
   const changeProducts = async (newAmount) => {
     let newOrder = {
       ...order,
@@ -33,28 +61,6 @@ const ProductCard = ({ product }) => {
       body: JSON.stringify(newOrder),
     });
     mutateOrder();
-  };
-
-  // subProduct
-  const subProduct = () => {
-    const newAmount = 
-      ( amount > 0 ) ?
-      ( ( amount === product.min ) && ( product.min > 0) ? 
-        amount - product.min :
-        amount - product.by ) :
-      amount;
-    changeProducts(newAmount);
-  };
-
-  // addProduct
-  const addProduct = () => {
-    const newAmount =
-      ( amount < product.max ) && ( amount < product.total ) ?
-      ( ( amount === 0 ) && ( product.min > 0) ?
-        amount + product.min :
-        amount + product.by ) :
-      amount;
-    changeProducts(newAmount);
   };
 
   return (
