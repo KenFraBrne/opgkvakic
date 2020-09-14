@@ -10,14 +10,8 @@ import fromUntilString from 'util/fromUntilString';
 
 const TimePicker = ({ deliveryDay }) => {
 
-  // load order & deliveries
-  // const { order, mutate } = getOrder();
-  // const { deliveries } = getDeliveries();
   const { order, mutateOrder } = getServerData('/api/order');
   const { deliveries } = getServerData('/api/deliveries');
-
-  // delivery window state
-  const [ deliveryWin, setDeliveryWin ] = useState(null);
   
   // set delivery time if it exists in order
   useEffect(() => {
@@ -68,8 +62,9 @@ const TimePicker = ({ deliveryDay }) => {
     changeDelivery(_id);
     setDeliveryWin(date);
   };
-  
+
   // dropdown title
+  const [ deliveryWin, setDeliveryWin ] = useState(null);
   let dropdownTitle = "Izaberite vrijeme dostave";
   if (deliveryWin && deliveryDay && deliveryDay.getTime() === getFloorDate(deliveryWin).getTime()) {
     const delivery = deliveries.find(delivery => (new Date(delivery.from)).getTime() === deliveryWin.getTime());
