@@ -21,7 +21,7 @@ const CartPage = () => {
   const router = useRouter();
 
   const handleOrder = () => {
-    fetch('/api/user/order', {
+    fetch('/api/user/orders', {
       method: 'POST',
     }).then(res => {
       router.push('/');
