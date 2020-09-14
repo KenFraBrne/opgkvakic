@@ -16,9 +16,8 @@ handler.get( (req, res) => {
   req.db
     .collection('deliveries')
     .find({
-      from: {
-        $gte: new Date(date.toISOString()),
-      }
+      from: { $gte: new Date(date.toISOString()) },
+      places: { $gte: 1 },
     })
     .toArray()
     .then(deliveries => {
