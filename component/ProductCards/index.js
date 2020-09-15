@@ -7,7 +7,9 @@ import ProductCard from 'component/ProductCards/ProductCard';
 
 const ProductCards = ({ filteredProducts }) => {
 
-  const cards = filteredProducts && filteredProducts.map(product => (
+  const cards = filteredProducts
+    ?.filter(product => product.total > 0)
+    .map(product => (
     <Col key={product._id} className="p-2">
       <ProductCard product={product}/>
     </Col>

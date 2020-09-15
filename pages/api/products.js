@@ -8,11 +8,7 @@ handler.use(middleware);
 handler.get( (req, res) => {
   req.db
     .collection('products')
-    .find({
-      total: {
-        $gt: 0,
-      }
-    })
+    .find({})
     .toArray()
     .then(products => {
       res.status(200).send({ products });
