@@ -5,57 +5,36 @@ import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
 
 import UserLayout from 'layout/UserLayout'
+import ProductSummary from 'component/ProductSummary';
 
 import getServerData from 'util/getServerData';
 
 const UserOrdersPage = () => {
 
   const { orders } = getServerData('/api/user/orders');
+  const { deliveries } = getServerData('/api/deliveries');
+  const { products } = getServerData('/api/products');
 
-  const orderCards = orders && orders.map( ( order, ind ) => {
+  const orderCards = orders?.map( ( order, ind ) => {
 
-    const date = new Date(order.date);
-    const { amount, name, price, unit, text } = order;
+    // get delivery date
+    const from = deliveries?.find( delivery => delivery._id === order.delivery )?.from;
+    const date = new Date(from);
 
-    const total = amount.reduce((tot, val, i) => tot+val*price[i]/unit[i], 0);
+    // calculate total price
+    const total = order?.products?.reduce( (total, orderedProduct) => {
+      const product = products?.find(product => product._id === orderedProduct._id);
+      return total+orderedProduct?.amount*product?.price/product?.priceUnit;
+    }, 0);
+
     const cardHead = 
       <div>
         <b>{ `${ind+1}. Narudžba` }</b> <br/>
         {`Cijena: ${total} kn`} <br/>
-        {`Datum: ${date.toLocaleDateString()}`} <br/>
+        {`Datum: ${from && date.toLocaleDateString()}`} <br/>
       </div>;
 
-
-    const tableRows = order.amount.map( (val, ind) =>{
-      const total = amount[ind]*price[ind]/unit[ind];
-      return (
-        <tr key={ind}>
-          <td>{ind+1}</td>
-          <td>{`${name[ind]} (${price[ind]}kn/${unit[ind] === 1 ? '' : unit[ind]}${text[ind]})`}</td>
-          <td>{`${amount[ind]} ${text[ind]}`}</td>
-          <td>{total}</td>
-        </tr>
-      )
-    });
-
-    const cardBody =
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Proizvod</th>
-            <th>Količina</th>
-            <th>Cijena</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableRows}
-          <tr>
-            <th className="text-center" colSpan={3}> Totalna cijena </th>
-            <td>{`${total} kn`}</td>
-          </tr>
-        </tbody>
-      </Table>;
+    const cardBody = <ProductSummary order={order}/>;
 
     return (
       <Card
@@ -68,7 +47,9 @@ const UserOrdersPage = () => {
         </Accordion.Toggle>
         <Accordion.Collapse
           eventKey={ind.toString()}>
-          <Card.Body>{cardBody}</Card.Body>
+          <Card.Body>
+            {cardBody}
+          </Card.Body>
         </Accordion.Collapse>
       </Card>
     );

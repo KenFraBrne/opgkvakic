@@ -34,7 +34,7 @@ const CartPage = () => {
       <h1>Vaša narudžba</h1>
       <br/>
       <h4>Detalji:</h4>
-      <ProductSummary />
+      <ProductSummary order={order}/>
       <Container fluid className="d-flex px-0 py-2">
         <div className="h4 pr-3"> Dostava: </div>
         <div>

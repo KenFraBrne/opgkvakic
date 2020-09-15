@@ -5,9 +5,8 @@ import Table from 'react-bootstrap/Table';
 import amountPretty from 'util/amountPretty';
 import getServerData from 'util/getServerData';
 
-const ProductSummary = () => {
+const ProductSummary = ({ order }) => {
 
-  const { order } = getServerData('/api/order');
   const { products } = getServerData('/api/products');
 
   // create verbose products (with amounts) and sort it
