@@ -17,15 +17,20 @@ const CartPage = () => {
   const { order, mutateOrder } = getServerData('/api/order');
 
   const [ deliveryDay, setDeliveryDay ] = useState(null);
-
+  const [ errorMsg, setErrorMsg ] = useState(null);
   const router = useRouter();
 
   const handleOrder = () => {
+    setErrorMsg(null);
     fetch('/api/user/orders', {
       method: 'POST',
     }).then(res => {
-      router.push('/');
-      mutateOrder();
+      if (res.status === 200){
+        router.push('/');
+        mutateOrder();
+      } else {
+        setErrorMsg('Morate biti prijavljeni za narudžbu');
+      };
     })
   };
 
@@ -44,19 +49,19 @@ const CartPage = () => {
         </div>
       </Container>
       <Container fluid className="d-flex px-0 py-2">
-        <div className="h4 pr-3">Vrijeme:</div>
+        <div className="h4 pr-3 my-auto">Vrijeme:</div>
         <div>
           <TimePicker deliveryDay={deliveryDay}/>
         </div>
       </Container>
       <Button
-        size="lg"
         className="my-3"
         variant="primary"
         disabled={!(order?.products && order?.delivery)}
         onClick={handleOrder}>
         Naručite
       </Button>
+      <p className="text-danger">{errorMsg}</p>
     </Container>;
 
   // change body if order not defined
