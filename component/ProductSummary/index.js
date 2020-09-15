@@ -7,34 +7,33 @@ import getServerData from 'util/getServerData';
 
 const ProductSummary = () => {
 
-  // order & products
   const { order } = getServerData('/api/order');
   const { products } = getServerData('/api/products');
 
-  // create a verbose order (with amounts and total price) and sort it
-  const _ids = order?.products && Object.keys(order.products);
-  const orderVerbose = _ids && products && _ids.map(_id => {
-    const product = products.find(product => product._id === _id );
-    product.amount = order.products[_id];
-    product.priceTotal = product.amount * product.price / product.priceUnit;
-    return product;
-  }).sort((a, b) => a.name.localeCompare(b.name));
+  // create verbose products (with amounts) and sort it
+  const productsVerbose = order?.products?.map( product => {
+    return {
+      ...product,
+      ...products?.find(prod => prod._id == product._id ),
+    };
+  });
 
   // calculate total price
-  const totalPrice = 
-    orderVerbose && 
-    orderVerbose.reduce((total, product) => total+ +product.priceTotal, 0) ||
-    0;
+  const totalPrice = products && productsVerbose.reduce((total, product) => {
+    const { amount, price, priceUnit } = product;
+    return total + amount*price/priceUnit;
+  }, 0);
 
   // table rows
-  const tableRows = orderVerbose && orderVerbose.map( (product, ind) => {
-    const amountString = amountPretty(product, product.amount);
+  const tableRows = products && productsVerbose.map( (product, ind) => {
+    const { name, amount, price, priceText, priceUnit } = product;
+    const amountString = amountPretty(product, amount);
     return (
       <tr key={ind}>
         <td>{ind+1}</td>
-        <td>{`${product.name} (${product.price}kn/${product.priceUnit === 1 ? '' : product.priceUnit}${product.priceText})`}</td>
+        <td>{`${name} (${price}kn/${priceUnit === 1 ? '' : priceUnit}${priceText})`}</td>
         <td>{amountString}</td>
-        <td>{product.priceTotal}</td>
+        <td>{amount*price/priceUnit}</td>
       </tr>
     )
   });

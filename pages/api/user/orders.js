@@ -63,29 +63,25 @@ handler.get( (req, res) => {
 
 handler.post( async (req, res) => {
   if (req.isAuthenticated()){
-    const user = req.user;
-    const order = req.session.order;
-
     // transform order to contain ObjectIds
+    const order = req.session.order;
     const delivery = new ObjectId(order.delivery);
-    const products = Object.entries(order.products).map(entry => {
-      const [_id, amount] = entry;
+    const products = order.products.map(product => {
+      const { _id, amount } = product;
       return {
         _id: new ObjectId(_id),
         amount,
       };
     });
     const transOrder = {
-      user: user._id,
+      user: req.user._id,
       delivery,
       products,
     };
-
     // insert a new order
     await req.db
       .collection('orders')
       .insertOne(transOrder);
-
     // update products collection
     products.forEach(async product => {
       const { _id, amount } = product;
@@ -97,7 +93,6 @@ handler.post( async (req, res) => {
         .collection('products')
         .updateOne(query, update);
     });
-
     // update deliveries collection
     const query = { _id: delivery };
     const update = {
@@ -106,11 +101,9 @@ handler.post( async (req, res) => {
     await req.db
       .collection('deliveries')
       .updateOne(query, update);
-
     // delete session order and end
     delete req.session.order;
     res.status(200).end();
-
   } else {
     res.status(403).end();
   };

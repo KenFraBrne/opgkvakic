@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
 
   const { order, mutateOrder } = getServerData('/api/order');
   const _id = product._id;
-  const amount = order?.products[_id] || 0;
+  const amount = order?.products?.find(product => product._id === _id)?.amount || 0;
 
   // sub product
   const subProduct = () => {
@@ -45,15 +45,17 @@ const ProductCard = ({ product }) => {
     changeProducts(newAmount);
   };
 
-  const changeProducts = async (newAmount) => {
-    let newOrder = {
+  const changeProducts = async (amount) => {
+    // copy the order without the changing product
+    const newOrder = {
       ...order,
-      products: {
-        ...order?.products,
-        [_id]: newAmount,
-      }
+      products: order?.products.filter(product => product._id !== _id) || [],
+    }
+    // push it if the amount is > 0
+    if (amount>0) {
+      newOrder.products.push({ _id, amount });
     };
-    if (newAmount === 0) delete newOrder.products[_id];
+    // update order
     mutateOrder({ order: newOrder }, false);
     await fetch('/api/order', {
       method: 'POST',

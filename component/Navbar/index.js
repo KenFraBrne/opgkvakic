@@ -15,12 +15,11 @@ import getServerData from 'util/getServerData';
 
 const MojNavbar = () => {
   
-  // order & user
   const { order } = getServerData('/api/order');
   const { user } = getServerData('/api/user');
   
-  // cart color
-  const orderAmount = order?.products && Object.values(order.products).reduce((tot, val) => tot+ +val, 0);
+  // cart color depending on order products
+  const cartColor = order?.products?.reduce((tot, val) => tot+val.amount, 0) ? 'red' : 'inherit';
 
   return (
 
@@ -79,10 +78,9 @@ const MojNavbar = () => {
 
           <Link href="/cart" passHref>
             <NavLink as="a" className="pr-4">
-              <FiShoppingCart size="1.5em" color={orderAmount ? "red" : "inherit"}/>
+              <FiShoppingCart size="1.5em" color={cartColor}/>
             </NavLink>
           </Link>
-
           
 
           { user ? 
