@@ -32,7 +32,6 @@ handler.delete((req, res) => {
       .collection('users')
       .findOneAndDelete({_id: req.user._id})
       .then(ret => {
-        console.log(ret);
         req.logout();
         res.status(204).end();
       })
