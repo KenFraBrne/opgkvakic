@@ -7,6 +7,60 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
+handler.get( (req, res) => {
+  if (req.isAuthenticated()){
+    req.db
+      .collection('orders')
+      .aggregate()
+      .lookup({
+        from: 'users',
+        foreignField: '_id',
+        localField: 'user',
+        as: 'user',
+      })
+      .unwind('$user')
+      .match({
+        'user._id': req.user._id
+      })
+      .lookup({
+        from: 'deliveries',
+        foreignField: '_id',
+        localField: 'delivery',
+        as: 'delivery',
+      })
+      .unwind('$delivery')
+      .unwind('$products')
+      .lookup({
+        from: 'products',
+        foreignField: '_id',
+        localField: 'products._id',
+        as: 'details',
+      })
+      .unwind('$details')
+      .group({
+        _id: '$_id',
+        'date': { $first: '$delivery.from'},
+        'amount': { $push: '$products.amount' },
+        'name': { $push: '$details.name' },
+        'price': { $push: '$details.price' },
+        'unit': { $push: '$details.priceUnit' },
+        'text': { $push: '$details.priceText' },
+      })
+      .sort({
+        'date': -1,
+      })
+      .toArray()
+      .then(orders => {
+        res.status(200).send({ orders });
+      })
+      .catch(err => {
+        res.status(503).end();
+      });
+  } else {
+    res.status(403).end();
+  };
+});
+
 handler.post( async (req, res) => {
   if (req.isAuthenticated()){
     const user = req.user;
