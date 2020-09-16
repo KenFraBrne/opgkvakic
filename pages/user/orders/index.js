@@ -11,16 +11,15 @@ import UserLayout from 'layout/UserLayout'
 import ProductSummary from 'component/ProductSummary';
 
 import getServerData from 'util/getServerData';
+import fromUntilString from 'util/fromUntilString';
 
 const UserOrdersPage = () => {
 
   const { orders } = getServerData('/api/user/orders');
-  const { deliveries } = getServerData('/api/deliveries');
-  const { products } = getServerData('/api/products');
 
   const [isDown, setIsDown] = useState( Array(50).fill(true) );
 
-  const orderCards = orders?.map( ( order, ind ) => {
+  const orderCards = orders?.map( (order, ind) => {
 
     // handle up/down
     const handleUpDown = () => {
@@ -30,13 +29,14 @@ const UserOrdersPage = () => {
     };
 
     // get delivery date
-    const from = deliveries?.find( delivery => delivery._id === order.delivery )?.from;
-    const date = new Date(from);
+    const delivery = order.delivery;
+    const date = new Date(order.delivery.from);
 
     // calculate total price
-    const total = order?.products?.reduce( (total, orderedProduct) => {
-      const product = products?.find(product => product._id === orderedProduct._id);
-      return total+orderedProduct?.amount*product?.price/product?.priceUnit;
+    const total = order.products.reduce( (total, product) => {
+      const amount = product.amount;
+      const { price, priceUnit } = product.details;
+      return total+amount*price/priceUnit;
     }, 0);
 
     const cardHead = 
@@ -44,7 +44,8 @@ const UserOrdersPage = () => {
         <Container className="flex-grow-1 text-nowrap">
           <b>{ `Narudžba ${ind+1}` }</b> <br/>
           {`Cijena: ${total} kn`} <br/>
-          {`Datum: ${from && date.toLocaleDateString()}`}
+          {`Datum: ${date.toLocaleDateString()}`} <br/>
+          {`Vrijeme: ${fromUntilString(delivery)}`}
         </Container>
         <Container className="text-right text-nowrap my-auto">
           <a href='\\'>
@@ -65,7 +66,7 @@ const UserOrdersPage = () => {
         <Accordion.Toggle
           as={Card.Header}
           className="px-0"
-          onClick={() => handleUpDown(ind)}
+          onClick={handleUpDown}
           eventKey={ind.toString()}>
           {cardHead}
         </Accordion.Toggle>

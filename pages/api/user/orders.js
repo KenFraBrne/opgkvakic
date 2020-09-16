@@ -11,7 +11,45 @@ handler.get( (req, res) => {
   if (req.isAuthenticated()){
     req.db
       .collection('orders')
-      .find({ user: req.user._id })
+      .aggregate()
+      // get user orders
+      .match({ user: req.user._id })
+      // get delivery info
+      .lookup({
+        from: 'deliveries',
+        localField: 'delivery',
+        foreignField: '_id',
+        as: 'delivery',
+      })
+      .unwind('$delivery')
+      // get products info
+      .unwind('$products')
+      .lookup({
+        from: 'products',
+        localField: 'products._id',
+        foreignField: '_id',
+        as: 'products.details',
+      })
+      .unwind('$products.details')
+      // group, project & sort them
+      .group({
+        _id: '$_id',
+        delivery: { '$first': '$delivery' },
+        products: { '$push': '$products' },
+      })
+      .project({
+        _id: 1,
+        'delivery.from': 1,
+        'delivery.until': 1,
+        'products._id': 1,
+        'products.amount': 1,
+        'products.details.by': 1,
+        'products.details.price': 1,
+        'products.details.priceUnit': 1,
+        'products.details.priceText': 1,
+      })
+      .sort({ _id: 1 })
+      // and finally
       .toArray()
       .then(orders => {
         res.status(200).send({ orders });
