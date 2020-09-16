@@ -30,17 +30,15 @@ const UserLayout = ({ children }) => {
     <Navbar
       bg="light"
       expand="sm"
-      className="border-bottom border-dark w-100"
+      className="border-bottom border-dark"
       style={{fontSize: '110%'}}>
-      <Nav className="mr-auto">
+      <Nav>
         <Link href="/user" passHref>
           <Nav.Link>Informacije</Nav.Link>
         </Link>
         <Link href="/user/orders" passHref>
           <Nav.Link>Narudžbe</Nav.Link>
         </Link>
-      </Nav>
-      <Nav>
         <Nav.Link href="\\" onClick={handleLogout}>Odjava</Nav.Link>
       </Nav>
     </Navbar>;
