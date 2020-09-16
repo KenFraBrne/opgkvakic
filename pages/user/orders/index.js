@@ -7,7 +7,7 @@ import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
 
-import { FiChevronsUp, FiChevronsDown, FiTrash } from 'react-icons/fi';
+import { FiChevronsUp, FiChevronsDown, FiX } from 'react-icons/fi';
 
 import UserLayout from 'layout/UserLayout'
 import ProductSummary from 'component/ProductSummary';
@@ -75,22 +75,29 @@ const UserOrdersPage = () => {
     // card head
     const cardHead = 
       <Container className="d-flex p-0 w-100">
-        <Container className="flex-grow-1 text-nowrap pr-0">
+        <Container className="flex-grow-1 text-nowrap">
           <b>{ `Narudžba ${ind+1}` }</b> <br/>
           {`Cijena: ${total} kn`} <br/>
           {`Datum: ${deliveryDate.toLocaleDateString()}`} <br/>
           {`Vrijeme: ${fromUntilString(delivery)}`}
         </Container>
-        <Container className="text-right text-nowrap pl-0 my-auto">
-          <Button variant="light" className="p-0">
-            { isDown[ind] ? <FiChevronsDown size="2em"/> : <FiChevronsUp size="2em"/> }
-          </Button>
+        <Container className="text-right text-nowrap p-0 my-auto">
+          <Accordion.Toggle
+            as={Button}
+            variant="light"
+            className="p-0"
+            onClick={() => handleUpDown(ind)}
+            eventKey={ind.toString()}>
+            { isDown[ind] ?
+              <FiChevronsDown size="2em"/> :
+              <FiChevronsUp size="2em"/> }
+          </Accordion.Toggle>
           <Button
             variant="light"
-            className="p-0 ml-4"
+            className="p-0 m-0 ml-md-4"
             disabled={buttonDisabled}
             onClick={() => handleTrashClick(order._id)}>
-            <FiTrash size="2em"/>
+            <FiX size="2em"/>
           </Button>
         </Container>
       </Container>;
@@ -102,13 +109,9 @@ const UserOrdersPage = () => {
       <Card
         key={order._id}
         className="mb-2 border-bottom">
-        <Accordion.Toggle
-          as={Card.Header}
-          className="px-0"
-          onClick={() => handleUpDown(ind)}
-          eventKey={ind.toString()}>
+        <Card.Header>
           {cardHead}
-        </Accordion.Toggle>
+        </Card.Header>
         <Accordion.Collapse
           eventKey={ind.toString()}>
           <Card.Body>
@@ -130,11 +133,11 @@ const UserOrdersPage = () => {
       onHide={() => setShow(false)}>
       <Modal.Header closeButton>
         <Modal.Title>
-          {` Izbriši narudžbu ${orderInd}`}
+          {` Poništi narudžbu ${orderInd}`}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        { `Jeste li sigurni da želite izbrisati narudžbu ${orderInd}?` }
+        { `Jeste li sigurni da želite poništiti narudžbu ${orderInd}?` }
       </Modal.Body>
       <Modal.Footer>
         <Button
