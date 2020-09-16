@@ -84,7 +84,7 @@ const UserOrdersPage = () => {
   return (
     <UserLayout>
       <Accordion className="m-3">
-        { orders?.length ? orderCards : <h3> Trenutno nemate narudžbi </h3> }
+        { orders?.length ? orderCards.reverse() : <h3> Trenutno nemate narudžbi </h3> }
       </Accordion>
     </UserLayout>
   );
