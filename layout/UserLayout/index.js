@@ -41,7 +41,7 @@ const UserLayout = ({ children }) => {
         </Link>
       </Nav>
       <Nav>
-        <Nav.Link href="" onClick={handleLogout}>Odjava</Nav.Link>
+        <Nav.Link href="\\" onClick={handleLogout}>Odjava</Nav.Link>
       </Nav>
     </Navbar>;
 
