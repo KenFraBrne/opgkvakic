@@ -108,7 +108,44 @@ handler.post( async (req, res) => {
   } else {
     res.status(403).end();
   };
+});
 
+handler.delete( async (req, res) => {
+  if (req.isAuthenticated()){
+    // get order
+    const _id = new ObjectId(req.body._id);
+    const order = await req.db
+      .collection('orders')
+      .findOne({ _id });
+    const products = order.products;
+    const delivery = order.delivery;
+    // update products collection
+    products.forEach(async product => {
+      const { _id, amount } = product;
+      const query = { _id };
+      const update = {
+        $inc: { total: +amount },
+      };
+      await req.db
+        .collection('products')
+        .updateOne(query, update);
+    });
+    // update deliveries
+    const query = { _id: delivery };
+    const update = {
+      $inc : { places: +1 },
+    };
+    await req.db
+      .collection('deliveries')
+      .updateOne(query, update);
+    // remove order and end
+    req.db
+      .collection('orders')
+      .deleteOne({ _id });
+    res.status(200).end();
+  } else {
+    res.status(403).end();
+  };
 });
 
 export default handler;
