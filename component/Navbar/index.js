@@ -55,16 +55,16 @@ const MojNavbar = () => {
 
           <NavDropdown title="O nama" id="nav-dropdown">
 
-            <Link href="/about/who" passHref>
+            <Link href="/about" passHref>
               <NavDropdown.Item>Tko smo</NavDropdown.Item>
             </Link>
 
             <Link href="/about/how" passHref>
-              <NavDropdown.Item>Dostave</NavDropdown.Item>
+              <NavDropdown.Item>O dostavama</NavDropdown.Item>
             </Link>
 
             <Link href="/about/where" passHref>
-              <NavDropdown.Item>Kako do nas?</NavDropdown.Item>
+              <NavDropdown.Item>Kako do nas</NavDropdown.Item>
             </Link>
 
             <Link href="/about/contact" passHref>
