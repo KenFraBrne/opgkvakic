@@ -36,7 +36,6 @@ handler.post( (req, res) => {
         raw: encodeMessage(req.body),
       }
     }).then(ret => {
-      console.log(ret)
       res.status(200).end();
     }).catch(err => {
       console.error('Message not sent:', err);
