@@ -1,5 +1,5 @@
 import nextConnect from 'next-connect';
-import gmail from 'middleware/gmail';
+import middleware from 'middleware';
 
 function encodeMessage({ name, email, subject, message }){
   const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`;
@@ -25,7 +25,7 @@ function encodeMessage({ name, email, subject, message }){
 
 const handler = nextConnect();
 
-handler.use(gmail);
+handler.use(middleware);
 
 handler.post( (req, res) => {
   const { name, email, subject, message } = req.body;
