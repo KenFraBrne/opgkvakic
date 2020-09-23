@@ -65,6 +65,7 @@ const DatePicker = ({ deliveryDay, setDeliveryDay }) => {
           placeholder="Izaberite datum dostave"/>
         <InputGroup.Append>
           <Button
+            disabled={!deliveries}
             onClick={() => setOverlayShow(!overlayShow)}
             variant="outline-secondary">
             <FiCalendar />
