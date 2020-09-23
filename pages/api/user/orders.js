@@ -64,6 +64,11 @@ handler.get( (req, res) => {
 
 handler.post( async (req, res) => {
   if (req.isAuthenticated()){
+    // check if user is verified
+    if (!req.user.verified){
+      res.status(403).send('Korisnički email nije potvrđen');
+      return;
+    };
     // transform order to contain ObjectIds
     const order = req.session.order;
     const delivery = new ObjectId(order.delivery);
@@ -106,7 +111,7 @@ handler.post( async (req, res) => {
     delete req.session.order;
     res.status(200).end();
   } else {
-    res.status(403).end();
+    res.status(403).send('Morate biti prijavljeni za narudžbu');
   };
 });
 

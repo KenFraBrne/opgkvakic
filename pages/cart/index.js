@@ -24,12 +24,13 @@ const CartPage = () => {
     setErrorMsg(null);
     fetch('/api/user/orders', {
       method: 'POST',
-    }).then(res => {
+    }).then(async res => {
       if (res.status === 200){
         router.push('/');
         mutateOrder();
       } else {
-        setErrorMsg('Morate biti prijavljeni za narudžbu');
+        const errorMsg = await res.text();
+        setErrorMsg(errorMsg);
       };
     })
   };
