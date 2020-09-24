@@ -1,39 +1,40 @@
 import React from 'react';
 
-import Container from 'react-bootstrap/Container';
+import Fade from 'react-reveal/Fade';
+
+import Link from 'next/link';
 
 import MainLayout from 'layout/MainLayout'
+
+import styles from './styles.module.css';
 
 export default function HomePage() {
   return (
     <MainLayout>
 
-      <Container fluid style={{maxWidth: 600, textAlign: 'justify'}}>
+      <Fade>
+        <div className={styles.row}>
+          <div className={styles.colTxt}>
+            <h2> Dobrodošli </h2>
+            <p> Pogledajte našu trenutnu <Link href="/order"><a>ponudu</a></Link> ili nas <Link href="/about"><a>upoznajte</a></Link>. </p>
+          </div>
+          <div className={styles.colImg}>
+            <img src="/intro/90901577_626949784816701_5041255869845602304_n.jpg"/>
+          </div>
+        </div>
+      </Fade>
 
-        <h1>Naslovna strana</h1>
-
-        <p>This is not to discredit the idea that some 
-          posit the teenage layer to be less than cloying. 
-          Some assert that a grandfather is a jump's 
-          quotation. Gifted classes show us how broccolis 
-          can be chills.</p>
-
-        <p>Framed in a different way, the certification 
-          of a gymnast becomes an acock frog. However, the 
-          chiselled seashore comes from an algoid heaven. A 
-          college is a cathedral from the right 
-          perspective. We know that before precipitations, 
-          pests were only epoches. Though we assume the 
-          latter, one cannot separate owls from uncheered 
-          units.</p>
-
-        <p>Yarest bottles show us how acoustics can be 
-          vacuums. The first flamy shoulder is, in its own 
-          way, a booklet. Missiles are falcate numerics. 
-          Commas are osmous pets. A peace of the velvet is 
-          assumed to be a dissolved fowl.</p>
-
-      </Container>
+      <Fade>
+        <div className={styles.rowRev}>
+          <div className={styles.colImg}>
+            <img src="/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg"/>
+          </div>
+          <div className={styles.colTxt}>
+            <h2> Dostave </h2>
+            <p> Svježa roba dostavljena na vaša vrata svaki tjedan </p>
+          </div>
+        </div>
+      </Fade>
 
     </MainLayout>
   )

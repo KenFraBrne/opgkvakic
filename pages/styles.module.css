@@ -1,0 +1,51 @@
+/* rows */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
+.rowRev{
+  display: flex;
+  flex-wrap: wrap-reverse;
+  height: 100vh;
+}
+
+/* colTxt */
+.colTxt {
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5%;
+}
+
+.colTxt > * {
+  padding: 5% 0;
+}
+
+.colTxt a {
+  text-decoration: underline;
+}
+
+/* colImg */
+.colImg {
+  flex: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.colImg img {
+  height: 100%;
+}
+
+/* media */
+@media (max-width: 1000px){
+  .colTxt, .colImg{
+    flex: 100%;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+}
