@@ -17,9 +17,9 @@ const UserLayout = ({ children }) => {
   const { user, mutateUser } = getServerData('/api/user');
 
   // load user orders & products already
-  getServerData('/api/user/orders');
+  const { orders } = getServerData('/api/user/orders');
   const { products } = getServerData('/api/products');
-  const isLoading = products ? false : true;
+  const isLoading = products && orders ? false : true;
 
   // go to initial page when logged out
   const handleLogout = () => {
