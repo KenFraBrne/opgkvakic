@@ -32,11 +32,12 @@ const PostPage = () => {
   return (
     <MainLayout>
 
-      <Container fluid style={{maxWidth: 600, textAlign: 'justify'}} >
+      <Container style={{maxWidth: 600}} >
 
         <Link href="/news" passHref>
-          <NavLink className="px-0 py-3">
-            <FiArrowLeft size="1.5em"/> Nazad
+          <NavLink className="px-0 py-3 d-flex flex-row">
+            <FiArrowLeft size="1.5em"/>
+            <div className="pl-1">Nazad</div>
           </NavLink>
         </Link>
 

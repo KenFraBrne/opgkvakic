@@ -55,7 +55,7 @@ const Footer = () => {
   const navContacts = contacts.map(contact => {
     const { text, href, rel, target, icon } = contact;
     return (
-      <Nav.Link href={href} rel={rel} target={target}>
+      <Nav.Link key={href} href={href} rel={rel} target={target}>
         {icon} <br/> {text}
       </Nav.Link>
     )
