@@ -3,6 +3,37 @@ import middleware from 'middleware';
 import passport from 'middleware/passport';
 import { ObjectId } from 'mongodb';
 
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import ProductSummary from 'component/ProductSummary';
+import fromUntilString from 'util/fromUntilString';
+
+function encodeMessage({ user, order, products, delivery }){
+  const dateString = delivery.from.toLocaleDateString();
+  const subject = `Vaša narudžba za ${dateString} je zaprimljena!`;
+  const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`;
+  const table = ReactDOMServer.renderToString(<ProductSummary order={order} products={products}/>)
+  const messageParts = [
+    `To: ${user.username} <${user.email}>`,
+    'Content-Type: text/html; charset=utf-8',
+    'MIME-Version: 1.0',
+    `Subject: ${utf8Subject}`,
+    '',
+    `Draga/dragi ${user.username},<br><br>`,
+    'Hvala vam na vašoj narudžbi 👍<br><br>',
+    `Narudžba će biti dostavljena ${dateString} u periodu ${fromUntilString(delivery)}<br><br>`,
+    'Detalji narudžbe nalaze se ispod.<br><br>',
+    'OPG Kvakić<br><br>',
+    table,
+  ];
+  const fullMessage = messageParts.join('\n');
+  return Buffer.from(fullMessage)
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+};
+
 const handler = nextConnect();
 
 handler.use(middleware);
@@ -64,8 +95,9 @@ handler.get( (req, res) => {
 
 handler.post( async (req, res) => {
   if (req.isAuthenticated()){
+    const user = req.user;
     // check if user is verified
-    if (!req.user.verified){
+    if (!user.verified){
       res.status(403).send('Korisnički email nije potvrđen');
       return;
     };
@@ -80,7 +112,7 @@ handler.post( async (req, res) => {
       };
     });
     const transOrder = {
-      user: req.user._id,
+      user: user._id,
       delivery,
       products,
     };
@@ -107,9 +139,32 @@ handler.post( async (req, res) => {
     await req.db
       .collection('deliveries')
       .updateOne(query, update);
-    // delete session order and end
-    delete req.session.order;
-    res.status(200).end();
+    // send a confirmation email;
+    const shopProducts = await req.db
+      .collection('products')
+      .find({})
+      .toArray();
+    const shopDelivery = await req.db
+      .collection('deliveries')
+      .findOne({ _id: delivery });
+    req.gmail.users.messages.send({
+      userId: 'me',
+      requestBody: {
+        raw: encodeMessage({
+          user,
+          order,
+          products: shopProducts,
+          delivery: shopDelivery,
+        }),
+      },
+    }).then(ret => {
+      // delete session order
+      delete req.session.order;
+      res.status(200).end();
+    }).catch(err => {
+      console.error('Message not sent:', err);
+      res.status(400).send('Greška u zaprimanju narudžbe');
+    });
   } else {
     res.status(403).send('Morate biti prijavljeni za narudžbu');
   };
