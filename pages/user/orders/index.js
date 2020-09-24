@@ -18,6 +18,7 @@ import fromUntilString from 'util/fromUntilString';
 const UserOrdersPage = () => {
 
   const { orders, mutateOrders } = getServerData('/api/user/orders');
+  const { products } = getServerData('/api/products');
 
   // handle chevrons
   const [isDown, setIsDown] = useState( Array(50).fill(true) );
@@ -103,7 +104,7 @@ const UserOrdersPage = () => {
       </Container>;
 
     // card body
-    const cardBody = <ProductSummary order={order}/>;
+    const cardBody = <ProductSummary order={order} products={products}/>;
 
     return (
       <Card

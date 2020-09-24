@@ -15,6 +15,7 @@ import getServerData from 'util/getServerData';
 const CartPage = () => {
 
   const { order, mutateOrder } = getServerData('/api/order');
+  const { products } = getServerData('/api/products');
 
   const [ deliveryDay, setDeliveryDay ] = useState(null);
   const [ errorMsg, setErrorMsg ] = useState(null);
@@ -40,7 +41,7 @@ const CartPage = () => {
       <h1>Vaša narudžba</h1>
       <br/>
       <h4>Detalji:</h4>
-      <ProductSummary order={order}/>
+      <ProductSummary order={order} products={products}/>
       <Container fluid className="d-flex px-0 py-2">
         <div className="h4 pr-3"> Dostava: </div>
         <div>
