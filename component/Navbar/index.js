@@ -25,14 +25,14 @@ const MojNavbar = () => {
 
     <Navbar
       expand="sm"
+      variant="light"
       collapseOnSelect
-      className="border-bottom border-dark"
-      style={{fontSize: '120%'}}>
+      className="py-3"
+      style={{fontSize: '110%'}}>
 
       <Link href="/" passHref>
         <Navbar.Brand>
-          <img src="/icons8-farm-64.png" height={40}/>{' '}
-          OPG Kvakić
+          <h2>OPG Kvakić</h2>
         </Navbar.Brand>
       </Link>
 
