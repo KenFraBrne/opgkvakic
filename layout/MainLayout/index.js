@@ -20,11 +20,11 @@ const MainLayout = ({children}) => {
 
       <Navbar/>
 
-      <Container fluid className="flex-grow-1 py-3">
+      <Container fluid className="flex-grow-1 p-0">
         {children}
       </Container>
 
-      {/* <Footer /> */}
+      <Footer/>
 
     </Container>
   );
