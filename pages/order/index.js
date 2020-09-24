@@ -14,6 +14,7 @@ const OrderPage = () => {
 
   // products
   const { products } = getServerData('/api/products');
+  const isLoading = products ? false : true;
 
   // form text state
   const [ formText, setFormText ] = useState('');
@@ -23,7 +24,7 @@ const OrderPage = () => {
   const filteredProducts = products && products.filter(product => re.test(removeDiacritics(product.name)));
 
   return (
-    <MainLayout>
+    <MainLayout isLoading={isLoading}>
       <Container fluid style={{maxWidth: '85%'}}>
 
         <h1> Ponuda </h1>

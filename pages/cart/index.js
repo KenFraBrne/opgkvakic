@@ -16,6 +16,7 @@ const CartPage = () => {
 
   const { order, mutateOrder } = getServerData('/api/order');
   const { products } = getServerData('/api/products');
+  const isLoading =  products ? false : true;
 
   const [ deliveryDay, setDeliveryDay ] = useState(null);
   const [ errorMsg, setErrorMsg ] = useState(null);
@@ -75,7 +76,7 @@ const CartPage = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout isLoading={isLoading}>
       {body}
     </MainLayout>
   );

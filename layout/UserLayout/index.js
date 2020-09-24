@@ -18,7 +18,8 @@ const UserLayout = ({ children }) => {
 
   // load user orders & products already
   getServerData('/api/user/orders');
-  getServerData('/api/products');
+  const { products } = getServerData('/api/products');
+  const isLoading = products ? false : true;
 
   // go to initial page when logged out
   const handleLogout = () => {
@@ -54,7 +55,7 @@ const UserLayout = ({ children }) => {
     </Container>
 
   return (
-    <MainLayout>
+    <MainLayout isLoading={isLoading}>
       { !user ? <h1> You are not authenticated </h1> : userPage }
     </MainLayout>
   );

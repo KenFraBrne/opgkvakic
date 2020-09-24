@@ -4,11 +4,24 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
 
 import Navbar from 'component/Navbar';
 import Footer from 'component/Footer';
 
-const MainLayout = ({children}) => {
+const MainLayout = (props) => {
+
+  const { children, isLoading } = props;
+
+  const spinner = 
+    <Container className="p-5 d-flex justify-content-center">
+      <Spinner
+        animation="border"
+        style={{
+          width: '15vh',
+          height: '15vh',
+        }}/>
+    </Container>;
 
   return (
     <Container fluid className="d-flex flex-column h-100 p-0">
@@ -21,7 +34,7 @@ const MainLayout = ({children}) => {
       <Navbar/>
 
       <Container fluid className="flex-grow-1 p-0">
-        {children}
+        { isLoading ? spinner : children }
       </Container>
 
       <Footer/>

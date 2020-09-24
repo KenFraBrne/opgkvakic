@@ -15,6 +15,7 @@ const NewsPage = () => {
 
   // posts
   const { posts } = getServerData('/api/posts');
+  const isLoading = posts ? false : true;
 
   // cards
   let cards = posts && posts
@@ -47,7 +48,7 @@ const NewsPage = () => {
     });
 
   return (
-    <MainLayout>
+    <MainLayout isLoading={isLoading}>
       <Container fluid style={{maxWidth: '85%'}}>
         <h1>Novosti</h1>
         <Row className="row-cols-1 row-cols-md-2 row-cols-lg-3">
