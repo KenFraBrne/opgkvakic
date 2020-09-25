@@ -23,16 +23,24 @@ export default function HomePage() {
               nas <Link href="/about"><a>upoznajte</a></Link>.
             </p>
           </div>
-          <div className={styles.colImg}
-            style={{ backgroundImage: 'url(/intro/90901577_626949784816701_5041255869845602304_n.jpg)' }}>
+          <div className={styles.colImg}>
+            <img
+              srcSet={[
+                require("pages/images/intro/90901577_626949784816701_5041255869845602304_n.jpg?webp"),
+                require("pages/images/intro/90901577_626949784816701_5041255869845602304_n.jpg"),
+              ].join(', ')}/>
           </div>
         </div>
       </Fade>
 
       <Fade>
         <div className={styles.wor}>
-          <div className={styles.colImg}
-            style={{ backgroundImage: 'url(/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg)' }}>
+          <div className={styles.colImg}>
+            <img
+              srcSet={[
+                require("pages/images/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg?webp"),
+                require("pages/images/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg"),
+              ].join(', ')}/>
           </div>
           <div className={styles.colTxt}>
             <h2> Dostave </h2>
