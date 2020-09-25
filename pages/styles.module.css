@@ -13,7 +13,7 @@
 
 /* colTxt */
 .colTxt {
-  flex: 40%;
+  flex: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +30,7 @@
 
 /* colImg */
 .colImg {
-  flex: 60%;
+  flex: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
