@@ -31,7 +31,9 @@ const MainLayout = (props) => {
         <link rel="icon" href="/icons8-farm-64.png" />
       </Head>
 
-      <Navbar/>
+      <Container fluid className="p-0">
+        <Navbar/>
+      </Container>
 
       <Container fluid className="flex-grow-1 p-0">
         { isLoading ? spinner : children }
