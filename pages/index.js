@@ -19,7 +19,11 @@ export default function HomePage() {
             <p> Pogledajte našu trenutnu <Link href="/order"><a>ponudu</a></Link> ili nas <Link href="/about"><a>upoznajte</a></Link>. </p>
           </div>
           <div className={styles.colImg}>
-            <img src="/intro/90901577_626949784816701_5041255869845602304_n.jpg"/>
+            <img
+              srcSet={[
+                require("pages/images/intro/90901577_626949784816701_5041255869845602304_n.jpg?webp"),
+                require("pages/images/intro/90901577_626949784816701_5041255869845602304_n.jpg"),
+              ].join(', ')}/>
           </div>
         </div>
       </Fade>
@@ -27,7 +31,11 @@ export default function HomePage() {
       <Fade>
         <div className={styles.rowRev}>
           <div className={styles.colImg}>
-            <img src="/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg"/>
+            <img
+              srcSet={[
+                require("pages/images/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg?webp"),
+                require("pages/images/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg"),
+              ].join(', ')}/>
           </div>
           <div className={styles.colTxt}>
             <h2> Dostave </h2>
