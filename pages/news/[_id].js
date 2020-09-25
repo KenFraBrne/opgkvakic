@@ -47,7 +47,13 @@ const PostPage = () => {
         <Carousel >
           {post?.images.map(( image, i ) => (
             <Carousel.Item key={i}>
-              <img src={image} className="img-fluid"/>
+              <img
+                srcSet={[
+                  require(`pages/images${image}?webp`),
+                  require(`pages/images${image}`),
+                ].join(', ')}
+                src={image}
+                className="img-fluid"/>
             </Carousel.Item>
           ))}
         </Carousel>

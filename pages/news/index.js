@@ -36,7 +36,13 @@ const NewsPage = () => {
           passHref>
           <Col as="a" className="my-1">
             <Card className="h-100" style={{textDecoration: 'none'}}>
-              <Card.Img variant="top" src={post.images[0]} className="img-fluid"/>
+              <Card.Img
+                variant="top"
+                srcSet={[
+                  require(`pages/images${post.images[0]}?webp`),
+                  require(`pages/images${post.images[0]}`),
+                ].join(', ')}
+                className="img-fluid"/>
               <Card.Body className="d-flex flex-column">
                 <Card.Title className="flex-grow-1">{post.title}</Card.Title>
                 <Card.Footer>{dateString}</Card.Footer>
