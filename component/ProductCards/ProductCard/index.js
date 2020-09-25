@@ -70,7 +70,12 @@ const ProductCard = ({ product }) => {
       <Card.Body className="d-flex flex-column">
 
         <Container className="flex-grow-1 d-flex">
-          <img src={product.image} className="align-self-center mw-100 mh-100"/>
+          <img
+            srcSet={[
+              require(`pages/images${product.image}?webp`),
+              require(`pages/images${product.image}`)
+            ].join(', ')}
+            className="align-self-center mw-100 mh-100"/>
         </Container>
 
         <Card.Title >
