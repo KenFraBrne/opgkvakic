@@ -26,8 +26,8 @@ export default function HomePage() {
           <div className={styles.colImg}>
             <img
               srcSet={[
-                require("pages/images/intro/90901577_626949784816701_5041255869845602304_n.jpg?webp"),
-                require("pages/images/intro/90901577_626949784816701_5041255869845602304_n.jpg"),
+                require("public/intro/90901577_626949784816701_5041255869845602304_n.jpg?webp"),
+                require("public/intro/90901577_626949784816701_5041255869845602304_n.jpg"),
               ].join(', ')}/>
           </div>
         </div>
@@ -38,8 +38,8 @@ export default function HomePage() {
           <div className={styles.colImg}>
             <img
               srcSet={[
-                require("pages/images/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg?webp"),
-                require("pages/images/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg"),
+                require("public/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg?webp"),
+                require("public/intro/WhatsApp_Image_2020-03-28_at_10.07.07.jpeg"),
               ].join(', ')}/>
           </div>
           <div className={styles.colTxt}>

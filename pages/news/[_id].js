@@ -49,8 +49,8 @@ const PostPage = () => {
             <Carousel.Item key={i}>
               <img
                 srcSet={[
-                  require(`pages/images${image}?webp`),
-                  require(`pages/images${image}`),
+                  require(`public/${image}?webp`),
+                  require(`public/${image}`),
                 ].join(', ')}
                 src={image}
                 className="img-fluid"/>

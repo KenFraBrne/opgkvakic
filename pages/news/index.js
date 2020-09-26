@@ -39,8 +39,8 @@ const NewsPage = () => {
               <Card.Img
                 variant="top"
                 srcSet={[
-                  require(`pages/images${post.images[0]}?webp`),
-                  require(`pages/images${post.images[0]}`),
+                  require(`public/${post.images[0]}?webp`),
+                  require(`public/${post.images[0]}`),
                 ].join(', ')}
                 className="img-fluid"/>
               <Card.Body className="d-flex flex-column">

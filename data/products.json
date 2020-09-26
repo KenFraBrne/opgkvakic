@@ -10,7 +10,7 @@
     "min": 0,
     "by": 1,
     "total": 20,
-    "image": "/products/wxW5JC1ZcW.jpg"
+    "image": "products/wxW5JC1ZcW.jpg"
   },
   {
     "id": "FwopEYgHgN",
@@ -23,7 +23,7 @@
     "min": 0,
     "by": 0.5,
     "total": 10,
-    "image": "/products/FwopEYgHgN.jpg"
+    "image": "products/FwopEYgHgN.jpg"
   },
   {
     "id": "Rjz8HBUw89",
@@ -36,7 +36,7 @@
     "min": 30,
     "by": 15,
     "total": 500,
-    "image": "/products/Rjz8HBUw89.jpg"
+    "image": "products/Rjz8HBUw89.jpg"
   },
   {
     "id": "1STMzeia3T",
@@ -49,7 +49,7 @@
     "min": 0,
     "by": 1,
     "total": 35,
-    "image": "/products/1STMzeia3T.png"
+    "image": "products/1STMzeia3T.png"
   },
   {
     "id": "b7Onm3mKZe",
@@ -62,6 +62,6 @@
     "min": 0,
     "by": 0.5,
     "total": 35,
-    "image": "/products/b7Onm3mKZe.jpg"
+    "image": "products/b7Onm3mKZe.jpg"
   }
 ]

@@ -72,8 +72,8 @@ const ProductCard = ({ product }) => {
         <Container className="flex-grow-1 d-flex">
           <img
             srcSet={[
-              require(`pages/images${product.image}?webp`),
-              require(`pages/images${product.image}`)
+              require(`public/${product.image}?webp`),
+              require(`public/${product.image}`)
             ].join(', ')}
             className="align-self-center mw-100 mh-100"/>
         </Container>
