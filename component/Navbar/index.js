@@ -49,7 +49,7 @@ const MojNavbar = () => {
             <NavLink>Ponuda</NavLink>
           </Link>
 
-          <Link href="/news" passHref>
+          <Link href="/posts" passHref>
             <NavLink>Novosti</NavLink>
           </Link>
 

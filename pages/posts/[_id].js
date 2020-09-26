@@ -34,7 +34,7 @@ const PostPage = () => {
 
       <Container style={{maxWidth: 600}} >
 
-        <Link href="/news" passHref>
+        <Link href="/posts" passHref>
           <NavLink className="px-0 py-3 d-flex flex-row">
             <FiArrowLeft size="1.5em"/>
             <div className="pl-1">Nazad</div>

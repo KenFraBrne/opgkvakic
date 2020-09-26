@@ -31,8 +31,8 @@ const NewsPage = () => {
       return (
         <Link
           key={post._id}
-          href="news/[_id]"
-          as={`news/${post._id}`}
+          href="posts/[_id]"
+          as={`posts/${post._id}`}
           passHref>
           <Col as="a" className="my-1">
             <Card className="h-100" style={{textDecoration: 'none'}}>
