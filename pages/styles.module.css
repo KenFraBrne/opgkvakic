@@ -15,7 +15,6 @@
 .colImg {
   flex: 60%;
   overflow: hidden;
-  background-color: darkseagreen;
 }
 .colImg img {
   width: auto;
