@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }) {
   getServerData(load ? '/api/posts' : null);
   getServerData(load ? '/api/products' : null);
   getServerData(load ? '/api/deliveries' : null);
+  getServerData(load ? '/api/user/orders' : null);
   useEffect(() => {
     setLoad(false);
   }, []);
