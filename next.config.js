@@ -9,4 +9,15 @@ module.exports = withOptimizedImages({
     config.resolve.alias.images = path.join(__dirname, "public");
     return config;
   },
+  mozjpeg: {
+    quality: 20,
+  },
+  optipng: {
+    quality: 20,
+    strip: 'all',
+  },
+  webp: {
+    preset: 'default',
+    size: 100000,
+  }
 });
