@@ -27,20 +27,22 @@ const ProductSummary = ({ order, products }) => {
     const amountString = amountPretty(product, amount);
     return (
       <tr key={ind}>
-        <td>{ind+1}</td>
         <td>{`${name} (${price}kn/${priceUnit === 1 ? '' : priceUnit}${priceText})`}</td>
         <td>{amountString}</td>
-        <td>{amount*price/priceUnit}</td>
+        <td>{amount*price/priceUnit + ' kn'}</td>
       </tr>
     )
   });
 
   return (
 
-    <Table striped bordered hover size="sm">
+    <Table
+      striped
+      bordered
+      responsive
+      className="text-center">
       <thead>
         <tr>
-          <th></th>
           <th>Proizvod</th>
           <th>Količina</th>
           <th>Cijena</th>
@@ -49,7 +51,7 @@ const ProductSummary = ({ order, products }) => {
       <tbody>
         {tableRows}
         <tr>
-          <th className="text-center" colSpan={3}> Totalna cijena </th>
+          <th colSpan={2}> Totalna cijena </th>
           <td>{`${totalPrice} kn`}</td>
         </tr>
       </tbody>
