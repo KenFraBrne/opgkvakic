@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -12,10 +15,13 @@ import getServerData from 'util/getServerData';
 
 export default function HomePage() {
 
-  const { mutateUser } = getServerData('/api/user');
+  // language change
+  const { language } = useContext(LanguageContext);
+  const content = language.content.pages.login;
 
+  // handle error message
   const router = useRouter();
-
+  const { mutateUser } = getServerData('/api/user');
   const [ errorMsg, setErrorMsg ] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -37,47 +43,46 @@ export default function HomePage() {
         mutateUser({ user });
         router.back();
       } else {
-        setErrorMsg("Email ili lozinka su pogrešni")
+        setErrorMsg(content.setErrorMsg);
       };
     };
   };
 
+  // form groups
+  const formGroups = [
+    "email",
+    "password",
+  ].map( (group, ind) => {
+    return (
+      <Form.Group
+        key={ind}
+        controlId={group}
+        onChange={() => setErrorMsg(null)}>
+        <Form.Label>{ content.FormLabel[ind] }</Form.Label>
+        <Form.Control
+          required
+          type={group}
+          placeholder={ content.FormPlaceholder[ind] }/>
+        <Form.Control.Feedback type="invalid">{ content.FormFeedback[ind] }</Form.Control.Feedback>
+      </Form.Group>
+    )
+  });
+
   return (
     <MainLayout>
-
       <Container fluid style={{maxWidth: 600, textAlign: 'justify'}}>
-
-        <h1>Prijava</h1>
-
-
+        <h1>{ content.h1 }</h1>
         <Form noValidate onSubmit={handleSubmit}>
-
-          <Form.Group controlId="email" onChange={() => setErrorMsg(null)}>
-            <Form.Label>Email adresa</Form.Label>
-            <Form.Control required type="email" placeholder="Upišite email"/>
-            <Form.Control.Feedback type="invalid">Email nije dobar</Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group controlId="password" onChange={() => setErrorMsg(null)}>
-            <Form.Label>Lozinka</Form.Label>
-            <Form.Control required type="password" placeholder="Upišite lozinku"/>
-            <Form.Control.Feedback type="invalid">Lozinka je prazna</Form.Control.Feedback>
-          </Form.Group>
-
+          { formGroups }
           <Button variant="primary" type="submit" className="mr-3">
-            Prijavi se
+            { content.Button[0] }
           </Button>
-
           <Button variant="secondary" onClick={() => router.push('/signup')}>
-            Registriraj se
+            { content.Button[1] }
           </Button>
-
         </Form>
-
         <p className="text-danger py-3">{errorMsg}</p>
-
       </Container>
-
     </MainLayout>
   )
 }
