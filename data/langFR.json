@@ -1,0 +1,166 @@
+{
+  "pages" : {
+    "index" : {
+      "row" : {
+        "h2" : "Bienvenue",
+        "p" : "Consultez notre offre ou rencontrez-nous." },
+      "wor" : {
+        "h2" : "Livraison",
+        "p" : "Produits frais livrés chez vous chaque semaine." }
+    },
+    "order" : {
+      "h1" : "Commandez"
+    },
+    "cart" : {
+      "h1" : [
+        "Votre commande",
+        "Votre panier est vide"
+      ],
+      "h4" : [
+        "Details:",
+        "Livraison:",
+        "Temps:"
+      ],
+      "button" : "Commandez"
+    },
+    "posts" : {
+      "h1" : "Actualités",
+      "_id" : "Retour"
+    },
+    "about" : {
+      "index" : {
+        "h1" : "À propos"
+      },
+      "where" : {
+        "h1" : "Ou sommes nous"
+      },
+      "how" : {
+        "h1" : "Sur les livraisons"
+      },
+      "contact" : {
+        "h1" : "Contactez-nous",
+        "name" : "Votre prenom",
+        "email" : "Votre adresse e-mail",
+        "subject" : "Sujet",
+        "message" : "Votre message",
+        "button" : "Envoyer"
+      }
+    },
+    "user" : {
+      "verify" : {
+        "h1" : "Connectez-vous",
+        "p" : [
+          "Merci d'avoir confirmé votre adresse e-mail",
+          "Le lien de confirmation n'est plus valide."
+        ]
+      }
+    }
+  },
+  "component" : {
+    "DatePicker" : {
+      "FormControl" : "Sélectionnez la date de livraison"
+    },
+    "Footer" : {
+      "linksText" : [
+        "Page d'accueil",
+        "Commandez",
+        "À propos",
+        "Contactez-nous",
+        "Connectez-vous"
+      ],
+      "b" : [
+        "Navigation",
+        "Contact"
+      ]
+    },
+    "Forms" : {
+      "UserInfo" : {
+        "formGroups" : [
+          "Nom d'utilisateur",
+          "Email",
+          "Prénom",
+          "Nom de famille",
+          "Adresse",
+          "Numéro de téléphone"
+        ],
+        "Button" : [
+          "Modifier les données personelles",
+          "Supprimer l'utilisateur"
+        ]
+      }
+    },
+    "Modals" : {
+      "OrderErase" : {
+        "ModalTitle" : "Supprimer la commande",
+        "ModalBody" : "Etes-vous sûr de vouloir annuler votre commande?",
+        "Button" : [
+          "Non",
+          "Oui"
+        ]
+      },
+      "UserErase" : {
+        "ModalTitle" : "Supprimer l'utilisateur",
+        "ModalBody" : "Etes-vous sûr de vouloir supprimer votre compte?",
+        "Button" : [
+          "Non",
+          "Oui"
+        ]
+      }
+    },
+    "Navbar" : {
+      "NavbarCollapse" : [
+        "Page d'accueil",
+        "Commandez",
+        "Nouvelles"
+      ],
+      "NavDropdown" : {
+        "title" : "A propos",
+        "Lien" : [
+          "Qui sommes nous",
+          "Sur les livraisons",
+          "Ou sommes nous",
+          "Contact"
+        ]
+      },
+      "NavLink" : "Connexion"
+    },
+    "OrderCards" : {
+      "index" : {
+        "h3" : "Vous n'avez pas de commandes encore"
+      },
+      "OrderCard" : {
+        "géant" : [
+          "La commande",
+          "Prix",
+          "Date",
+          "Temps"
+        ]
+      }
+    },
+    "ProductSummary" : {
+      "thead" : {
+        "th" : [ 
+          "Produit",
+          "Quantite",
+          "Prix"
+        ]
+      },
+      "tbody" : {
+        "th" : "Prix total"
+      }
+    },
+    "DatePicker" : {
+      "dropdownTitle" : "Choisissez la date de livraison"
+    }
+  },
+  "layout" : {
+    "UserLayout" : {
+      "NavLink" : [
+        "Information",
+        "Commandes",
+        "Déconnectez-vous"
+      ],
+      "h1" : "L'utilisateur n'est pas connecté"
+    }
+  }
+}

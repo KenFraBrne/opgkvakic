@@ -1,0 +1,166 @@
+{
+  "pages" : {
+    "index" : {
+      "row" : {
+        "h2" : "Welcome",
+        "p" : "Check out our current offer or get to know us." },
+        "wor" : {
+          "h2" : "Delivery",
+          "p" : "Fresh items delivered to your doorstep every week." }
+    },
+    "order" : {
+      "h1" : "Order"
+    },
+    "cart" : {
+      "h1" : [
+        "Your order",
+        "Your shopping cart is empty"
+      ],
+      "h4" : [
+        "Order details:",
+        "Delivery:",
+        "Time:"
+      ],
+      "button" : "Order"
+    },
+    "posts" : {
+      "h1" : "News",
+      "_id" : "Back"
+    },
+    "about" : {
+      "index" : {
+        "h1" : "About us"
+      },
+      "where" : {
+        "h1" : "How to get to us"
+      },
+      "how" : {
+        "h1" : "About our deliveries"
+      },
+      "contact" : {
+        "h1" : "Contact us",
+        "name" : "Your name",
+        "email" : "Your email address",
+        "subject" : "Message title",
+        "message" : "Your message",
+        "button" : "Send the message"
+      }
+    },
+    "user" : {
+      "verify" : {
+        "h1" : "Registration",
+        "p" : [
+          "Thank you for confirming your email address",
+          "The confirmation link is no longer valid."
+        ]
+      }
+    }
+  },
+  "component" : {
+    "DatePicker" : {
+      "FormControl" : "Select the delivery date"
+    },
+    "Footer" : {
+      "linksText" : [
+        "Home",
+        "Offer",
+        "About us",
+        "Contact us",
+        "Login"
+      ],
+      "b" : [
+        "Navigation",
+        "Contact"
+      ]
+    },
+    "Forms" : {
+      "UserInfo" : {
+        "formGroups" : [
+          "User name",
+          "Email",
+          "Name",
+          "Last name",
+          "Address",
+          "Mobile or fixed phone number"
+        ],
+        "Button" : [
+          "Changing data",
+          "Delete user"
+        ]
+      }
+    },
+    "Modals" : {
+      "OrderErase" : {
+        "ModalTitle" : "Cancel order",
+        "ModalBody" : "Are you sure you want to cancel the order?",
+        "Button" : [
+          "No",
+          "Yes"
+        ]
+      },
+      "UserErase" : {
+        "ModalTitle" : "Delete user account",
+        "ModalBody" : "Are you sure you want to delete your user account?",
+        "Button" : [
+          "No",
+          "Yes"
+        ]
+      }
+    },
+    "Navbar" : {
+      "NavbarCollapse" : [
+        "Homepage",
+        "Offer",
+        "News"
+      ],
+      "NavDropdown" : {
+        "title" : "About us",
+        "Link" : [
+          "Who are we",
+          "About our deliveries",
+          "How to get to us",
+          "Contact"
+        ]
+      },
+      "NavLink" : "Login"
+    },
+    "OrderCards" : {
+      "index" : {
+        "h3" : "You do not have any orders currently"
+      },
+      "OrderCard" : {
+        "div" : [
+          "Order",
+          "Price",
+          "Date",
+          "Time"
+        ]
+      }
+    },
+    "ProductSummary" : {
+      "thead" : {
+        "th" : [ 
+          "Product",
+          "Quantity",
+          "Price"
+        ]
+      },
+      "tbody" : {
+        "th" : "Total price"
+      }
+    },
+    "DatePicker" : {
+      "dropdownTitle" : "Select delivery time"
+    }
+  },
+  "layout" : {
+    "UserLayout" : {
+      "NavLink" : [
+        "User data",
+        "Orders",
+        "Log out"
+      ],
+      "h1" : "The user is not logged in"
+    }
+  }
+}

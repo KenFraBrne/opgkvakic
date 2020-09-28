@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
+import { LanguageProvider } from 'context/Language';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/globals.css'
 
@@ -21,7 +23,9 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <Component {...pageProps} />
+    <LanguageProvider>
+      <Component {...pageProps} />
+    </LanguageProvider>
   )
 }
 

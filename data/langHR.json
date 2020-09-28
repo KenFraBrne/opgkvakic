@@ -1,0 +1,166 @@
+{
+  "pages" : {
+    "index" : {
+      "row" : {
+        "h2" : "Dobrodošli",
+        "p" : "Pogledajte našu trenutnu ponudu ili nas upoznajte." },
+        "wor" : {
+          "h2" : "Dostave",
+          "p" : "Svježa roba dostavljena na vaša vrata svaki tjedan." }
+    },
+    "order" : {
+      "h1" : "Ponuda"
+    },
+    "cart" : {
+      "h1" : [
+        "Vaša narudžba",
+        "Vaša košarica je prazna"
+      ],
+      "h4" : [
+        "Detalji:",
+        "Dostava:",
+        "Vrijeme:"
+      ],
+      "button" : "Naručite"
+    },
+    "posts" : {
+      "h1" : "Novosti",
+      "_id" : "Nazad"
+    },
+    "about" : {
+      "index" : {
+        "h1" : "O nama"
+      },
+      "where" : {
+        "h1" : "Kako do nas"
+      },
+      "how" : {
+        "h1" : "O dostavama"
+      },
+      "contact" : {
+        "h1" : "Kontaktirajte nas",
+        "name" : "Vaše ime",
+        "email" : "Vaš email",
+        "subject" : "Naslov poruke",
+        "message" : "Vaša poruka",
+        "button" : "Pošalji"
+      }
+    },
+    "user" : {
+      "verify" : {
+        "h1" : "Registracija",
+        "p" : [
+          "Hvala vam na potvrdi vaše email adrese",
+          "Link za potvrdu više ne važi."
+        ]
+      }
+    }
+  },
+  "component" : {
+    "DatePicker" : {
+      "FormControl" : "Izaberite datum dostave"
+    },
+    "Footer" : {
+      "linksText" : [
+        "Naslovna",
+        "Ponuda",
+        "O nama",
+        "Kontaktirajte nas",
+        "Prijava"
+      ],
+      "b" : [
+        "Navigacija",
+        "Kontakt"
+      ]
+    },
+    "Forms" : {
+      "UserInfo" : {
+        "formGroups" : [
+          "Korisničko ime",
+          "Email",
+          "Ime",
+          "Prezime",
+          "Adresa",
+          "Broj mobitela ili telefona"
+        ],
+        "Button" : [
+          "Izmjeni korisničke podatke",
+          "Izbriši korisnika"
+        ]
+      }
+    },
+    "Modals" : {
+      "OrderErase" : {
+        "ModalTitle" : "Poništi narudžbu",
+        "ModalBody" : "Jeste li sigurni da želite poništiti narudžbu?",
+        "Button" : [
+          "Ne",
+          "Da"
+        ]
+      },
+      "UserErase" : {
+        "ModalTitle" : "Izbriši korisnički račun",
+        "ModalBody" : "Jeste li sigurni da želite izbrisati vaš korisnički račun?",
+        "Button" : [
+          "Ne",
+          "Da"
+        ]
+      }
+    },
+    "Navbar" : {
+      "NavbarCollapse" : [
+        "Naslovna",
+        "Ponuda",
+        "Novosti"
+      ],
+      "NavDropdown" : {
+        "title" : "O nama",
+        "Link" : [
+          "Tko smo",
+          "O dostavama",
+          "Kako do nas",
+          "Kontakt"
+        ]
+      },
+      "NavLink" : "Prijava"
+    },
+    "OrderCards" : {
+      "index" : {
+        "h3" : "Trenutno nemate narudžbi"
+      },
+      "OrderCard" : {
+        "div" : [
+          "Narudžba",
+          "Cijena",
+          "Datum",
+          "Vrijeme"
+        ]
+      }
+    },
+    "ProductSummary" : {
+      "thead" : {
+        "th" : [ 
+          "Proizvod",
+          "Količina",
+          "Cijena"
+        ]
+      },
+      "tbody" : {
+        "th" : "Totalna cijena"
+      }
+    },
+    "DatePicker" : {
+      "dropdownTitle" : "Izaberite vrijeme dostave"
+    }
+  },
+  "layout" : {
+    "UserLayout" : {
+      "NavLink" : [
+        "Informacije",
+        "Narudžbe",
+        "Odjava"
+      ],
+      "h1" : "Korisnik nije prijavljen"
+    }
+  }
+}
