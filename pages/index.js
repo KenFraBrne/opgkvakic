@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Fade from 'react-reveal/Fade';
 
 import Link from 'next/link';
+
+import { LanguageContext } from 'context/Language';
 
 import Container from 'react-bootstrap/Container';
 
@@ -11,17 +13,17 @@ import MainLayout from 'layout/MainLayout'
 import styles from './styles.module.css';
 
 export default function HomePage() {
+
+  const { language } = useContext(LanguageContext);
+
   return (
     <MainLayout>
 
       <Fade>
         <div className={styles.row}>
           <div className={styles.colTxt}>
-            <h2> Dobrodošli </h2>
-            <p>
-              Pogledajte našu trenutnu <Link href="/order"><a>ponudu</a></Link> ili
-              nas <Link href="/about"><a>upoznajte</a></Link>.
-            </p>
+            <h2> {language.content.pages.index.row.h2} </h2>
+            <p> {language.content.pages.index.row.p} </p>
           </div>
           <div className={styles.colImg}>
             <img
@@ -43,8 +45,8 @@ export default function HomePage() {
               ].join(', ')}/>
           </div>
           <div className={styles.colTxt}>
-            <h2> Dostave </h2>
-            <p> Svježa roba dostavljena na vaša vrata svaki tjedan </p>
+            <h2> {language.content.pages.index.wor.h2} </h2>
+            <p> {language.content.pages.index.wor.p} </p>
           </div>
         </div>
       </Fade>
