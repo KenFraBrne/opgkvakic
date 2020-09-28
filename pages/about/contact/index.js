@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useRouter } from 'next/router';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -35,13 +38,17 @@ export default function ContactPage() {
       });
     };
   };
+  
+  // language change
+  const { language } = useContext(LanguageContext);
+  const content = language.content.pages.about.contact;
 
   return (
     <MainLayout>
 
       <Container fluid style={{maxWidth: 800}}>
 
-        <h1>Kontaktirajte nas</h1>
+        <h1>{ content.h1 }</h1>
 
         <Row className="pt-3">
 
@@ -52,27 +59,27 @@ export default function ContactPage() {
                   className="col-md"
                   controlId="name">
                   <Form.Control
-                    placeholder="Vaše ime"/>
+                    placeholder={ content.name }/>
                 </Form.Group>
                 <Form.Group
                   className="col-md"
                   controlId="email">
                   <Form.Control
                     type="email"
-                    placeholder="Vaš email"/>
+                    placeholder={ content.email }/>
                 </Form.Group>
               </Form.Row>
               <Form.Group controlId="subject">
                 <Form.Control
-                placeholder="Naslov poruke"/>
+                placeholder={ content.subject }/>
               </Form.Group>
               <Form.Group controlId="message">
                 <Form.Control
                   as="textarea"
-                  placeholder="Vaša poruka"/>
+                  placeholder={ content.message }/>
               </Form.Group>
               <Button type="submit">
-                Pošaljite poruku
+                { content.button }
               </Button>
             </Form>
           </Col>
