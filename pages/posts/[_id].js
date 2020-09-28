@@ -3,6 +3,9 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
 import NavLink from 'react-bootstrap/NavLink';
@@ -15,14 +18,20 @@ import getServerData from 'util/getServerData';
 
 const PostPage = () => {
 
+  // query parameter
   const router = useRouter();
   const _id = router.query?._id;
 
+  // get post data
   const { posts } = getServerData('/api/posts');
   const post = _id && posts && posts.find(post => post._id === _id);
+  
+  // language change
+  const { language } = useContext(LanguageContext);
 
+  // date string
   const date = post && new Date(post.date);
-  const dateString = date && date.toLocaleString([],{
+  const dateString = date && date.toLocaleString( language.lang ,{
     weekday: 'short',
     year: 'numeric',
     month: 'long',
@@ -37,7 +46,7 @@ const PostPage = () => {
         <Link href="/posts" passHref>
           <NavLink className="px-0 py-3 d-flex flex-row">
             <FiArrowLeft size="1.5em"/>
-            <div className="pl-1">Nazad</div>
+            <div className="pl-1"> { language.content.pages.posts._id } </div>
           </NavLink>
         </Link>
 

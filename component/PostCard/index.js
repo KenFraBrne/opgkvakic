@@ -5,11 +5,11 @@ import Link from 'next/link';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 
-export default function PostCard({ post }){
+export default function PostCard({ post, lang }){
 
   const date = new Date(post.date);
 
-  const dateString = date.toLocaleString([],{
+  const dateString = date.toLocaleString(lang, {
     weekday: 'short',
     year: 'numeric',
     month: 'long',
