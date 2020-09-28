@@ -1,13 +1,10 @@
 import React from 'react';
 
-import Link from 'next/link';
-
 import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 import MainLayout from 'layout/MainLayout';
+import PostCard from 'component/PostCard';
 
 import getServerData from 'util/getServerData';
 
@@ -17,40 +14,12 @@ const NewsPage = () => {
   const { posts } = getServerData('/api/posts');
   const isLoading = posts ? false : true;
 
-  // cards
-  let cards = posts && posts
+  // post cards
+  let postCards = posts && posts
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .map(post => {
-      const date = new Date(post.date);
-      const dateString = date.toLocaleString([],{
-        weekday: 'short',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-      return (
-        <Link
-          key={post._id}
-          href="posts/[_id]"
-          as={`posts/${post._id}`}
-          passHref>
-          <Col as="a" className="my-1">
-            <Card className="h-100" style={{textDecoration: 'none'}}>
-              <Card.Img
-                variant="top"
-                srcSet={[
-                  require(`public/${post.images[0]}?webp`),
-                  require(`public/${post.images[0]}`),
-                ].join(', ')}
-                className="img-fluid"/>
-              <Card.Body className="d-flex flex-column">
-                <Card.Title className="flex-grow-1">{post.title}</Card.Title>
-                <Card.Footer>{dateString}</Card.Footer>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Link>
-      )
+      const props = { post };
+      return <PostCard {...props}/>
     });
 
   return (
@@ -58,7 +27,7 @@ const NewsPage = () => {
       <Container fluid style={{maxWidth: '85%'}}>
         <h1>Novosti</h1>
         <Row className="row-cols-1 row-cols-md-2 row-cols-lg-3">
-          {cards}
+          {postCards}
         </Row>
       </Container>
     </MainLayout>
