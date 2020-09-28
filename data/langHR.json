@@ -55,6 +55,44 @@
           "Link za potvrdu više ne važi."
         ]
       }
+    },
+    "login" : {
+      "setErrorMsg" : "Email ili lozinka su pogrešni",
+      "h1" : "Prijava",
+      "FormLabel" : [
+        "Email adresa",
+        "Lozinka"
+      ],
+      "FormPlaceholder" : [
+        "Upišite email",
+        "Upišite lozinku"
+      ],
+      "FormFeedback" : [
+        "Email nije dobar",
+        "Lozinka je prazna"
+      ],
+      "Button" : [
+        "Prijavi se",
+        "Registriraj se"
+      ]
+    },
+    "signup" : {
+      "handleSubmit" : [
+        "Email nije dobar",
+        "Email je prazan"
+      ],
+      "h1" : "Registracija",
+      "FormLabel" : [
+        "Korisničko ime",
+        "Email adresa",
+        "Lozinka"
+      ],
+      "FormPlaceholder" : [
+        "Upišite korisničko ime",
+        "Upišite email",
+        "Upišite lozinku"
+      ],
+      "Button" : "Registriraj se"
     }
   },
   "component" : {

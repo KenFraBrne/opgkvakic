@@ -55,6 +55,44 @@
           "The confirmation link is no longer valid."
         ]
       }
+    },
+    "login" : {
+      "setErrorMsg" : "Email or password incorrect",
+      "h1" : "Log in",
+      "FormLabel" : [
+        "Email address",
+        "Password"
+      ],
+      "FormPlaceholder" : [
+        "Enter email",
+        "Enter your password"
+      ],
+      "FormFeedback" : [
+        "Email not valid",
+        "Password is empty"
+      ],
+      "Button" : [
+        "Log in",
+        "Register"
+      ]
+    },
+    "signup" : {
+      "handleSubmit" : [
+        "Email not valid",
+        "Email empty"
+      ],
+      "h1" : "Sign up",
+      "FormLabel" : [
+        "User name",
+        "Email address",
+        "Password"
+      ],
+      "FormPlaceholder" : [
+        "Enter username",
+        "Enter email",
+        "Enter password"
+      ],
+      "Button" : "Sign up"
     }
   },
   "component" : {

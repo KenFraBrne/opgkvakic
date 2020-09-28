@@ -55,6 +55,44 @@
           "Le lien de confirmation n'est plus valide."
         ]
       }
+    },
+    "login" : {
+      "setErrorMsg" : "Adresse email ou mot de passe incorrect",
+      "h1" : "S'identifier",
+      "FormLabel" : [
+        "Adresse email",
+        "Mot de passe"
+      ],
+      "FormPlaceholder" : [
+        "Entrez votre addresse e-mail",
+        "Entrez votre mot de passe"
+      ],
+      "FormFeedback" : [
+        "Email non valide",
+        "Mot de passe vide"
+      ],
+      "Button" : [
+        "S'identifier",
+        "Inscrivez-vous"
+      ]
+    },
+    "signup" : {
+      "handleSubmit" : [
+        "Email non valide",
+        "Email vide"
+      ],
+      "h1" : "Inscription",
+      "FormLabel" : [
+        "Nom d'utilisateur",
+        "Adresse eMail",
+        "Mot de passe"
+      ],
+      "FormPlaceholder" : [
+        "Entrez votre nom d'utilisateur",
+        "Entrez votre addresse e-mail",
+        "Entrer le mot de passe"
+      ],
+      "Button" : "S'inscrire"
     }
   },
   "component" : {
