@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 
@@ -23,16 +26,19 @@ const OrderPage = () => {
   const re = new RegExp(removeDiacritics(formText), 'i');
   const filteredProducts = products && products.filter(product => re.test(removeDiacritics(product.name)));
 
+  // language change
+  const { language } = useContext(LanguageContext);
+
   return (
     <MainLayout isLoading={isLoading}>
       <Container fluid style={{maxWidth: '85%'}}>
 
-        <h1> Ponuda </h1>
+        <h1> { language.content.pages.order.h1 } </h1>
 
         <Form className="py-2 px-3 mx-auto" style={{maxWidth: 700}}>
           <Form.Control
             type="text"
-            placeholder="Pretražite proizvod"
+            placeholder={ language.content.pages.order.FormControl }
             value={formText}
             onChange={(event) => setFormText(event.target.value)}/>
         </Form>

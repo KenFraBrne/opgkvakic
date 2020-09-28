@@ -9,7 +9,8 @@
           "p" : "Fresh items delivered to your doorstep every week." }
     },
     "order" : {
-      "h1" : "Order"
+      "h1" : "Order",
+      "FormControl" : "Search product"
     },
     "cart" : {
       "h1" : [

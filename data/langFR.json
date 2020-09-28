@@ -9,7 +9,8 @@
         "p" : "Produits frais livrés chez vous chaque semaine." }
     },
     "order" : {
-      "h1" : "Commandez"
+      "h1" : "Commandez",
+      "FormControl" : "Cherchez le produit"
     },
     "cart" : {
       "h1" : [

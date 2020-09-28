@@ -9,7 +9,8 @@
           "p" : "Svježa roba dostavljena na vaša vrata svaki tjedan." }
     },
     "order" : {
-      "h1" : "Ponuda"
+      "h1" : "Ponuda",
+      "FormControl" : "Pretražite proizvod"
     },
     "cart" : {
       "h1" : [
