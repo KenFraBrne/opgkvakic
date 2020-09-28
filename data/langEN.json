@@ -44,7 +44,7 @@
         "email" : "Your email address",
         "subject" : "Message title",
         "message" : "Your message",
-        "button" : "Send the message"
+        "button" : "Send message"
       }
     },
     "user" : {
