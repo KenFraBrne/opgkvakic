@@ -108,8 +108,8 @@
       }
     },
     "Navbar" : {
-      "NavbarCollapse" : [
-        "Homepage",
+      "navLinkLeft" : [
+        "Home",
         "Offer",
         "News"
       ],
@@ -117,12 +117,12 @@
         "title" : "About us",
         "Link" : [
           "Who are we",
-          "About our deliveries",
+          "About the deliveries",
           "How to get to us",
           "Contact"
         ]
       },
-      "NavLink" : "Login"
+      "navLinkRight" : "Login"
     },
     "OrderCards" : {
       "index" : {

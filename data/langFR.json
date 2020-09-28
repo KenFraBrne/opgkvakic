@@ -108,21 +108,21 @@
       }
     },
     "Navbar" : {
-      "NavbarCollapse" : [
+      "navLinkLeft" : [
         "Page d'accueil",
         "Commandez",
         "Nouvelles"
       ],
       "NavDropdown" : {
         "title" : "A propos",
-        "Lien" : [
+        "Link" : [
           "Qui sommes nous",
           "Sur les livraisons",
           "Ou sommes nous",
           "Contact"
         ]
       },
-      "NavLink" : "Connexion"
+      "navLinkRight" : "Connexion"
     },
     "OrderCards" : {
       "index" : {

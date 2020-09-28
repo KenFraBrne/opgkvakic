@@ -108,7 +108,7 @@
       }
     },
     "Navbar" : {
-      "NavbarCollapse" : [
+      "navLinkLeft" : [
         "Naslovna",
         "Ponuda",
         "Novosti"
@@ -122,7 +122,7 @@
           "Kontakt"
         ]
       },
-      "NavLink" : "Prijava"
+      "navLinkRight" : "Prijava"
     },
     "OrderCards" : {
       "index" : {
