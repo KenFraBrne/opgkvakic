@@ -4,9 +4,9 @@ import * as actions from './actions.js';
 const reducer = (language, action) => {
   const { type } = action;
   switch(type){
-    case(types.SET_HR): return actions.setLanguage('data/langHR.json');
-    case(types.SET_EN): return actions.setLanguage('data/langEN.json');
-    case(types.SET_FR): return actions.setLanguage('data/langFR.json');
+    case(types.SET_HR): return actions.setHR();
+    case(types.SET_EN): return actions.setEN();
+    case(types.SET_FR): return actions.setFR();
     default: return language;
   };
 };
