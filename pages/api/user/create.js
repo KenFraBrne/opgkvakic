@@ -4,50 +4,27 @@ import normalizeEmail from 'validator/lib/normalizeEmail';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import middleware from 'middleware';
-
-function encodeMessage({ username, email, verifyToken, req }){
-  const subject = 'Dobrodošli!';
-  const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`;
-  const messageParts = [
-    `To: ${username} <${email}>`,
-    'Content-Type: text/html; charset=utf-8',
-    'MIME-Version: 1.0',
-    `Subject: ${utf8Subject}`,
-    '',
-    `Draga/dragi ${username},<br><br>`,
-    'Hvala vam što ste nam se pridužili 😉<br><br>',
-    'Kako bi aktivirali vaš korišnički račun i omogučili naručivanje, molimo vas da kliknete',
-    `<a href="${req.headers.origin}/user/verify/${verifyToken}">ovaj link</a><br><br>`,
-    'Do skora  👋<br>',
-    'OPG Kvakić<br><br>',
-  ];
-  const fullMessage = messageParts.join('\n');
-  return Buffer.from(fullMessage)
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '');
-};
+import { encodedCreateUser } from 'layout/Email/CreateUser';
 
 const handler = nextConnect();
 
 handler.use(middleware);
 
 handler.post(async (req, res) => {
-
   const { username, password } = req.body;
   const email = normalizeEmail(req.body.email);
-
-  if (!isEmail(email)){
-    res.status(400).send('Email nije dobar');
-  } else {
+  // check if email is ok
+  if ( !isEmail(email) ) return res.status(400).end();
+  else {
+    // check if email already exists
     const nEmails = await req.db.collection('users').countDocuments({ email });
-    if (nEmails > 0) {
-      res.status(403).send('Email vec postoji');
-    } else {
+    if (nEmails > 0) return res.status(403).end();
+    else {
+      // hash password & create verify token
       const hashedPassword = await bcrypt.hash(password, 10);
       const verifyToken = crypto.randomBytes(20).toString('hex');
-      req.db
+      // insert user
+      const user = await req.db
         .collection('users')
         .insertOne({
           username,
@@ -56,23 +33,25 @@ handler.post(async (req, res) => {
           verified: false,
           verifyToken,
         })
-        .then(ret => {
-          const user = ret.ops[0];
-          req.login(user, err => {
-            if (err) res.status(511).send('Korisnik se treba upisati');
-            req.gmail.users.messages.send({
-              userId: 'me',
-              requestBody: {
-                raw: encodeMessage({ username, email, verifyToken, req }),
-              }
-            }).then(() => console.log('email poslan'))
-              .catch(() => console.log('email nije poslan'));
-            res.status(201).send('Korisnik upisan!');
-          });
+        .then(ret => ret.ops[0])
+        // or throw error
+        .catch(() => res.status(500).end());
+      // send welcome message
+      const raw = encodedCreateUser({ username, email, verifyToken, req });
+      req.gmail.users.messages
+        .send({
+          userId: 'me',
+          requestBody: { raw }
         })
-        .catch(() => {
-          res.status(503).send('Greška pri registraciji');
-        });
+        // or throw error
+        .catch(() => res.status(503).end())
+      // log in
+      console.log(user);
+      req.login(user, err => {
+        if (!err) return res.status(201).end();
+        // or throw error
+        else return res.status(511).end();
+      });
     }
   };
 });

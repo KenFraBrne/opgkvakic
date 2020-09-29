@@ -1,88 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 
 import MainLayout from 'layout/MainLayout'
+import SignupForm from 'component/Forms/Signup';
 
 export default function HomePage() {
 
+  // success
   const router = useRouter();
-  const [ formValid, setFormValid ] = useState(false);
-  const [ emailError, setEmailError ] = useState(null);
-  const [ emailValid, setEmailValid ] = useState(true);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() !== false) {
-      const body = {
-        username: form.username.value,
-        password: form.password.value,
-        email: form.email.value,
-      };
-      const res = await fetch('/api/user/create', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(body),
-      });
-      if (res.status !== 201){
-        setEmailError(await res.text());
-        setEmailValid(false);
-        setFormValid(false);
+  const [ success, setSuccess ] = useState(null);
+  const getSuccess = (success) => {
+    switch(success) {
+      case 201: // OK
+      case 511: // Signup required
+        setTimeout(() => router.replace('/'), 2000);
+        return (
+          <Container>
+            <p> Dobrodošli! </p>
+            <p> Molimo vas da provjerite svoj email i aktivirate svoj račun. </p>
+          </Container>
+        );
+      case 500: // Registration error
+        return (
+          <Container>
+            <p> Došlo je do greške pri stvaranju vašeg računa... </p>
+            <p> Molimo vas da probate <a href="\\" onClick={() => setSuccess(null)}> ponovo </a> </p>
+          </Container>
+        );
+      case 503: // Verification email error
+        return (
+          <Container>
+            <p> Korisnički račun je kreiran ali izgleda da mail potvrde nije poslan... </p>
+            <p> Molimo vas da nas kontaktirate za aktivaciju vašeg računa </p>
+          </Container>
+        );
+      default:
         return;
-      } else {
-        router.push('/');
-      };
-    };
-
-    if (form.email.value.length !== 0){
-      setEmailError("Email nije dobar");
-    } else {
-      setEmailError("Email je prazan");
-    };
-
-    setFormValid(true);
+    }
   };
+  const sucessContainer = (
+    <Container className="px-0 py-3">
+      { getSuccess(success) }
+    </Container>
+  );
 
+  // render
   return (
     <MainLayout>
-
-      <Container fluid style={{maxWidth: 600, textAlign: 'justify'}}>
-
-        <h1>Registracija</h1>
-
-        <Form noValidate validated={formValid} onSubmit={handleSubmit}>
-
-          <Form.Group controlId="username">
-            <Form.Label>Korisničko ime</Form.Label>
-            <Form.Control required type="text" placeholder="Upišite korisničko ime"/>
-            <Form.Control.Feedback type="invalid">Korišničko ime je prazno</Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group controlId="email">
-            <Form.Label>Email adresa</Form.Label>
-            <Form.Control isInvalid={!emailValid} required type="email" placeholder="Upišite email"/>
-            <Form.Control.Feedback type="invalid">{emailError}</Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group controlId="password">
-            <Form.Label>Lozinka</Form.Label>
-            <Form.Control required type="password" placeholder="Upišite lozinku"/>
-            <Form.Control.Feedback type="invalid">Lozinka je prazna</Form.Control.Feedback>
-          </Form.Group>
-
-          <Button variant="primary" type="submit" className="mr-3">
-            Registriraj se
-          </Button>
-
-        </Form>
-
+      <Container fluid className="py-3" style={{maxWidth: 600, textAlign: 'justify'}}>
+        <h1> Registracija </h1>
+        { success ?
+            sucessContainer :
+            <SignupForm {...{ setSuccess }}/> }
       </Container>
-
     </MainLayout>
   )
 }
