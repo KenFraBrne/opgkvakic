@@ -11,7 +11,7 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.post(async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, lang } = req.body;
   const email = normalizeEmail(req.body.email);
   // check if email is ok
   if ( !isEmail(email) ) return res.status(400).end();
@@ -37,7 +37,7 @@ handler.post(async (req, res) => {
         // or throw error
         .catch(() => res.status(500).end());
       // send welcome message
-      const raw = encodedCreateUser({ username, email, verifyToken, req });
+      const raw = encodedCreateUser({ username, lang, email, verifyToken, req });
       req.gmail.users.messages
         .send({
           userId: 'me',
@@ -46,7 +46,6 @@ handler.post(async (req, res) => {
         // or throw error
         .catch(() => res.status(503).end())
       // log in
-      console.log(user);
       req.login(user, err => {
         if (!err) return res.status(201).end();
         // or throw error

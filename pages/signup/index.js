@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
+
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
 
 import Container from 'react-bootstrap/Container';
 
@@ -9,41 +12,44 @@ import SignupForm from 'component/Forms/Signup';
 
 export default function HomePage() {
 
-  // success
+  // change language
+  const { language } = useContext(LanguageContext);
+  const content = language.content.pages.signup;
+
+  // status
   const router = useRouter();
-  const [ success, setSuccess ] = useState(null);
-  const getSuccess = (success) => {
-    switch(success) {
+  const [ status, setStatus ] = useState(null);
+  const getStatus = (status) => {
+    switch(status) {
       case 201: // OK
       case 511: // Signup required
-        setTimeout(() => router.replace('/'), 2000);
+        setTimeout(() => router.replace('/'), 3000);
         return (
           <Container>
-            <p> Dobrodošli! </p>
-            <p> Molimo vas da provjerite svoj email i aktivirate svoj račun. </p>
+            { content.status[201].p.map( ( line, ind ) => <p key={ind}>{line}</p> ) }
           </Container>
         );
       case 500: // Registration error
+        const aElem = <a href="\\" onClick={() => setStatus(null)}> { content.status[500].a } </a>;
         return (
           <Container>
-            <p> Došlo je do greške pri stvaranju vašeg računa... </p>
-            <p> Molimo vas da probate <a href="\\" onClick={() => setSuccess(null)}> ponovo </a> </p>
+            <p> { content.status[500].p[0] } </p>
+            <p> { content.status[500].p[1] } { aElem }  </p>
           </Container>
         );
       case 503: // Verification email error
         return (
           <Container>
-            <p> Korisnički račun je kreiran ali izgleda da mail potvrde nije poslan... </p>
-            <p> Molimo vas da nas kontaktirate za aktivaciju vašeg računa </p>
+            { content.status[503].p.map( ( line, ind ) => <p key={ind}>{line}</p> ) }
           </Container>
         );
       default:
         return;
     }
   };
-  const sucessContainer = (
+  const statusContainer = (
     <Container className="px-0 py-3">
-      { getSuccess(success) }
+      { getStatus(status) }
     </Container>
   );
 
@@ -51,10 +57,10 @@ export default function HomePage() {
   return (
     <MainLayout>
       <Container fluid className="py-3" style={{maxWidth: 600, textAlign: 'justify'}}>
-        <h1> Registracija </h1>
-        { success ?
-            sucessContainer :
-            <SignupForm {...{ setSuccess }}/> }
+        <h1> { content.h1 } </h1>
+        { status ?
+            statusContainer :
+            <SignupForm {...{ language, setStatus }}/> }
       </Container>
     </MainLayout>
   )

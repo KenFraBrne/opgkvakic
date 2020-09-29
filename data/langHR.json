@@ -77,22 +77,28 @@
       ]
     },
     "signup" : {
-      "handleSubmit" : [
-        "Email nije dobar",
-        "Email je prazan"
-      ],
-      "h1" : "Registracija",
-      "FormLabel" : [
-        "Korisničko ime",
-        "Email adresa",
-        "Lozinka"
-      ],
-      "FormPlaceholder" : [
-        "Upišite korisničko ime",
-        "Upišite email",
-        "Upišite lozinku"
-      ],
-      "Button" : "Registriraj se"
+      "status" : {
+        "201" : {
+          "p" : [
+            "Dobrodošli!",
+            "Molimo vas da provjerite svoj email i aktivirate svoj račun."
+          ]
+        },
+        "500" : {
+          "p" : [
+            "Došlo je do greške pri stvaranju vašeg računa...",
+            "Molimo vas da probate"
+          ],
+          "a" : "ponovo"
+        },
+        "503" : {
+          "p" : [
+            "Korisnički račun je kreiran, ali izgleda da mail potvrde nije poslan...",
+            "Molimo vas da nas kontaktirate za aktivaciju vašeg računa."
+          ]
+        }
+      },
+      "h1" : "Registracija"
     }
   },
   "component" : {
@@ -126,6 +132,30 @@
           "Izmjeni korisničke podatke",
           "Izbriši korisnika"
         ]
+      },
+      "Signup" : {
+        "emailError" : {
+          "400" : "Email nije dobar",
+          "403" : "Email vec postoji",
+          "empty" : "Email je prazan"
+        },
+        "formGroups" : {
+          "text" : {
+            "label" : "Korisničko ime",
+            "placeholder" : "Upišite vaše korisničko ime",            
+            "feedback" : "Korisničko ime je prazno"
+          },
+          "email" : {
+            "label" : "Email adresa",
+            "placeholder" : "Upišite vaš email"
+          },
+          "password" : {
+            "label" : "Lozinka",
+            "placeholder" : "Upišite vašu lozinku",
+            "feedback" : "Lozinka je prazna"
+          }
+        },
+        "Button" : "Registriraj se"
       }
     },
     "Modals" : {
@@ -200,6 +230,18 @@
         "Odjava"
       ],
       "h1" : "Korisnik nije prijavljen"
+    },
+    "Email" : {
+      "CreateUser" : {
+        "a" : "ovaj link",
+        "p" : [
+          "Draga/dragi ",
+          "Hvala vam što ste nam se pridužili 😉",
+          "Kako bi aktivirali vaš korišnički račun i omogučili naručivanje, molimo vas da kliknete ",
+          "Do skora 👋 "
+        ],
+        "subject" : "Dobrodošli!"
+      }
     }
   }
 }

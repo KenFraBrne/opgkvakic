@@ -5,13 +5,21 @@ import { useRouter } from 'next/router';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function Signup({ setSuccess }){
+export default function Signup({ language, setStatus }){
+
+  // language change
+  const content = language.content.component.Forms.Signup;
 
   // handle form submit
   const router = useRouter();
   const [ formValid, setFormValid ] = useState(false);
   const [ emailError, setEmailError ] = useState(null);
   const [ emailValid, setEmailValid ] = useState(true);
+
+  // change email error with language change
+  useEffect(() => {
+
+  }, [language])
 
   // handleChange
   const handleChange = () => {
@@ -30,6 +38,7 @@ export default function Signup({ setSuccess }){
         username: form.username.value,
         password: form.password.value,
         email: form.email.value,
+        lang: language.lang,
       };
       const res = await fetch('/api/user/create', {
         method: 'POST',
@@ -42,61 +51,46 @@ export default function Signup({ setSuccess }){
         case 500: // Registration error
         case 503: // Verification email error
         case 511: // Signup required
-          setTimeout(() => setSuccess(res.status), 500);
+          setTimeout(() => setStatus(res.status), 500);
           setEmailValid(true);
           setFormValid(true);
           return;
-        case 400: setEmailError('Email nije dobar'); break; // Email not good
-        case 403: setEmailError('Email vec postoji'); break; // Email exists
+        case 400: // Email not good
+        case 403: // Email exists
+          setEmailError(res.status);
+          setEmailValid(false);
+          setFormValid(false);
+          return;
       };
-      setEmailValid(false);
-      setFormValid(false);
-      return;
     } else {
       // email length error message
-      if (form.email.value.length > 0) setEmailError('Email nije dobar');
-      else setEmailError('Email je prazan');
+      if (form.email.value.length > 0) setEmailError( content.setEmailError[400] );
+      else setEmailError( content.setEmailError.empty );
       setFormValid(true);
     };
   };
 
   // form groups
   const formGroups = [
-    {
-      type: 'text',
-      controlId: 'username',
-      label: 'Korisničko ime',
-      placeholder: "Upišite vaše korisničko ime",
-      feedback: "Korisničko ime je prazno",
-    },
-    {
-      type: 'email',
-      controlId: 'email',
-      label: 'Email adresa',
-      placeholder: "Upišite vaš email",
-      isInvalid: !emailValid,
-    },
-    {
-      type: 'password',
-      controlId: 'password',
-      label: 'Lozinka',
-      placeholder: "Upišite vašu lozinku",
-      feedback: "Lozinka je prazna",
-    }
+    { type: 'text', controlId: 'username' },
+    { type: 'email', controlId: 'email', isInvalid: !emailValid },
+    { type: 'password', controlId: 'password' },
   ].map( group => {
     const { type } = group;
     return (
       <Form.Group
         key={type}
         controlId={group.controlId}>
-        <Form.Label>{ group.label }</Form.Label>
+        <Form.Label>{ content.formGroups[type].label }</Form.Label>
         <Form.Control
           required
           type={ group.type }
           isInvalid={ group?.isInvalid }
-          placeholder={ group.placeholder }/>
+          placeholder={ content.formGroups[type].placeholder }/>
         <Form.Control.Feedback type="invalid">
-          { type === 'email' ?  emailError : group.feedback }
+          { type === 'email' ?
+              content.emailError[emailError] :
+              content.formGroups[type].feedback }
         </Form.Control.Feedback>
       </Form.Group>
     )
@@ -113,7 +107,7 @@ export default function Signup({ setSuccess }){
         type="submit"
         variant="primary"
         className="mr-3">
-        Registriraj se
+        { content.Button }
       </Button>
     </Form>
   )

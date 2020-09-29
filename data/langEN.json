@@ -77,22 +77,28 @@
       ]
     },
     "signup" : {
-      "handleSubmit" : [
-        "Email not valid",
-        "Email empty"
-      ],
-      "h1" : "Sign up",
-      "FormLabel" : [
-        "User name",
-        "Email address",
-        "Password"
-      ],
-      "FormPlaceholder" : [
-        "Enter username",
-        "Enter email",
-        "Enter password"
-      ],
-      "Button" : "Sign up"
+      "status" : {
+        "201" : {
+          "p" : [
+            "Welcome!",
+            "Please check your email and activate your account."
+          ]
+        },
+        "500" : {
+          "p" : [
+            "There was an error creating your account ...",
+            "Please try"
+          ],
+          "a" : "again"
+        },
+        "503" : {
+          "p" : [
+            "An account has been created, but the confirmation email does not appear to have been sent ...",
+            "Please contact us to activate your account."
+          ]
+        }
+      },
+      "h1" : "Sign up"
     }
   },
   "component" : {
@@ -126,6 +132,30 @@
           "Changing data",
           "Delete user"
         ]
+      },
+      "Signup" : {
+        "emailError" : {
+          "400" : "Email is not good",
+          "403" : "Email already exists",
+          "empty" : "Email is empty"
+        },
+        "formGroups" : {
+          "text" : {
+            "label" : "Username",
+            "placeholder" : "Enter your username",
+            "feedback" : "Username is empty"
+          },
+          "email" : {
+            "label" : "Email address",
+            "placeholder" : "Enter your email"
+          },
+          "password" : {
+            "label" : "Password",
+            "placeholder" : "Enter your password",
+            "feedback" : "Password is empty"
+          }
+        },
+        "Button" : "Register"
       }
     },
     "Modals" : {
@@ -200,6 +230,18 @@
         "Log out"
       ],
       "h1" : "The user is not logged in"
+    },
+    "Email" : {
+      "CreateUser" : {
+        "a" : "this link",
+        "p" : [
+          "Dear",
+          "Thank you for registering with us 😉",
+          "To activate your account and enable ordering, please click ",
+          "See you soon 👋"
+        ],
+        "subject" : "Welcome!"
+      }
     }
   }
 }

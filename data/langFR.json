@@ -68,7 +68,7 @@
         "Entrez votre mot de passe"
       ],
       "FormFeedback" : [
-        "Email non valide",
+        "Addresse email non valide",
         "Mot de passe vide"
       ],
       "Button" : [
@@ -77,22 +77,28 @@
       ]
     },
     "signup" : {
-      "handleSubmit" : [
-        "Email non valide",
-        "Email vide"
-      ],
-      "h1" : "Inscription",
-      "FormLabel" : [
-        "Nom d'utilisateur",
-        "Adresse eMail",
-        "Mot de passe"
-      ],
-      "FormPlaceholder" : [
-        "Entrez votre nom d'utilisateur",
-        "Entrez votre addresse e-mail",
-        "Entrer le mot de passe"
-      ],
-      "Button" : "S'inscrire"
+      "status" : {
+        "201" : {
+          "p" : [
+            "Bienvenue!",
+            "Veuillez vérifier votre messagerie et activer votre compte."
+          ]
+        },
+        "500" : {
+          "p" : [
+            "Une erreur s'est produite lors de la création de votre compte ...",
+            "S'il vous plaît essayez"
+          ],
+          "a" : "encore une fois"
+        },
+        "503" : {
+          "p" : [
+            "Un compte a été créé, mais l'e-mail de confirmation ne semble pas avoir été envoyé ...",
+            "Veuillez nous contacter pour activer votre compte."
+          ]
+        }
+      },
+      "h1" : "Inscription"
     }
   },
   "component" : {
@@ -126,6 +132,30 @@
           "Modifier les données personelles",
           "Supprimer l'utilisateur"
         ]
+      },
+      "Signup" : {
+        "emailError" : {
+          "400" : "L'e-mail n'est pas bon",
+          "403" : "L'e-mail existe déjà",
+          "empty" : "L'e-mail est vide"
+        },
+        "formGroups" : {
+          "text" : {
+            "label" : "Nom d'utilisateur",
+            "placeholder" : "Entrez votre nom d'utilisateur",
+            "feedback" : "Le nom d'utilisateur est vide"
+          },
+          "email" : {
+            "label" : "Adresse e-mail",
+            "placeholder" : "Entrez votre email"
+          },
+          "password" : {
+            "label" : "Mot de passe",
+            "placeholder" : "Entrez votre mot de passe",
+            "feedback" : "Le mot de passe est vide"
+          }
+        },
+        "Button" : "S'inscrire"
       }
     },
     "Modals" : {
@@ -200,6 +230,18 @@
         "Déconnectez-vous"
       ],
       "h1" : "L'utilisateur n'est pas connecté"
+    },
+    "Email" : {
+      "CreateUser" : {
+        "a" : "ce lien",
+        "p" : [
+          "Chère/cher ",
+          "Merci de vous être enregistré avec nous 😉",
+          "Pour activer votre compte et activer la commande, veuillez cliquer sur ",
+          "A bientôt 👋"
+        ],
+        "subject" : "Bienvenue!"
+      }
     }
   }
 }
