@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
@@ -14,47 +17,51 @@ import getServerData from 'util/getServerData';
 
 const CartPage = () => {
 
+  // change language
+  const { language } = useContext(LanguageContext);
+  const content = language.content.pages.cart;
+  const lang = language.lang;
+
+  // load order & products
   const { order, mutateOrder } = getServerData('/api/order');
   const { products } = getServerData('/api/products');
   const isLoading =  products ? false : true;
 
+  // delivery day & response status state
   const [ deliveryDay, setDeliveryDay ] = useState(null);
-  const [ errorMsg, setErrorMsg ] = useState(null);
+  const [ status, setStatus ] = useState(null);
   const router = useRouter();
 
   const handleOrder = () => {
-    setErrorMsg(null);
     fetch('/api/user/orders', {
       method: 'POST',
-    }).then(async res => {
-      if (res.status === 200){
-        router.push('/');
-        mutateOrder();
-      } else {
-        const errorMsg = await res.text();
-        setErrorMsg(errorMsg);
+      body: JSON.stringify({ lang }),
+    }).then( res => {
+      setStatus(res.status);
+      // if order ok, delete session order and route
+      if ( res.status === 200 ){
+        fetch('/api/order', { method: 'DELETE' }).then(() => mutateOrder())
+        router.replace('/');
       };
     })
   };
 
-  let body =
+  let body = (
     <Container fluid style={{maxWidth: 650}}>
-      <h1>Vaša narudžba</h1>
+      <h1>{ content.h1.order }</h1>
       <br/>
-      <h4>Detalji:</h4>
-      <ProductSummary order={order} products={products}/>
+      <h4>{ content.h4.details }</h4>
+      <ProductSummary {...{ order, products, language }}/>
       <Container fluid className="d-flex px-0 py-2">
-        <div className="h4 pr-3"> Dostava: </div>
+        <div className="h4 pr-3">{ content.h4.order }</div>
         <div>
-          <DatePicker
-            setDeliveryDay={(date) => setDeliveryDay(date)}
-            deliveryDay={deliveryDay}/>
+          <DatePicker {...{ language, deliveryDay, setDeliveryDay }}/>
         </div>
       </Container>
       <Container fluid className="d-flex px-0 py-2">
-        <div className="h4 pr-3 my-auto">Vrijeme:</div>
+        <div className="h4 pr-3 my-auto">{ content.h4.time }</div>
         <div>
-          <TimePicker deliveryDay={deliveryDay}/>
+          <TimePicker {...{ language, deliveryDay }}/>
         </div>
       </Container>
       <Button
@@ -62,16 +69,19 @@ const CartPage = () => {
         variant="primary"
         disabled={!(order?.products && order?.delivery)}
         onClick={handleOrder}>
-        Naručite
+        { content.button }
       </Button>
-      <p className="text-danger">{errorMsg}</p>
-    </Container>;
+      <p className={ status === 200 ? "text-success" : "text-danger" }>
+        { status && content.status[status]}
+      </p>
+    </Container>
+  );
 
   // change body if order not defined
   if ( !order || order?.products && Object.keys(order.products).length === 0 ) {
     body =
       <Container fluid style={{maxWidth: 650}}>
-        <h1>Vaša košarica je prazna</h1>
+        <h1>{ content.h1.basket }</h1>
       </Container>;
   };
 

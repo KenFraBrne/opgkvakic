@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 import getFloorDate from 'util/getFloorDate';
 
-const Calendar = ({deliveries, calendarDate, calendarDayChoose}) => {
+const Calendar = ({ language, deliveries, calendarDate, calendarDayChoose }) => {
 
   // current date
   const nowDate = getFloorDate();
@@ -19,7 +19,7 @@ const Calendar = ({deliveries, calendarDate, calendarDayChoose}) => {
   // calendar head
   const headDays = Array(7).fill(0).map((_, i) => {
     const day = new Date(null, null, i+1);
-    const dayString = day.toLocaleString(undefined, {weekday: 'short'});
+    const dayString = day.toLocaleString(language.lang, {weekday: 'short'});
     return <th key={i}>{dayString}</th>
   });
 

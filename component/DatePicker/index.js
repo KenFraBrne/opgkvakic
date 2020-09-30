@@ -13,7 +13,10 @@ import { FiCalendar, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 import getFloorDate from 'util/getFloorDate';
 import getServerData from 'util/getServerData';
 
-const DatePicker = ({ deliveryDay, setDeliveryDay }) => {
+const DatePicker = ({ language, deliveryDay, setDeliveryDay }) => {
+
+  // change language
+  const content = language.content.component.DatePicker;
 
   // load order & deliveries
   const { order } = getServerData('/api/order');
@@ -62,7 +65,7 @@ const DatePicker = ({ deliveryDay, setDeliveryDay }) => {
           disabled
           ref={overlayRef}
           value={deliveryDayString}
-          placeholder="Izaberite datum dostave"/>
+          placeholder={ content.placeholder }/>
         <InputGroup.Append>
           <Button
             disabled={!deliveries}
@@ -89,7 +92,7 @@ const DatePicker = ({ deliveryDay, setDeliveryDay }) => {
                 </Button>
               </div>
               <div className="h6 px-1 my-auto">
-                {calendarDate.toLocaleString([], {month: 'short', year: 'numeric'})}
+                {calendarDate.toLocaleString( language.lang, {month: 'short', year: 'numeric'})}
               </div>
               <div className="flex-grow-1 pl-1">
                 <Button 
@@ -103,6 +106,7 @@ const DatePicker = ({ deliveryDay, setDeliveryDay }) => {
           </PopoverTitle>
           <PopoverContent>
             <Calendar
+              language={language}
               deliveries={deliveries}
               calendarDate={calendarDate}
               calendarDayChoose={(day) => calendarDayChoose(day)}/>

@@ -13,15 +13,22 @@
       "FormControl" : "Cherchez le produit"
     },
     "cart" : {
-      "h1" : [
-        "Votre commande",
-        "Votre panier est vide"
-      ],
-      "h4" : [
-        "Details:",
-        "Livraison:",
-        "Temps:"
-      ],
+      "status" : {
+        "200" : "Votre commande a été reçue!",
+        "401" : "Adresse e-mail de l'utilisateur non vérifiée",
+        "403" : "Utilisateur non connecté",
+        "500" : "Erreur lors de la réception de la commande. Veuillez réessayer.",
+        "503" : "Erreur lors de la réception de la commande. Veuillez réessayer."
+      },
+      "h1" : {
+        "order" : "Votre commande",
+        "basket" : "Votre panier est vide"
+      },
+      "h4" : {
+        "details" : "Details:",
+        "order" : "Livraison:",
+        "time" : "L'heure:"
+      },
       "button" : "Commandez"
     },
     "posts" : {
@@ -103,7 +110,10 @@
   },
   "component" : {
     "DatePicker" : {
-      "FormControl" : "Sélectionnez la date de livraison"
+      "placeholder" : "Sélectionnez la date de livraison"
+    },
+    "TimePicker" : {
+      "dropdownTitle" : "Sélectionnez l'heure de livraison"
     },
     "Footer" : {
       "linksText" : [
@@ -208,18 +218,11 @@
     },
     "ProductSummary" : {
       "thead" : {
-        "th" : [ 
-          "Produit",
-          "Quantite",
-          "Prix"
-        ]
+        "article" : "Produit",
+        "quantity" : "Quantite",
+        "price" : "Prix"
       },
-      "tbody" : {
-        "th" : "Prix total"
-      }
-    },
-    "DatePicker" : {
-      "dropdownTitle" : "Choisissez la date de livraison"
+      "tbody" : "Prix total"
     }
   },
   "layout" : {
@@ -235,12 +238,21 @@
       "CreateUser" : {
         "a" : "ce lien",
         "p" : [
-          "Chère/cher ",
+          "Chère/Cher ",
           "Merci de vous être enregistré avec nous 😉",
           "Pour activer votre compte et activer la commande, veuillez cliquer sur ",
           "A bientôt 👋"
         ],
         "subject" : "Bienvenue!"
+      },
+      "OrderConfirm" : {
+        "subject" : "Votre commande pour le dateString est reçu!" ,
+        "p" : [
+          "Chère/Cher username",
+          "Merci pour votre commande 👍",
+          "Votre commande sera livrée le dateString dans la période timeString",
+          "Veuillez trouver les détails de la commande ci-dessous."
+        ]
       }
     }
   }

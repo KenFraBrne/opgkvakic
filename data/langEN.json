@@ -13,15 +13,22 @@
       "FormControl" : "Search product"
     },
     "cart" : {
-      "h1" : [
-        "Your order",
-        "Your shopping cart is empty"
-      ],
-      "h4" : [
-        "Order details:",
-        "Delivery:",
-        "Time:"
-      ],
+      "status" : {
+        "200" : "Your order has been received!",
+        "401" : "User email not verified",
+        "403" : "User not logged in",
+        "500" : "Error receiving order. Please try again.",
+        "503" : "Error receiving order. Please try again."
+      },
+      "h1" : {
+        "order" : "Your order",
+        "basket" : "Your shopping cart is empty"
+      },
+      "h4" : {
+        "details" : "Order details:",
+        "order" : "Delivery:",
+        "time" : "Time:"
+      },
       "button" : "Order"
     },
     "posts" : {
@@ -103,7 +110,10 @@
   },
   "component" : {
     "DatePicker" : {
-      "FormControl" : "Select the delivery date"
+      "placeholder" : "Select the delivery date"
+    },
+    "TimePicker" : {
+      "dropdownTitle" : "Select the delivery time"
     },
     "Footer" : {
       "linksText" : [
@@ -208,18 +218,11 @@
     },
     "ProductSummary" : {
       "thead" : {
-        "th" : [ 
-          "Product",
-          "Quantity",
-          "Price"
-        ]
+        "article" : "Product",
+        "quantity" : "Quantity",
+        "price" : "Price"
       },
-      "tbody" : {
-        "th" : "Total price"
-      }
-    },
-    "DatePicker" : {
-      "dropdownTitle" : "Select delivery time"
+      "tbody" : "Total price"
     }
   },
   "layout" : {
@@ -241,6 +244,15 @@
           "See you soon 👋"
         ],
         "subject" : "Welcome!"
+      },
+      "OrderConfirm" : {
+        "subject" : "Your order for dateString is received!" ,
+        "p" : [
+          "Dear",
+          "Thank you for your order 👍",
+          "Your order will be delivered dateString in the period timeString",
+          "You can find the order details underneath."
+        ]
       }
     }
   }

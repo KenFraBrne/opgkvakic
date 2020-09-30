@@ -13,15 +13,22 @@
       "FormControl" : "Pretražite proizvod"
     },
     "cart" : {
-      "h1" : [
-        "Vaša narudžba",
-        "Vaša košarica je prazna"
-      ],
-      "h4" : [
-        "Detalji:",
-        "Dostava:",
-        "Vrijeme:"
-      ],
+      "status" : {
+        "200" : "Vaša narudžba je zaprimljena!",
+        "401" : "Korisnički email nije potvrđen",
+        "403" : "Korisnik nije prijavljen",
+        "500" : "Greška pri zaprimanju narudžbe. Molimo pokušajte ponovo.",
+        "503" : "Greška pri zaprimanju narudžbe. Molimo pokušajte ponovo."
+      },
+      "h1" : {
+        "order" : "Vaša narudžba",
+        "basket" : "Vaša košarica je prazna"
+      },
+      "h4" : {
+        "details" : "Detalji:",
+        "order" : "Dostava:",
+        "time" : "Vrijeme:"
+      },
       "button" : "Naručite"
     },
     "posts" : {
@@ -103,7 +110,10 @@
   },
   "component" : {
     "DatePicker" : {
-      "FormControl" : "Izaberite datum dostave"
+      "placeholder" : "Izaberite datum dostave"
+    },
+    "TimePicker" : {
+      "dropdownTitle" : "Izaberite vrijeme dostave"
     },
     "Footer" : {
       "linksText" : [
@@ -208,18 +218,11 @@
     },
     "ProductSummary" : {
       "thead" : {
-        "th" : [ 
-          "Proizvod",
-          "Količina",
-          "Cijena"
-        ]
+        "article" : "Proizvod",
+        "quantity" : "Količina",
+        "price" : "Cijena"
       },
-      "tbody" : {
-        "th" : "Totalna cijena"
-      }
-    },
-    "DatePicker" : {
-      "dropdownTitle" : "Izaberite vrijeme dostave"
+      "tbody" : "Totalna cijena"
     }
   },
   "layout" : {
@@ -235,12 +238,21 @@
       "CreateUser" : {
         "a" : "ovaj link",
         "p" : [
-          "Draga/dragi ",
+          "Draga/Dragi ",
           "Hvala vam što ste nam se pridužili 😉",
           "Kako bi aktivirali vaš korišnički račun i omogučili naručivanje, molimo vas da kliknete ",
           "Do skora 👋 "
         ],
         "subject" : "Dobrodošli!"
+      },
+      "OrderConfirm" : {
+        "subject" : "Vaša narudžba za dateString je zaprimljena!",
+        "p" : [
+          "Draga/Dragi username",
+          "Hvala vam na vašoj narudžbi 👍",
+          "Narudžba će biti dostavljena dateString u periodu timeString",
+          "Detalji narudžbe nalaze se ispod."
+        ]
       }
     }
   }

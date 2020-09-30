@@ -5,7 +5,10 @@ import Table from 'react-bootstrap/Table';
 import amountPretty from 'util/amountPretty';
 import getServerData from 'util/getServerData';
 
-const ProductSummary = ({ order, products }) => {
+const ProductSummary = ({ order, products, language }) => {
+
+  // language change
+  const content = language.content.component.ProductSummary;
 
   // create verbose products (with amounts) and sort it
   const productsVerbose = order?.products?.map( product => {
@@ -39,19 +42,18 @@ const ProductSummary = ({ order, products }) => {
     <Table
       striped
       bordered
-      responsive
-      className="text-center">
+      responsive>
       <thead>
         <tr>
-          <th>Proizvod</th>
-          <th>Količina</th>
-          <th>Cijena</th>
+          <th>{ content.thead.article }</th>
+          <th>{ content.thead.quantity }</th>
+          <th>{ content.thead.price }</th>
         </tr>
       </thead>
       <tbody>
         {tableRows}
         <tr>
-          <th colSpan={2}> Totalna cijena </th>
+          <th colSpan={2} className="text-center"> { content.tbody } </th>
           <td>{`${totalPrice} kn`}</td>
         </tr>
       </tbody>

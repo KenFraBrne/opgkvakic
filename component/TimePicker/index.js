@@ -8,10 +8,14 @@ import getFloorDate from 'util/getFloorDate';
 import getServerData from 'util/getServerData';
 import fromUntilString from 'util/fromUntilString';
 
-const TimePicker = ({ deliveryDay }) => {
+const TimePicker = ({ language, deliveryDay }) => {
 
   const { order, mutateOrder } = getServerData('/api/order');
   const { deliveries } = getServerData('/api/deliveries');
+
+  // language change
+  const content = language.content.component.TimePicker;
+  const lang = language.lang;
   
   // set delivery time if it exists in order
   useEffect(() => {
@@ -33,9 +37,9 @@ const TimePicker = ({ deliveryDay }) => {
       const date = new Date(delivery.from);
       return (
         <DropdownItem
-          onSelect={() => selectDeliveryTime(delivery._id)}
+          eventKey={delivery._id}
           key={delivery._id}>
-          {fromUntilString(delivery)}
+          {fromUntilString({ delivery, lang })}
         </DropdownItem>
       )
     });
@@ -65,14 +69,15 @@ const TimePicker = ({ deliveryDay }) => {
 
   // dropdown title
   const [ deliveryWin, setDeliveryWin ] = useState(null);
-  let dropdownTitle = "Izaberite vrijeme dostave";
+  let dropdownTitle = language.content.component.TimePicker.dropdownTitle;
   if (deliveryWin && deliveryDay && deliveryDay.getTime() === getFloorDate(deliveryWin).getTime()) {
     const delivery = deliveries.find(delivery => (new Date(delivery.from)).getTime() === deliveryWin.getTime());
-    dropdownTitle = fromUntilString(delivery);
+    dropdownTitle = fromUntilString({ delivery, lang });
   };
 
   return (
     <DropdownButton
+      onSelect={selectDeliveryTime}
       variant="outline-dark"
       disabled={!deliveryDay}
       title={dropdownTitle}>
