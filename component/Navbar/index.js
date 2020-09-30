@@ -66,7 +66,7 @@ const MyNavbar = () => {
   return (
 
     <Navbar
-      expand="sm"
+      expand="md"
       variant="light"
       collapseOnSelect
       className="py-3"
@@ -81,7 +81,7 @@ const MyNavbar = () => {
       <NavbarToggle aria-controls="responsive-navbar-nav" />
 
       <NavbarCollapse>
-        <Nav className="mr-auto align-items-left align-items-sm-center">
+        <Nav className="mr-auto align-items-left align-items-md-center px-4 px-md-0">
 
           {navLinkLeft}
 
@@ -103,19 +103,19 @@ const MyNavbar = () => {
         <Nav>
 
           <Link href="/cart" passHref>
-            <NavLink as="a" className="pr-4">
+            <NavLink as="a" className="pl-4">
               <FiShoppingCart size="1.5em" color={cartColor}/>
             </NavLink>
           </Link>
           
           { user ? 
             <Link href="/user" passHref>
-              <NavLink as="a" className="pr-3">
+              <NavLink as="a" className="pl-4">
                 {user.username}
               </NavLink>
             </Link> :
             <Link href="/login" passHref>
-              <NavLink as="a" className="pr-3">
+              <NavLink as="a" className="pl-4">
                 {language.content.component.Navbar.navLinkRight}
               </NavLink>
             </Link> }
