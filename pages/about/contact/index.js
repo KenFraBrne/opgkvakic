@@ -28,6 +28,7 @@ export default function ContactPage() {
         email: form.email.value,
         subject: form.subject.value,
         message: form.message.value,
+        lang: language.lang,
       };
       fetch('/api/contact', {
         method: 'POST',

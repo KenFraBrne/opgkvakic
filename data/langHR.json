@@ -253,6 +253,13 @@
           "Narudžba će biti dostavljena dateString u periodu timeString",
           "Detalji narudžbe nalaze se ispod."
         ]
+      },
+      "ContactResponse" : {
+        "p" : [
+          "Draga/Dragi name",
+          "Hvala vam na vašoj poruci. Nastojati ćemo vam odgovoriti u najkraćem roku.",
+          "Vaša poruka:"
+        ]
       }
     }
   }

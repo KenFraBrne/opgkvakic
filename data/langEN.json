@@ -253,6 +253,13 @@
           "Your order will be delivered dateString in the period timeString",
           "You can find the order details underneath."
         ]
+      },
+      "ContactResponse" : {
+        "p" : [
+          "Dear name",
+          "Thank you for your message. We will try to respond to you as soon as possible.",
+          "Your message:"
+        ]
       }
     }
   }

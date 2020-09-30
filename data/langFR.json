@@ -253,6 +253,13 @@
           "Votre commande sera livrée le dateString dans la période timeString",
           "Veuillez trouver les détails de la commande ci-dessous."
         ]
+      },
+      "ContactResponse" : {
+        "p" : [
+          "Cher name",
+          "Merci pour votre message. Nous reviendrons vers vous aussi vite que possible.",
+          "Votre message:"
+        ]
       }
     }
   }
