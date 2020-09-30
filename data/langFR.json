@@ -117,7 +117,7 @@
     },
     "Footer" : {
       "linksText" : [
-        "Page d'accueil",
+        "Accueil",
         "Commandez",
         "À propos",
         "Contactez-nous",
@@ -188,7 +188,7 @@
     },
     "Navbar" : {
       "navLinkLeft" : [
-        "Page d'accueil",
+        "Accueil",
         "Commandez",
         "Nouvelles"
       ],
