@@ -46,12 +46,7 @@
         "h1" : "Sur les livraisons"
       },
       "contact" : {
-        "h1" : "Contactez-nous",
-        "name" : "Votre prenom",
-        "email" : "Votre adresse e-mail",
-        "subject" : "Sujet",
-        "message" : "Votre message",
-        "button" : "Envoyer"
+        "h1" : "Contactez-nous"
       }
     },
     "user" : {
@@ -166,6 +161,17 @@
           }
         },
         "Button" : "S'inscrire"
+      },
+      "Contact" : {
+        "formRows" : {
+          "name" : "Votre prénom",
+          "email" : "Votre email"
+        },
+        "formGroups" : {
+          "subject" : "Sujet",
+          "message" : "Votre message"
+        },
+        "button" : "Envoyer"
       }
     },
     "Modals" : {
@@ -254,7 +260,7 @@
       },
       "ContactResponse" : {
         "p" : [
-          "Cher name",
+          "Chère/Cher name",
           "Merci pour votre message. Nous reviendrons vers vous aussi vite que possible.",
           "Votre message:"
         ]

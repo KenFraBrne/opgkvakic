@@ -46,12 +46,7 @@
         "h1" : "O dostavama"
       },
       "contact" : {
-        "h1" : "Kontaktirajte nas",
-        "name" : "Vaše ime",
-        "email" : "Vaš email",
-        "subject" : "Naslov poruke",
-        "message" : "Vaša poruka",
-        "button" : "Pošalji"
+        "h1" : "Kontaktirajte nas"
       }
     },
     "user" : {
@@ -166,6 +161,17 @@
           }
         },
         "Button" : "Registriraj se"
+      },
+      "Contact" : {
+        "formRows" : {
+          "name" : "Vaše ime",
+          "email" : "Vaš email"
+        },
+        "formGroups" : {
+          "subject" : "Naslov poruke",
+          "message" : "Vaša poruka"
+        },
+        "button" : "Pošalji"
       }
     },
     "Modals" : {
