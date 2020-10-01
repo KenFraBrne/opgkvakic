@@ -227,11 +227,11 @@
   },
   "layout" : {
     "UserLayout" : {
-      "NavLink" : [
-        "User data",
-        "Orders",
-        "Log out"
-      ],
+      "navbarLinks" : {
+        "/user" : "Information",
+        "/user/orders" : "Orders",
+        "#" : "Log out"
+      },
       "h1" : "The user is not logged in"
     },
     "Email" : {

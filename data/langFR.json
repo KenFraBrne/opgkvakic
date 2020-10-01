@@ -227,11 +227,11 @@
   },
   "layout" : {
     "UserLayout" : {
-      "NavLink" : [
-        "Information",
-        "Commandes",
-        "Déconnectez-vous"
-      ],
+      "navbarLinks" : {
+        "/user" : "Information",
+        "/user/orders" : "Commandes",
+        "#" : "Déconnectez-vous"
+      },
       "h1" : "L'utilisateur n'est pas connecté"
     },
     "Email" : {

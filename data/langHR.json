@@ -227,11 +227,11 @@
   },
   "layout" : {
     "UserLayout" : {
-      "NavLink" : [
-        "Informacije",
-        "Narudžbe",
-        "Odjava"
-      ],
+      "navbarLinks" : {
+        "/user" : "Informacije",
+        "/user/orders" : "Narudžbe",
+        "#" : "Odjava"
+      },
       "h1" : "Korisnik nije prijavljen"
     },
     "Email" : {
