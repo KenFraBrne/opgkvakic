@@ -45,7 +45,9 @@ const UserLayout = ({ children }) => {
         key={ind}
         href={href}
         passHref>
-        <Nav.Link onClick={onClick}>
+        <Nav.Link
+          className="ml-2 px-3"
+          onClick={onClick}>
           { content.navbarLinks[href] }
         </Nav.Link>
       </Link>
@@ -56,7 +58,7 @@ const UserLayout = ({ children }) => {
     <Navbar
       bg="light"
       expand="sm"
-      className="border-bottom border-dark"
+      className="border-bottom border-light"
       style={{fontSize: '110%'}}>
       <Nav>{ navbarLinks }</Nav>
     </Navbar>
@@ -68,9 +70,9 @@ const UserLayout = ({ children }) => {
         <Container fluid className="text-center p-5">
           <h1>{ content.h1 }</h1>
         </Container> :
-        <Container fluid>
+        <Container fluid className="px-0">
           {userNavbar}
-          <Container className="px-md-5">
+          <Container>
             {children}
           </Container>
         </Container>

@@ -110,12 +110,12 @@ const MyNavbar = () => {
           
           { user ? 
             <Link href="/user" passHref>
-              <NavLink as="a" className="pl-4">
+              <NavLink as="a" className="pl-4 mr-2">
                 {user.username}
               </NavLink>
             </Link> :
             <Link href="/login" passHref>
-              <NavLink as="a" className="pl-4">
+              <NavLink as="a" className="pl-4 mr-2">
                 {language.content.component.Navbar.navLinkRight}
               </NavLink>
             </Link> }

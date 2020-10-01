@@ -42,7 +42,8 @@ const ProductSummary = ({ order, products, language }) => {
     <Table
       striped
       bordered
-      responsive>
+      responsive
+      className="text-nowrap">
       <thead>
         <tr>
           <th>{ content.thead.article }</th>
