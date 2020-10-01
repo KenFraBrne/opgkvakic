@@ -130,14 +130,14 @@
     },
     "Forms" : {
       "UserInfo" : {
-        "formGroups" : [
-          "Korisničko ime",
-          "Email",
-          "Ime",
-          "Prezime",
-          "Adresa",
-          "Broj mobitela ili telefona"
-        ],
+        "formGroups" : {
+          "username" :  "Korisničko ime",
+          "email" :  "Email",
+          "first" :  "Ime",
+          "last" :  "Prezime",
+          "address" :  "Adresa",
+          "telephone" :  "Broj mobitela ili telefona"
+        },
         "Button" : [
           "Izmjeni korisničke podatke",
           "Izbriši korisnika"

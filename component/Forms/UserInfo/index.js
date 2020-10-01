@@ -1,12 +1,17 @@
 import React from 'react';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 function UserInfo({ user, mutateUser, setShow }){
-
+  // language
+  const { language } = useContext(LanguageContext);
+  const content = language.content.component.Forms.UserInfo;
   // form submit handler
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -35,53 +40,51 @@ function UserInfo({ user, mutateUser, setShow }){
         });
     });
   };
-
   // form groups
   const formGroups = [
-    { key: 'username', text: 'Korisničko ime', readOnly: true },
-    { key: 'email', text: 'Email', readOnly: true },
-    { key: 'first', text: 'Ime'},
-    { key: 'last', text: 'Prezime' },
-    { key: 'address', text: 'Adresa' },
-    { key: 'telephone', text: 'Broj mobitela ili telefona' },
-  ].map(group =>
-    <Form.Group
-      as={Row}
-      key={group.key}
-      controlId={group.key}>
-      <Form.Label column className="font-weight-bold">
-        {group.text}
-      </Form.Label>
-      <Col sm="10">
-        <Form.Control
-          type={group?.type}
-          plaintext={group?.readOnly}
-          readOnly={group?.readOnly}
-          defaultValue={user?.[group.key]}/>
-      </Col>
-    </Form.Group>
-  );
-
+    { key: 'username', readOnly: true },
+    { key: 'email', readOnly: true },
+    { key: 'first' },
+    { key: 'last' },
+    { key: 'address' },
+    { key: 'telephone'},
+  ].map(group => {
+    const { key, readOnly } = group;
+    return (
+      <Form.Group
+        as={Row}
+        key={key}
+        controlId={key}>
+        <Form.Label
+          column
+          className="font-weight-bold">
+          { content.formGroups[key] }
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control
+            readOnly={readOnly}
+            plaintext={readOnly}
+            defaultValue={user?.[key]}/>
+        </Col>
+      </Form.Group>
+    )
+  });
   // render
   return (
     <Form onSubmit={handleFormSubmit}>
-
       {formGroups}
-
       <Button
         type="submit"
         variant="primary"
         className="m-1">
-        Izmjeni podatke
+        { content.Button[0] }
       </Button>
-
       <Button
         variant="danger"
         className="m-1"
         onClick={() => setShow(true)}>
-        Izbriši korisnika
+        { content.Button[1] }
       </Button>
-
     </Form>
   )
 }

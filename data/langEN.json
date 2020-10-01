@@ -130,16 +130,16 @@
     },
     "Forms" : {
       "UserInfo" : {
-        "formGroups" : [
-          "User name",
-          "Email",
-          "Name",
-          "Last name",
-          "Address",
-          "Mobile or fixed phone number"
-        ],
+        "formGroups" : {
+          "username" :  "Username",
+          "email" :  "Email",
+          "first" :  "Name",
+          "last" :  "Last name",
+          "address" :  "Address",
+          "telephone" :  "Mobile or fixed phone number"
+        },
         "Button" : [
-          "Changing data",
+          "Modify user data",
           "Delete user"
         ]
       },

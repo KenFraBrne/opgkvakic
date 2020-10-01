@@ -130,17 +130,17 @@
     },
     "Forms" : {
       "UserInfo" : {
-        "formGroups" : [
-          "Nom d'utilisateur",
-          "Email",
-          "Prénom",
-          "Nom de famille",
-          "Adresse",
-          "Numéro de téléphone"
-        ],
+        "formGroups" : {
+          "username" : "Pseudo",
+          "email" :  "Email",
+          "first" :  "Prénom",
+          "last" :  "Nom de famille",
+          "address" : "Adresse",
+          "telephone" : "Numéro de téléphone"
+        },
         "Button" : [
-          "Modifier les données personelles",
-          "Supprimer l'utilisateur"
+          "Modifier les données",
+          "Supprimer le compte"
         ]
       },
       "Signup" : {
