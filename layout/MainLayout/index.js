@@ -35,7 +35,7 @@ const MainLayout = (props) => {
         <Navbar/>
       </Container>
 
-      <Container fluid className="flex-grow-1 p-0">
+      <Container fluid className="flex-grow-1 px-0 py-2">
         { isLoading ? spinner : children }
       </Container>
 
