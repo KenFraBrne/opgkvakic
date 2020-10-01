@@ -171,7 +171,7 @@
     "Modals" : {
       "OrderErase" : {
         "ModalTitle" : "Cancel order",
-        "ModalBody" : "Are you sure you want to cancel the order?",
+        "ModalBody" : "Are you sure you want to cancel the order",
         "Button" : [
           "No",
           "Yes"
@@ -204,9 +204,7 @@
       "navLinkRight" : "Login"
     },
     "OrderCards" : {
-      "index" : {
-        "h3" : "You do not have any orders currently"
-      },
+      "h3" : "You do not have any orders currently",
       "OrderCard" : {
         "div" : [
           "Order",

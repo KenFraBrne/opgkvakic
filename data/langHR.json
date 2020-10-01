@@ -171,7 +171,7 @@
     "Modals" : {
       "OrderErase" : {
         "ModalTitle" : "Poništi narudžbu",
-        "ModalBody" : "Jeste li sigurni da želite poništiti narudžbu?",
+        "ModalBody" : "Jeste li sigurni da želite poništiti narudžbu",
         "Button" : [
           "Ne",
           "Da"
@@ -204,9 +204,7 @@
       "navLinkRight" : "Prijava"
     },
     "OrderCards" : {
-      "index" : {
-        "h3" : "Trenutno nemate narudžbi"
-      },
+      "h3" : "Trenutno nemate narudžbi",
       "OrderCard" : {
         "div" : [
           "Narudžba",

@@ -171,7 +171,7 @@
     "Modals" : {
       "OrderErase" : {
         "ModalTitle" : "Supprimer la commande",
-        "ModalBody" : "Etes-vous sûr de vouloir annuler votre commande?",
+        "ModalBody" : "Etes-vous sûr de vouloir annuler votre commande",
         "Button" : [
           "Non",
           "Oui"
@@ -204,15 +204,13 @@
       "navLinkRight" : "Connexion"
     },
     "OrderCards" : {
-      "index" : {
-        "h3" : "Vous n'avez pas de commandes encore"
-      },
+      "h3" : "Vous n'avez pas de commandes encore",
       "OrderCard" : {
-        "géant" : [
-          "La commande",
+        "div" : [
+          "Commande",
           "Prix",
           "Date",
-          "Temps"
+          "L'heure"
         ]
       }
     },
