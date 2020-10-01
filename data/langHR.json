@@ -116,13 +116,13 @@
       "dropdownTitle" : "Izaberite vrijeme dostave"
     },
     "Footer" : {
-      "linksText" : [
-        "Naslovna",
-        "Ponuda",
-        "O nama",
-        "Kontaktirajte nas",
-        "Prijava"
-      ],
+      "links" : {
+        "/" : "Naslovna",
+        "/order" : "Ponuda",
+        "/about" : "O nama",
+        "/about/contact" : "Kontaktirajte nas",
+        "/login" : "Prijava"
+      },
       "b" : [
         "Navigacija",
         "Kontakt"

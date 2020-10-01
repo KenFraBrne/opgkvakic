@@ -116,13 +116,13 @@
       "dropdownTitle" : "Sélectionnez l'heure de livraison"
     },
     "Footer" : {
-      "linksText" : [
-        "Accueil",
-        "Commandez",
-        "À propos",
-        "Contactez-nous",
-        "Connectez-vous"
-      ],
+      "links" : {
+        "/" : "Accueil",
+        "/order" : "Commandez",
+        "/about" : "À propos",
+        "/about/contact" : "Contactez-nous",
+        "/login" : "Connectez-vous"
+      },
       "b" : [
         "Navigation",
         "Contact"

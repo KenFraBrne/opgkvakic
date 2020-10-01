@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -11,26 +14,32 @@ import Col from 'react-bootstrap/Col';
 
 import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 
-const Footer = () => {
-
+export default function Footer(){
+  // language
+  const { language } = useContext(LanguageContext);
+  const content = language.content.component.Footer;
   // navigation links
   const links = [
-    {href: "/", text: "Naslovna"},
-    {href: "/order", text: "Ponuda"},
-    {href: "/about", text: "O nama"},
-    {href: "/about/contact", text: "Kontaktirajte nas"},
-    {href: "/login", text: "Login"},
+    "/",
+    "/order",
+    "/about",
+    "/about/contact",
+    "/login",
   ];
-
-  const navLinks = links.map(link => {
-    const { href, text } = link;
+  const navLinks = links.map( link => {
+    const className = [
+      "text-center",
+      "text-md-left",
+      "pl-0",
+    ].join(' ');
     return (
-      <Link key={href} href={href} passHref>
-        <Nav.Link className="pl-0">{text}</Nav.Link>
+      <Link key={link} href={link} passHref>
+        <Nav.Link {...{ className }}>
+          { content.links[link] }
+        </Nav.Link>
       </Link>
     );
   });
-
   // contact links
   const contacts = [
     {
@@ -51,47 +60,45 @@ const Footer = () => {
       icon: <FiMail />,
     }
   ];
-
   const navContacts = contacts.map(contact => {
     const { text, href, rel, target, icon } = contact;
     return (
-      <Nav.Link key={href} href={href} rel={rel} target={target}>
+      <Nav.Link
+        rel={rel}
+        key={href}
+        href={href}
+        target={target}
+        className="text-center">
         {icon} <br/> {text}
       </Nav.Link>
     )
   })
-
+  // navbar cols
+  const navbarCols = [
+    navLinks,
+    navContacts,
+  ].map( ( navbar, ind ) => {
+    const className = [
+      "pb-1",
+      ind === 1 ? 'text-center' : "text-center text-md-left",
+    ].join(' ');
+    return (
+      <Col key={ind} sm>
+        <Navbar variant="dark" className="justify-content-center">
+          <Nav className="mx-auto flex-column">
+            <Nav.Item {...{ className }}>
+              <b>{ content.b[ind] }</b>
+            </Nav.Item>
+            { navbar }
+          </Nav>
+        </Navbar>
+      </Col>
+    );
+  });
+  // render
   return (
     <Container fluid className="bg-dark text-light pt-3">
-
-      <Row>
-
-        <Col sm>
-          <Navbar variant="dark" className="justify-content-center">
-            <Nav className="text-center text-lg-left flex-column">
-              <Nav.Item className="pb-1">
-                <b>Navigacija</b>
-              </Nav.Item>
-              {navLinks}
-            </Nav>
-          </Navbar>
-        </Col>
-
-        <Col sm>
-          <Navbar variant="dark" className="justify-content-center">
-            <Nav className="text-center flex-column">
-              <Nav.Item className="pb-1">
-                <b>Kontakt</b>
-              </Nav.Item>
-              {navContacts}
-            </Nav>
-          </Navbar>
-        </Col>
-
-      </Row>
-
+      <Row> {navbarCols} </Row>
     </Container>
   );
 };
-
-export default Footer;

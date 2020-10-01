@@ -116,13 +116,13 @@
       "dropdownTitle" : "Select the delivery time"
     },
     "Footer" : {
-      "linksText" : [
-        "Home",
-        "Offer",
-        "About us",
-        "Contact us",
-        "Login"
-      ],
+      "links" : {
+        "/" : "Home",
+        "/order" : "Offer",
+        "/about" : "About us",
+        "/about/contact" : "Contact us",
+        "/login" : "Login"
+      },
       "b" : [
         "Navigation",
         "Contact"
