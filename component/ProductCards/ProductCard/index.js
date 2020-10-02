@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -8,11 +11,13 @@ import amountPretty from 'util/amountPretty';
 import getServerData from 'util/getServerData';
 
 const ProductCard = ({ product }) => {
-
-  const { order, mutateOrder } = getServerData('/api/order');
+  // language change
+  const { language } = useContext(LanguageContext);
+  const lang = language.lang;
+  // load order
   const _id = product._id;
+  const { order, mutateOrder } = getServerData('/api/order');
   const amount = order?.products?.find(product => product._id === _id)?.amount || 0;
-
   // sub product
   const subProduct = () => {
     const newAmount = 
@@ -28,7 +33,6 @@ const ProductCard = ({ product }) => {
       amount;
     changeProducts(newAmount);
   };
-
   // add product
   const addProduct = () => {
     const newAmount =
@@ -44,7 +48,6 @@ const ProductCard = ({ product }) => {
       amount;
     changeProducts(newAmount);
   };
-
   const changeProducts = async (amount) => {
     // copy the order without the changing product
     const newOrder = {
@@ -64,44 +67,46 @@ const ProductCard = ({ product }) => {
     });
     mutateOrder();
   };
-
+  // render
+  const {
+    image,
+    name,
+    price,
+    priceUnit,
+    priceText,
+  } = product;
   return (
-    <Card className="h-100 d-flex">
-      <Card.Body className="d-flex flex-column">
-
+    <Card bg="light" className="h-100">
+      <Card.Body className="d-flex flex-column text-center">
         <Container className="flex-grow-1 d-flex">
           <img
             srcSet={[
-              require(`public/${product.image}?webp`),
-              require(`public/${product.image}`)
+              require(`public/${image}?webp`),
+              require(`public/${image}`)
             ].join(', ')}
             className="align-self-center mw-100 mh-100"/>
         </Container>
-
-        <Card.Title >
-          {`${product.name} (${product.price}kn/${product.priceUnit === 1 ? '' : product.priceUnit+' '}${product.priceText})`}
-        </Card.Title>
-
-        <Card.Text>
-          {product.description}
-        </Card.Text>
-
-        <Card.Footer className="d-flex">
-          <Button
-            className="flex-shrink-0"
-            style={{width: '20%'}}
-            variant="danger"
-            onClick={subProduct}> - </Button>
-          <Container className="text-center my-auto">
-            {amountPretty(product, amount)}
-          </Container>
-          <Button
-            className="flex-shrink-0"
-            style={{width: '20%'}}
-            onClick={addProduct}
-            variant="success"> + </Button>
-        </Card.Footer>
-
+        <Container className="w-100 px-0 pt-2 m-0">
+          <Card.Title> { name[lang] || name } </Card.Title>
+          <Card.Body>
+            {`${price}kn/${priceUnit === 1 ? '' : priceUnit+' '}${priceText[lang] || priceText}`}
+          </Card.Body>
+          <Card.Footer className="d-flex">
+            <Button
+              className="flex-shrink-0"
+              style={{width: '20%'}}
+              variant="danger"
+              onClick={subProduct}> - </Button>
+            <Container className="text-center my-auto">
+              {amountPretty({ product, amount, lang })}
+            </Container>
+            <Button
+              className="flex-shrink-0"
+              style={{width: '20%'}}
+              onClick={addProduct}
+              variant="success"> + </Button>
+          </Card.Footer>
+        </Container>
       </Card.Body>
     </Card>
   );

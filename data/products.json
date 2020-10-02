@@ -1,67 +1,186 @@
 [
   {
-    "id": "wxW5JC1ZcW",
-    "name": "Salata",
-    "description": "Zelena salatica dobrodošla uz svako mesno jelo",
-    "price": 5,
+    "name": {
+        "hr" : "Blitva",
+        "en" : "Swiss chard",
+        "fr" : "Bette à carde"
+    },
+    "price": 10,
     "priceUnit": 1,
-    "priceText": "glavica",
+    "priceText": {
+        "hr" : "vezica",
+        "en" : "bundle",
+        "fr" : "botte"
+    },
     "max": 3,
     "min": 0,
     "by": 1,
-    "total": 20,
-    "image": "products/wxW5JC1ZcW.jpg"
+    "total": 50,
+    "image": "products/90799479_210434200182344_8189350985236217856_n.jpg"
   },
+
   {
-    "id": "FwopEYgHgN",
-    "name": "Špinat",
-    "description": "Za idealan uskršnji objed",
-    "price": 20,
-    "priceUnit": 1,
-    "priceText": "kg",
-    "max": 2,
-    "min": 0,
-    "by": 0.5,
-    "total": 10,
-    "image": "products/FwopEYgHgN.jpg"
+      "name": {
+          "hr" : "Matovilac",
+          "en" : "Lamb's lettuce",
+          "fr" : "Mâche"
+      },
+      "price": 10,
+      "priceUnit": 15,
+      "priceText": "dag",
+      "max": 60,
+      "min": 0,
+      "by": 15,
+      "total": 500,
+      "image": "products/90828796_580033289265619_7512832982588063744_n-1-.jpg"
   },
+
   {
-    "id": "Rjz8HBUw89",
-    "name": "Rikula",
-    "description": "Bolje nego da ti je baba riknula",
-    "price": 20,
-    "priceUnit": 15,
-    "priceText": "dag",
-    "max": 75,
-    "min": 30,
-    "by": 15,
-    "total": 500,
-    "image": "products/Rjz8HBUw89.jpg"
+      "name": {
+          "hr" : "Mladi luk",
+          "en" : "Scallions",
+          "fr" : "Oignons verts"
+      },
+      "price": 5,
+      "priceUnit": 1,
+      "priceText": {
+          "hr" : "vezica",
+          "en" : "bundle",
+          "fr" : "botte"
+      },
+      "max": 5,
+      "min": 0,
+      "by": 1,
+      "total": 50,
+      "image": "products/92144643_593120448214970_5179814031665397760_n.jpg"
   },
+
   {
-    "id": "1STMzeia3T",
-    "name": "Rotkvica",
-    "description": "Njam njam i koja rotkvica svaki dan",
-    "price": 5,
-    "priceUnit": 1,
-    "priceText": "vezica",
-    "max": 10,
-    "min": 0,
-    "by": 1,
-    "total": 35,
-    "image": "products/1STMzeia3T.png"
+      "name": "Pak choi",
+      "price": 5,
+      "priceUnit": 1,
+      "priceText": {
+          "hr" : "glavica",
+          "en" : "piece",
+          "fr" : "tète"
+      },
+      "max": 5,
+      "min": 0,
+      "by": 1,
+      "total": 50,
+      "image": "products/92257422_2452210185089969_8176864862471716864_n.jpg"
   },
+
   {
-    "id": "b7Onm3mKZe",
-    "name": "Tikvice",
-    "description": "Okrugle i zelene, sa malo ulja u tavi su nam zavodljive",
-    "price": 20,
-    "priceUnit": 1,
-    "priceText": "kg",
-    "max": 3,
-    "min": 0,
-    "by": 0.5,
-    "total": 35,
-    "image": "products/b7Onm3mKZe.jpg"
+      "name": {
+          "hr" : "Zelena salata",
+          "en" : "Green leaf lettuce",
+          "fr" : "Laitue verte"
+      },
+      "price": 5,
+      "priceUnit": 1,
+      "priceText": {
+          "hr" : "glavica",
+          "en" : "piece",
+          "fr" : "tète"
+      },
+      "max": 3,
+      "min": 0,
+      "by": 1,
+      "total": 50,
+      "image": "products/WhatsApp_Image_2020-03-31_at_08.52.54-1-.jpg"
+  },
+
+  {
+      "name": {
+          "hr" : "Crvena salata",
+          "en" : "Red leaf lettuce",
+          "fr" : "Laitue rouge"
+      },
+      "price": 5,
+      "priceUnit": 1,
+      "priceText": {
+          "hr" : "glavica",
+          "en" : "piece",
+          "fr" : "tète"
+      },
+      "max": 3,
+      "min": 0,
+      "by": 1,
+      "total": 50,
+      "image": "products/WhatsApp_Image_2020-04-13_at_11.54.29.jpg"
+  },
+
+  {
+      "name": {
+          "hr" : "Kelj",
+          "en" : "Savoy cabbage",
+          "fr" : "Chou frisé"
+      },
+      "price": 5,
+      "priceUnit": 1,
+      "priceText": {
+          "hr" : "glavica",
+          "en" : "piece",
+          "fr" : "tète"
+      },
+      "max": 3,
+      "min": 0,
+      "by": 1,
+      "total": 50,
+      "image": "products/WhatsApp_Image_2020-04-24_at_10.48.05.jpg"
+  },
+
+  {
+      "name": {
+          "hr" : "Zelje",
+          "en" : "Cabbage",
+          "fr" : "Chou"
+      },
+      "price": 5,
+      "priceUnit": 1,
+      "priceText": {
+          "hr" : "glavica",
+          "en" : "piece",
+          "fr" : "tète"
+      },
+      "max": 3,
+      "min": 0,
+      "by": 1,
+      "total": 50,
+      "image": "products/WhatsApp_Image_2020-04-27_at_09.48.39.jpg"
+  },
+
+  {
+      "name": {
+          "hr" : "Tikvice",
+          "en" : "Zucchini",
+          "fr" : "Courgette"
+      },
+      "price": 10,
+      "priceUnit": 1,
+      "priceText": "kg",
+      "max": 2,
+      "min": 0,
+      "by": 0.5,
+      "total": 50,
+      "image": "products/WhatsApp_Image_2020-05-24_at_14.15.22.jpg"
+  },
+
+  {
+      "name": {
+          "hr" : "Cikla",
+          "en" : "Beetroot",
+          "fr" : "Betterave"
+      },
+      "price": 10,
+      "priceUnit": 1,
+      "priceText": "kg",
+      "max": 2,
+      "min": 0,
+      "by": 0.5,
+      "total": 50,
+      "image": "products/WhatsApp_Image_2020-05-24_at_14.18.22.jpg"
   }
+
 ]
