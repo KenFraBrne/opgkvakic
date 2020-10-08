@@ -9,7 +9,6 @@ export function CreateUser({ username, content, req, verifyToken }){
   const aElem = <a href={aHref}> { content.a } </a>;
   return (
     <div>
-      <h1> { content.subject } </h1>
       <p> { content.p[0] } {username} </p>
       <p> { content.p[1] } </p>
       <p> { content.p[2] } {aElem} </p>
