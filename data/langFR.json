@@ -51,11 +51,11 @@
     },
     "user" : {
       "verify" : {
-        "h1" : "Connectez-vous",
-        "p" : [
-          "Merci d'avoir confirmé votre adresse e-mail",
-          "Le lien de confirmation n'est plus valide."
-        ]
+        "h1" : "L'inscription",
+        "p" : {
+          "ok" : "Merci d'avoir confirmé votre adresse e-mail",
+          "nok" : "Le lien de confirmation n'est plus valide."
+        }
       }
     },
     "login" : {

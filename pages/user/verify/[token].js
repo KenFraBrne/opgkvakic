@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import nextConnect from 'next-connect';
 import database from 'middleware/database';
 
@@ -8,14 +11,17 @@ import Container from 'react-bootstrap/Container';
 import MainLayout from 'layout/MainLayout';
 
 function VerifyUser({ success }){
+  // language
+  const { language } = useContext(LanguageContext);
+  const content = language.content.pages.user.verify;
+  // render
   return (
     <MainLayout>
       <Container className="p-5">
-        <h1> Registracija </h1>
+        <h1> {content.h1} </h1>
         { success ?
-          <p> Hvala vam na potvrdi vaše email adrese  </p> :
-          <p> Link za potvrdu više ne važi. </p>
-        }
+          <p> {content.p.ok} </p> :
+          <p> {content.p.nok} </p> }
       </Container>
     </MainLayout>
   );

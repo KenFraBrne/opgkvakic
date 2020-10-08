@@ -52,10 +52,10 @@
     "user" : {
       "verify" : {
         "h1" : "Registration",
-        "p" : [
-          "Thank you for confirming your email address",
-          "The confirmation link is no longer valid."
-        ]
+        "p" : {
+          "ok" : "Thank you for confirming your email address",
+          "nok" : "The confirmation link is no longer valid."
+        }
       }
     },
     "login" : {

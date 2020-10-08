@@ -52,10 +52,10 @@
     "user" : {
       "verify" : {
         "h1" : "Registracija",
-        "p" : [
-          "Hvala vam na potvrdi vaše email adrese",
-          "Link za potvrdu više ne važi."
-        ]
+        "p" : {
+          "ok" : "Hvala vam na potvrdi vaše email adrese",
+          "nok" : "Link za potvrdu više ne važi."
+        }
       }
     },
     "login" : {
