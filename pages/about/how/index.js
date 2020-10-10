@@ -26,7 +26,12 @@ function AboutDeliveriesPage() {
         <h1>{ content.h1 }</h1>
         <p> { content.p[0] } </p>
         <figure className="text-center p-3">
-          <img src="/about/how/berlingo.png" className="img-fluid"/>
+          <img
+            className="img-fluid"
+            srcSet={[
+              require('public/about/how/berlingo.png?webp'),
+              require('public/about/how/berlingo.png')
+            ].join(', ')}/>
           <figcaption className="figure-caption"> { content.figcaption[0] } </figcaption>
         </figure>
         <p> { content.p[1] } </p>
