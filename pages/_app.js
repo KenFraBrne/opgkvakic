@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { LanguageProvider } from 'context/Language';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'leaflet/dist/leaflet.css';
 import 'styles/globals.css'
 
 import getServerData from 'util/getServerData';
