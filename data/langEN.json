@@ -43,7 +43,15 @@
         "h1" : "How to get to us"
       },
       "how" : {
-        "h1" : "About our deliveries"
+        "h1" : "About our deliveries",
+        "p" : [
+          "Our deliveries take place during weekends on a weekly basis (and sometimes on Wednesdays). We strive to make all deliveries within the predetermined timeframe, which you choose during ordering.",
+          "Once we are close to the delivery adress, we contact you by phone to hand over the delivery. If we are unable to contact you within a few minutes, we assume you are unable to pick up your order,  in which case you can pick up your order at our home address."
+        ],
+        "figcaption" : [
+          "Berlingo",
+          "Delivery area"
+        ]
       },
       "contact" : {
         "h1" : "Contact us"

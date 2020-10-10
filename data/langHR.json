@@ -43,7 +43,15 @@
         "h1" : "Kako do nas"
       },
       "how" : {
-        "h1" : "O dostavama"
+        "h1" : "O dostavama",
+        "p" : [
+          "Naše dostave se odvijaju vikendom na tjednoj bazi (a ponekad i srijedom). Sve dostave nastojimo vršiti unutar preodređenog vremenskog obrasca koji izabirete pri naručivanju.",
+          "Jednom kada se nalazimo u blizini vaše adrese, telefonski vas kontaktiramo i predajemo vašu narudžbu. Ako vas unutar nekoliko minuta nismo u stanju kontaktirati, pretpostavljamo da niste u stanju preuzeti narudžbu. Vašu narudžbu u tom slučaju možete podići na našoj adresi."
+        ],
+        "figcaption" : [
+          "Berlingo",
+          "Dostavno područje"
+        ]
       },
       "contact" : {
         "h1" : "Kontaktirajte nas"

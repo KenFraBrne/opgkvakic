@@ -43,7 +43,15 @@
         "h1" : "Ou sommes nous"
       },
       "how" : {
-        "h1" : "Sur les livraisons"
+        "h1" : "Sur les livraisons",
+        "p" : [
+          "Nos livraisons se deroulent les week-ends chacque semaine (et parfois le mercredi). Nous nous efforçons d'effectuer toutes les livraisons dans le délai prédéterminé, que vous choisissez lors de la commande.",
+          "Une fois que nous sommes proches de votre addresse, nous vous contactons par téléphone pour remettre la livraison. Si nous n'arrivons pas de vous contacter dans quelques minutes, nous supposons que vous ne pouvez pas récupérer votre commande. Dans ce cas, vous pouvez recuperer votre commande à notre addresse domicile. "
+        ],
+        "figcaption" : [
+          "Berlingo",
+          "La zone de livraison"
+        ]
       },
       "contact" : {
         "h1" : "Contactez-nous"
