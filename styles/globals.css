@@ -17,13 +17,3 @@ a {
 #__next{
   height: 100vh;
 }
-
-.form-control.is-valid, .was-validated .form-control:valid{
-  background-image: none;
-  border: 1px solid #ced4da;
-}
-
-.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
-  border: 1px solid #ced4da;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}

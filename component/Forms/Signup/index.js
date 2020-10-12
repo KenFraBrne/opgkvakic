@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { useContext } from 'react';
 import { LanguageContext } from 'context/Language';
 
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import FormGroup from 'component/Forms/Signup/FormGroup';
 
 export default function Signup({ setStatus }){
 
@@ -12,77 +11,63 @@ export default function Signup({ setStatus }){
   const { language } = useContext(LanguageContext);
   const content = language.content.component.Forms.Signup;
 
-  // form group control ids
-  const controlIds = [
+  // group control ids
+  const ids = [
     'username',
     'password',
     'email',
+    'address',
   ];
 
-  // form group states
-  const initGroups = controlIds.map( controlId => {
-    return {
-      controlId,
+  // groups' state
+  const initGroups = ids.reduce( ( obj, id ) => {
+    obj[id] = {
+      error: 'empty',
       isInvalid: false,
-      feedback: content.formGroups[controlId].feedback.empty,
-    }
-  });
+    };
+    return obj;
+  }, {});
   const [ groups, setGroups ] = useState(initGroups);
 
-  // handle control change
-  const handleControlChange = (controlId) => {
-    const group = groups.find( group => group.controlId === controlId );
-    group.isInvalid = false;
-    setGroups([
-      ...groups.filter( group => group.controlId !== controlId ),
-      group,
-    ]);
+  // set feedback error
+  const setError = (id, error) => {
+    groups[id].isInvalid = true;
+    groups[id].error = error;
+    setGroups({...groups});
+  };
+
+  // reset isInvalid
+  const resetIsInvalid = (id) => {
+    groups[id].isInvalid = false;
+    setGroups({...groups});
   };
 
   // form groups
-  const formGroups = controlIds.map( controlId => {
-    const { placeholder, label } = content.formGroups[controlId];
-    const { isInvalid, feedback } = groups.find( group => group.controlId === controlId );
-    const type = controlId === 'password' ? controlId : 'text';
-    return (
-      <Form.Group {...{
-        key: controlId,
-        controlId
-        }}>
-        <Form.Label> { label } </Form.Label>
-        <Form.Control {...{
-          type,
-          isInvalid,
-          placeholder,
-          required: true,
-          onChange: () => handleControlChange(controlId),
-        }}/>
-        <Form.Control.Feedback type="invalid"> { feedback } </Form.Control.Feedback>
-      </Form.Group>
-    )
-  });
-
-  // form valid state
-  const [ formValid, setFormValid ] = useState(false);
-
-  // handle group feedback
-  const handleFeedback = (controlId, key) => {
-    const group = groups.find( group => group.controlId === controlId );
-    group.isInvalid = true;
-    group.feedback = content.formGroups[controlId].feedback[key];
-    setGroups([
-      ...groups.filter( group => group.controlId !== controlId ),
+  const formGroups = ids.map( id => {
+    const group = groups[id];
+    return <FormGroup {...{
+      id,
       group,
-    ]);
-  };
+      key: id,
+      resetIsInvalid
+    }}/>
+  });
 
   // handle form submit
   const handleFormSubmit = async (event) => {
+
+    // prevent default behaviour
     event.preventDefault();
+
+    // return if some values are empty
     const form = event.currentTarget;
-    // if form ok
-    if (form.checkValidity()) {
-      // post info
+    const isEmpty = ids.some( id => form[id].value.length === 0 );
+    if ( isEmpty  ) {
+      return ids.forEach( id => form[id].value.length === 0 && setError(id, 'empty'));
+    } else {
+
+      // otherwise post info
+      const entries = ids.map( id => [ id, form[id].value ] );
       const body = {
         username: form.username.value,
         password: form.password.value,
@@ -94,44 +79,34 @@ export default function Signup({ setStatus }){
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body),
       });
-      // resolve based on status
+
+      // and resolve based on status
       switch (res.status) {
         case 201: // OK
         case 500: // Registration error
         case 503: // Verification email error
         case 511: // Signup required
-          setTimeout(() => setStatus(res.status), 500);
-          setFormValid(true);
-          return;
+          return setTimeout(() => setStatus(res.status), 500);
         case 400: // Email not good
         case 403: // Email exists
         default:
-          handleFeedback('email', res.status);
-          setFormValid(false);
-          return;
+          return setError('email', res.status);
       };
-    // if form nok
-    } else {
-      // email length error message
-      if (form.email.value.length > 0) handleFeedback('email', 400);
-      else handleFeedback('email', 'empty');
-      setFormValid(true);
+
     };
   };
 
   // render
   return (
-    <Form
+    <form
       noValidate
-      validated={formValid}
       onSubmit={handleFormSubmit}>
       { formGroups }
-      <Button
+      <button
         type="submit"
-        variant="primary"
-        className="mr-3">
+        className="mr-3 btn-primary">
         { content.Button }
-      </Button>
-    </Form>
-  )
+      </button>
+    </form>
+  );
 }
