@@ -147,25 +147,37 @@
         ]
       },
       "Signup" : {
-        "emailError" : {
-          "400" : "Email nije dobar",
-          "403" : "Email vec postoji",
-          "empty" : "Email je prazan"
-        },
         "formGroups" : {
-          "text" : {
+          "username" : {
             "label" : "Korisničko ime",
             "placeholder" : "Upišite vaše korisničko ime",            
-            "feedback" : "Korisničko ime je prazno"
-          },
-          "email" : {
-            "label" : "Email adresa",
-            "placeholder" : "Upišite vaš email"
+            "feedback" : {
+              "empty" : "Korisničko ime je prazno"
+            }
           },
           "password" : {
             "label" : "Lozinka",
             "placeholder" : "Upišite vašu lozinku",
-            "feedback" : "Lozinka je prazna"
+            "feedback" : {
+              "empty" : "Lozinka je prazna"
+            }
+          },
+          "email" : {
+            "label" : "Email",
+            "placeholder" : "Upišite vaš email",
+            "feedback" : {
+              "400" : "Email nije dobar",
+              "403" : "Email vec postoji",
+              "empty" : "Email je prazan"
+            }
+          },
+          "address" : {
+            "label" : "Adresa stanovanja",
+            "placeholder" : "Upišite vašu adresu stanovanja",
+            "feedback" : {
+              "nok" : "Adresa je izvan dostavnog područja",
+              "empty" : "Adresa je prazan"
+            }
           }
         },
         "Button" : "Registriraj se"

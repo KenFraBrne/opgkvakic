@@ -147,25 +147,37 @@
         ]
       },
       "Signup" : {
-        "emailError" : {
-          "400" : "L'e-mail n'est pas bon",
-          "403" : "L'e-mail existe déjà",
-          "empty" : "L'e-mail est vide"
-        },
         "formGroups" : {
-          "text" : {
+          "username" : {
             "label" : "Nom d'utilisateur",
             "placeholder" : "Entrez votre nom d'utilisateur",
-            "feedback" : "Le nom d'utilisateur est vide"
-          },
-          "email" : {
-            "label" : "Adresse e-mail",
-            "placeholder" : "Entrez votre email"
+            "feedback" : {
+              "empty" : "Le nom d'utilisateur est vide"
+            }
           },
           "password" : {
             "label" : "Mot de passe",
             "placeholder" : "Entrez votre mot de passe",
-            "feedback" : "Le mot de passe est vide"
+            "feedback" : {
+              "empty" : "Le mot de passe est vide"
+            }
+          },
+          "email" : {
+            "label" : "Adresse e-mail",
+            "placeholder" : "Entrez votre email",
+            "feedback" : {
+              "400" : "L'e-mail n'est pas bon",
+              "403" : "L'e-mail existe déjà",
+              "empty" : "L'e-mail est vide"
+            }
+          },
+          "address" : {
+            "label" : "Adresse du domicile",
+            "placeholder" : "Entrez votre adresse personnelle",
+            "feedback" : {
+              "nok" : "L'adresse ne se trouve pas dans la zone de livraison",
+              "empty" : "L'adresse est vide"
+            }
           }
         },
         "Button" : "S'inscrire"

@@ -60,7 +60,7 @@ export default function HomePage() {
         <h1> { content.h1 } </h1>
         { status ?
             statusContainer :
-            <SignupForm {...{ language, setStatus }}/> }
+            <SignupForm {...{ setStatus }}/> }
       </Container>
     </MainLayout>
   )
