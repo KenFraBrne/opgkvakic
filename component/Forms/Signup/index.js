@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import { useContext } from 'react';
 import { LanguageContext } from 'context/Language';
@@ -20,36 +20,35 @@ export default function Signup({ setStatus }){
   ];
 
   // groups' state
-  const initGroups = ids.reduce( ( obj, id ) => {
-    obj[id] = {
-      error: 'empty',
-      isInvalid: false,
-    };
-    return obj;
-  }, {});
+  const initGroups = ids.map( id => ({
+    id,
+    value: '',
+    error: 'empty',
+    isInvalid: false,
+  }));
   const [ groups, setGroups ] = useState(initGroups);
 
-  // set feedback error
-  const setError = (id, error) => {
-    groups[id].isInvalid = true;
-    groups[id].error = error;
-    setGroups({...groups});
+  // set group functions
+  const setGroup = ( id, obj ) => {
+    const group = groups.find( group => group.id === id );
+    setGroups([
+      ...groups.filter( group => group.id !== id ),
+      Object.assign( group, obj ),
+    ]);
   };
-
-  // reset isInvalid
-  const resetIsInvalid = (id) => {
-    groups[id].isInvalid = false;
-    setGroups({...groups});
-  };
+  const setError = ( id, error ) => setGroup( id, { isInvalid: true, error });
+  const setValue = ( id, value ) => setGroup( id, { value });
+  const resetInvalid = id => setGroup( id, { isInvalid: false } );
 
   // form groups
   const formGroups = ids.map( id => {
-    const group = groups[id];
+    const group = groups.find(group => group.id === id);
     return <FormGroup {...{
-      id,
       group,
       key: id,
-      resetIsInvalid
+      setError,
+      setValue,
+      resetInvalid
     }}/>
   });
 
@@ -63,7 +62,7 @@ export default function Signup({ setStatus }){
     const form = event.currentTarget;
     const isEmpty = ids.some( id => form[id].value.length === 0 );
     if ( isEmpty  ) {
-      return ids.forEach( id => form[id].value.length === 0 && setError(id, 'empty'));
+      return ids.forEach( id => form[id].value.length === 0 && setError( id, 'empty' ));
     } else {
 
       // otherwise post info
@@ -104,7 +103,7 @@ export default function Signup({ setStatus }){
       { formGroups }
       <button
         type="submit"
-        className="mr-3 btn-primary">
+        className="mr-3 btn btn-primary">
         { content.Button }
       </button>
     </form>
