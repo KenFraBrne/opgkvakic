@@ -173,10 +173,11 @@
           },
           "address" : {
             "label" : "Adresse du domicile",
-            "placeholder" : "Entrez votre adresse personnelle",
+            "placeholder" : "Cherchez votre adresse domicile",
             "feedback" : {
-              "nok" : "L'adresse ne se trouve pas dans la zone de livraison",
-              "empty" : "L'adresse est vide"
+              "area" : "L'adresse ne se trouve pas dans la zone de livraison",
+              "empty" : "L'adresse est vide",
+              "chosen" : "Veuillez choisir l'adresse avec le menu déroulant"
             }
           }
         },

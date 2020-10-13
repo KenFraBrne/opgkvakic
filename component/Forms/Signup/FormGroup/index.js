@@ -5,7 +5,7 @@ import { LanguageContext } from 'context/Language';
 
 import suggestAddreses from 'util/suggestAddresses';
 
-export default function FormGroup({ group, setError, setValue, resetInvalid }){
+export default function FormGroup({ group, setGroup }){
 
   // group values 
   const { id, value, error, isInvalid } = group;
@@ -21,8 +21,8 @@ export default function FormGroup({ group, setError, setValue, resetInvalid }){
   // handle onChange
   const handleOnChange = (event) => {
     const { id, value } = event.currentTarget;
-    setValue( id, value );
-    if ( isInvalid ) resetInvalid(id);
+    setGroup( id, { value, isChosen: false } );
+    if ( isInvalid ) setGroup( id, { isInvalid: false } );
     if (id === 'address') getAddresses(value);
   };
 
@@ -55,11 +55,16 @@ export default function FormGroup({ group, setError, setValue, resetInvalid }){
     </button>
   );
 
-  // set address if clicked on
+  // set address if chosen
   const target = useRef(null);
   const click = (event) => {
     const isInside = target.current.contains(event.target);
-    if (isInside) setValue('address', event.target.textContent);
+    if (isInside) {
+      setGroup('address', {
+        value: event.target.textContent,
+        isChosen: true,
+      });
+    };
     setAddresses([]);
   };
 

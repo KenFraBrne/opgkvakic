@@ -173,10 +173,11 @@
           },
           "address" : {
             "label" : "Adresa stanovanja",
-            "placeholder" : "Upišite vašu adresu stanovanja",
+            "placeholder" : "Pretražite vašu adresu stanovanja",
             "feedback" : {
-              "nok" : "Adresa je izvan dostavnog područja",
-              "empty" : "Adresa je prazan"
+              "area" : "Adresa je izvan dostavnog područja",
+              "empty" : "Adresa je prazan",
+              "chosen" : "Molimo da izaberete adresu pomoću pretraživača"
             }
           }
         },

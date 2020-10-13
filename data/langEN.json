@@ -173,10 +173,11 @@
           },
           "address" : {
             "label" : "Home address",
-            "placeholder" : "Enter your home address",
+            "placeholder" : "Search your home address",
             "feedback" : {
-              "nok" : "Address is not within the delivery area",
-              "empty" : "Address is empty"
+              "area" : "Address is not within the delivery area",
+              "empty" : "Address is empty",
+              "chosen" : "Please choose the address from the dropdown menu"
             }
           }
         },
