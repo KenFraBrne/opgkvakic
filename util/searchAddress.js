@@ -9,6 +9,7 @@ export default function searchAddress(address){
   url.searchParams.append('county', county);
   url.searchParams.append('postalcode', postalcode);
   url.searchParams.append('countrycodes', 'hr');
+  url.searchParams.append('addressdetails', '1');
   url.searchParams.append('format', 'json');
   url.searchParams.append('limit', '1');
   return fetch(url.toString());

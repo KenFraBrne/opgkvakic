@@ -11,7 +11,7 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.post(async (req, res) => {
-  const { username, password, lang } = req.body;
+  const { username, password, address, lang } = req.body;
   const email = normalizeEmail(req.body.email);
   // check if email is ok
   if ( !isEmail(email) ) return res.status(400).end();
@@ -30,6 +30,7 @@ handler.post(async (req, res) => {
           username,
           password: hashedPassword,
           email,
+          address,
           verified: false,
           verifyToken,
         })

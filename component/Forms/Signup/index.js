@@ -5,6 +5,7 @@ import { LanguageContext } from 'context/Language';
 
 import FormGroup from 'component/Forms/Signup/FormGroup';
 
+const [ polygon ] = require('data/area.json').geometry.coordinates;
 import searchAddress from 'util/searchAddress';
 import inPolygon from 'util/inPolygon';
 
@@ -93,30 +94,32 @@ export default function Signup({ setStatus }){
   const checkArea = async () => {
     const { value } = groups.find( group => group.id === 'address' );
     const [ address ] = await searchAddress(value).then(res => res.json());
-    const [ polygon ] = require('data/area.json').geometry.coordinates;
-    const point = [
-      Number(address.lon),
-      Number(address.lat),
-    ];
-    const inArea = inPolygon(point, polygon);
+    const { lon, lat } = address;
+    const inArea = inPolygon( [lon, lat], polygon);
     if (!inArea) {
+      // if no, set address area error key
       return setGroup( 'address', {
         error: 'area',
         isChosen: false,
         isInvalid: true,
       })
     } else {
-      return postBody();
+      // if yes, make a verbose address object and change all numeric strings to numbers
+      const addressVerbose = {...address.address, lon, lat};
+      for (let [key, val] of Object.entries(addressVerbose)){
+        if (Number(val)) addressVerbose[key] = Number(val);
+      };
+      // and post it
+      return postData(addressVerbose);
     };
   };
 
-  // post groups data
-  const postBody = () => {
-    console.log('jesmo tu?');
-    return;
+  // post data
+  const postData = (addressVerbose) => {
     const entries = groups.map( group => [ group.id, group.value ] );
     const body = {
       ...Object.fromEntries(entries),
+      address: addressVerbose,
       lang: language.lang,
     };
     const promise = fetch('/api/user/create', {
