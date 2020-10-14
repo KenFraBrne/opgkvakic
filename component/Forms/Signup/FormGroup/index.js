@@ -32,11 +32,13 @@ export default function FormGroup({ group, setGroup }){
 
   // get adresses
   const getAddresses = (value) => {
+    setShow(true);
     clearTimeout(timer);
     const newTimer = setTimeout(() => {
       suggestAddreses(value)
         .then(res => res.json())
         .then(res => {
+          setShow(false);
           const { suggestions } = res;
           setAddresses(suggestions.map( suggestion => suggestion.text ));
         })
@@ -74,6 +76,14 @@ export default function FormGroup({ group, setGroup }){
     return () => document.removeEventListener('click', click);
   }, []);
 
+  // show spinner when loading address
+  const [ show, setShow ] = useState(false);
+  const spinner = (
+    <li className="list-group-item text-center">
+      <div className="spinner-border" role="status"/>
+    </li>
+  );
+
   // render
   return (
     <div className="form-group w-100">
@@ -93,7 +103,7 @@ export default function FormGroup({ group, setGroup }){
         style={{ zIndex: 99 }}
         className="position-relative">
         <ul className="list-group position-absolute w-100" >
-          { autocomplete }
+          { show && id === "address" ? spinner : autocomplete }
         </ul>
       </div>
     </div>
