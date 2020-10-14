@@ -103,19 +103,19 @@ const MyNavbar = () => {
         <Nav>
 
           <Link href="/cart" passHref>
-            <NavLink as="a" className="pl-4">
+            <NavLink as="a" className="px-4 px-md-3">
               <FiShoppingCart size="1.5em" color={cartColor}/>
             </NavLink>
           </Link>
           
           { user ? 
             <Link href="/user" passHref>
-              <NavLink as="a" className="pl-4 mr-2">
+              <NavLink as="a" className="px-4 px-md-3">
                 {user.username}
               </NavLink>
             </Link> :
             <Link href="/login" passHref>
-              <NavLink as="a" className="pl-4 mr-2">
+              <NavLink as="a" className="px-4 px-md-3">
                 {language.content.component.Navbar.navLinkRight}
               </NavLink>
             </Link> }
