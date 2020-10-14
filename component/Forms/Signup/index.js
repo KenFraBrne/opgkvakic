@@ -138,6 +138,7 @@ export default function Signup({ setStatus }){
         case 500: // Registration error
         case 503: // Verification email error
         case 511: // Signup required
+          setValidated(true);
           return setTimeout(() => setStatus(res.status), 500);
         case 400: // Email not good
         case 403: // Email exists
@@ -147,10 +148,14 @@ export default function Signup({ setStatus }){
     });
   };
 
+  // form validated state
+  const [ validated, setValidated ] = useState(false);
+
   // render
   return (
     <form
       noValidate
+      className={ validated ? "was-validated" : "" }
       onSubmit={handleFormSubmit}>
       { formGroups }
       <button
