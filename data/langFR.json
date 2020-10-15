@@ -147,7 +147,7 @@
         ]
       },
       "Signup" : {
-        "formGroups" : {
+        "FormGroup" : {
           "username" : {
             "label" : "Nom d'utilisateur",
             "placeholder" : "Entrez votre nom d'utilisateur",

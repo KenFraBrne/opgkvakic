@@ -147,7 +147,7 @@
         ]
       },
       "Signup" : {
-        "formGroups" : {
+        "FormGroup" : {
           "username" : {
             "label" : "Korisničko ime",
             "placeholder" : "Upišite vaše korisničko ime",            

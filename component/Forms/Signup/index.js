@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useContext } from 'react';
 import { LanguageContext } from 'context/Language';
 
-import FormGroup from 'component/Forms/Signup/FormGroup';
+import FormGroup from 'component/Forms/FormGroup';
 
-const [ polygon ] = require('data/area.json').geometry.coordinates;
-import searchAddress from 'util/searchAddress';
-import inPolygon from 'util/inPolygon';
+import inDeliveryArea from 'util/inDeliveryArea';
 
 export default function Signup({ setStatus }){
 
@@ -15,40 +13,33 @@ export default function Signup({ setStatus }){
   const { language } = useContext(LanguageContext);
   const content = language.content.component.Forms.Signup;
 
-  // group control ids
-  const ids = [
-    'username',
-    'password',
-    'email',
-    'address',
-  ];
-
-  // groups' state
-  const initGroups = ids.map( id => ({
-    id,
+  // group states
+  const initGroup = {
+    id: null,
     value: '',
     error: 'empty',
     isChosen: false,
     isInvalid: false,
-  }));
-  const [ groups, setGroups ] = useState(initGroups);
-
-  // set group function
-  const setGroup = ( id, obj ) => {
-    const group = groups.find( group => group.id === id );
-    setGroups([
-      ...groups.filter( group => group.id !== id ),
-      Object.assign( group, obj ),
-    ]);
   };
+  const emailGroup = useState({ ...initGroup, id: 'email' });
+  const usernameGroup = useState({ ...initGroup, id: 'username' });
+  const passwordGroup = useState({ ...initGroup, id: 'password' });
+  const addressGroup = useState({ ...initGroup, id: 'address' });
+  const groupList = [
+    usernameGroup,
+    emailGroup,
+    passwordGroup,
+    addressGroup,
+  ];
 
   // form group components to render
-  const formGroups = ids.map( id => {
-    const group = groups.find(group => group.id === id);
+  const formGroups = groupList.map( ([ group, setGroup ]) => {
+    const id = group.id;
     return <FormGroup {...{
-      group,
       key: id,
-      setGroup
+      group,
+      setGroup,
+      content: content.FormGroup[id],
     }}/>
   });
 
@@ -60,14 +51,18 @@ export default function Signup({ setStatus }){
 
   // check if group values are empty
   const checkEmpty = () => {
-    const isEmpty = groups.some( group => group.value.length === 0 );
+    const isEmpty = groupList.some( ([ group, _ ]) => group.value.length === 0 );
     if ( isEmpty ) {
       // if yes, set error key & isInvalid
-      const newGroups = groups.map( group => {
-        if ( group.value.length === 0 ) return {...group, error: 'empty', isInvalid: true }
-        else return {...group}
+      return groupList.forEach( ([ group, setGroup ]) => {
+        if (group.value.length === 0) {
+          setGroup({
+            ...group,
+            error: 'empty',
+            isInvalid: true
+          });
+        };
       });
-      return setGroups(newGroups);
     } else {
       // if no, check if address is chosen
       return checkChosen();
@@ -76,10 +71,12 @@ export default function Signup({ setStatus }){
 
   // check if address is chosen
   const checkChosen = () => {
-    const { isChosen } = groups.find( group => group.id === 'address' );
+    const [ group, setGroup ] = addressGroup;
+    const { isChosen } = group;
+    // if no, set address click error key
     if ( !isChosen ) {
-      // if no, set address click error key
-      return setGroup( 'address', {
+      return setGroup( {
+        ...group,
         error: 'chosen',
         isChosen: false,
         isInvalid: true,
@@ -92,31 +89,25 @@ export default function Signup({ setStatus }){
 
   // check if address is in delivery area
   const checkArea = async () => {
-    const { value } = groups.find( group => group.id === 'address' );
-    const [ address ] = await searchAddress(value).then(res => res.json());
-    const { lon, lat } = address;
-    const inArea = inPolygon( [lon, lat], polygon);
+    const [ group, setGroup ] = addressGroup;
+    const { inArea, addressVerbose } = await inDeliveryArea(group.value);
     if (!inArea) {
       // if no, set address area error key
-      return setGroup( 'address', {
+      return setGroup({
+        ...group,
         error: 'area',
         isChosen: false,
         isInvalid: true,
-      })
+      });
     } else {
-      // if yes, make a verbose address object and change all numeric strings to numbers
-      const addressVerbose = {...address.address, lon, lat};
-      for (let [key, val] of Object.entries(addressVerbose)){
-        if (Number(val)) addressVerbose[key] = Number(val);
-      };
-      // and post it
+      // otherwise post it
       return postData(addressVerbose);
     };
   };
 
   // post data
   const postData = (addressVerbose) => {
-    const entries = groups.map( group => [ group.id, group.value ] );
+    const entries = groupList.map( ([ group, _ ]) => [group.id, group.value]);
     const body = {
       ...Object.fromEntries(entries),
       address: addressVerbose,
@@ -128,7 +119,7 @@ export default function Signup({ setStatus }){
       body: JSON.stringify(body),
     });
     return resolveFetch(promise);
-  }
+  };
 
   // resolve based on fetch promise response
   const resolveFetch = (promise) => {
@@ -143,7 +134,12 @@ export default function Signup({ setStatus }){
         case 400: // Email not good
         case 403: // Email exists
         default:
-          return setGroup('email', { error: res.status, isInvalid: true });
+          const [ group, setGroup ] = emailGroup;
+          return setGroup({
+            ...group,
+            error: res.status,
+            isInvalid: true
+          });
       };
     });
   };

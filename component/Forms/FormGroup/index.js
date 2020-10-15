@@ -1,34 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { useContext } from 'react';
-import { LanguageContext } from 'context/Language';
-
 import suggestAddreses from 'util/suggestAddresses';
 
-export default function FormGroup({ group, setGroup }){
+export default function FormGroup({ group, setGroup, content }){
 
   // group values 
   const { id, value, error, isInvalid } = group;
 
-  // language change
-  const { language } = useContext(LanguageContext);
-  const content = language.content.component.Forms.Signup.formGroups[id];
-  const { placeholder, label } = content;
+  // form values
+  const { label, placeholder, feedback } = content;
 
-  // type
-  const type = id === 'password' || id === 'email' ? id : 'text';
-  
-  // handle onChange
-  const handleOnChange = (event) => {
-    const { id, value } = event.currentTarget;
-    setGroup( id, { value, isChosen: false } );
-    if ( isInvalid ) setGroup( id, { isInvalid: false } );
-    if (id === 'address') getAddresses(value);
-  };
-
-  // address debounce states
+  // addresses debounce states
   const [ timer, setTimer ] = useState(null);
   const [ addresses, setAddresses ] = useState([]);
+
+  // spinner show state
+  const [ show, setShow ] = useState(false);
 
   // get adresses
   const getAddresses = (value) => {
@@ -47,6 +34,18 @@ export default function FormGroup({ group, setGroup }){
     setTimer(newTimer);
   };
 
+  // handle onChange
+  const handleOnChange = (event) => {
+    const { id, value } = event.currentTarget;
+    setGroup({
+      ...group,
+      value,
+      isChosen: false,
+      isInvalid: false,
+    });
+    if (id === 'address') getAddresses(value);
+  };
+
   // autocomplete results
   const autocomplete = addresses.map( ( address, i ) =>
     <button
@@ -62,9 +61,10 @@ export default function FormGroup({ group, setGroup }){
   const click = (event) => {
     const isInside = target.current.contains(event.target);
     if (isInside) {
-      setGroup('address', {
-        value: event.target.textContent,
+      setGroup({
+        ...group,
         isChosen: true,
+        value: event.target.textContent,
       });
     };
     setAddresses([]);
@@ -76,8 +76,7 @@ export default function FormGroup({ group, setGroup }){
     return () => document.removeEventListener('click', click);
   }, []);
 
-  // show spinner when loading address
-  const [ show, setShow ] = useState(false);
+  // spinner ( when loading addresses )
   const spinner = (
     <li className="list-group-item text-center">
       <div className="spinner-border" role="status"/>
@@ -90,14 +89,16 @@ export default function FormGroup({ group, setGroup }){
       <label>{ label }</label>
       <input {...{
         id,
-        type,
         value,
         placeholder,
         required: true,
+        type: id === 'password' || id === 'email' ? id : 'text',
         className: isInvalid ? 'form-control is-invalid' : 'form-control',
         onChange: (event) => handleOnChange(event),
       }}/>
-      <div className="invalid-feedback">{ content.feedback[error] } </div>
+      <div className="invalid-feedback">
+        { feedback[error] }
+      </div>
       <div
         ref={target}
         style={{ zIndex: 99 }}
