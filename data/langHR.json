@@ -133,55 +133,69 @@
     },
     "Forms" : {
       "UserInfo" : {
-        "formGroups" : {
-          "username" :  "Korisničko ime",
-          "email" :  "Email",
-          "first" :  "Ime",
-          "last" :  "Prezime",
-          "address" :  "Adresa",
-          "telephone" :  "Broj mobitela ili telefona"
-        },
-        "Button" : [
-          "Izmjeni korisničke podatke",
-          "Izbriši korisnika"
-        ]
+        "Button" : {
+          "change" : "Izmjeni korisničke podatke",
+          "delete" : "Izbriši korisnika"
+        }
       },
       "Signup" : {
-        "FormGroup" : {
-          "username" : {
-            "label" : "Korisničko ime",
-            "placeholder" : "Upišite vaše korisničko ime",            
-            "feedback" : {
-              "empty" : "Korisničko ime je prazno"
-            }
-          },
-          "password" : {
-            "label" : "Lozinka",
-            "placeholder" : "Upišite vašu lozinku",
-            "feedback" : {
-              "empty" : "Lozinka je prazna"
-            }
-          },
-          "email" : {
-            "label" : "Email",
-            "placeholder" : "Upišite vaš email",
-            "feedback" : {
-              "400" : "Email nije dobar",
-              "403" : "Email vec postoji",
-              "empty" : "Email je prazan"
-            }
-          },
-          "address" : {
-            "label" : "Adresa stanovanja",
-            "placeholder" : "Pretražite vašu adresu stanovanja",
-            "feedback" : {
-              "area" : "Adresa je izvan dostavnog područja",
-              "empty" : "Adresa je prazan",
-              "chosen" : "Molimo da izaberete adresu pomoću pretraživača"
-            }
+        "Button" : "Registriraj se"
+      },
+      "FormGroup" : {
+        "username" : {
+          "label" : "Korisničko ime",
+          "placeholder" : "Upišite vaše korisničko ime",            
+          "feedback" : {
+            "empty" : "Korisničko ime je prazno"
           }
         },
-        "Button" : "Registriraj se"
+        "password" : {
+          "label" : "Lozinka",
+          "placeholder" : "Upišite vašu lozinku",
+          "feedback" : {
+            "empty" : "Lozinka je prazna"
+          }
+        },
+        "email" : {
+          "label" : "Email",
+          "placeholder" : "Upišite vaš email",
+          "feedback" : {
+            "400" : "Email nije dobar",
+            "403" : "Email vec postoji",
+            "empty" : "Email je prazan"
+          }
+        },
+        "address" : {
+          "label" : "Adresa stanovanja",
+          "placeholder" : "Pretražite vašu adresu stanovanja",
+          "feedback" : {
+            "area" : "Adresa je izvan dostavnog područja",
+            "empty" : "Adresa je prazan",
+            "chosen" : "Molimo da izaberete adresu pomoću pretraživača"
+          }
+        },
+        "first" : {
+          "label" : "Ime",
+          "placeholder" : "Unesite svoje ime",
+          "feedback" : {
+            "empty" : "Ime je prazno"
+          }
+        },
+        "last" : {
+          "label" : "Prezime",
+          "placeholder" : "Unesite svoje prezime",
+          "feedback" : {
+            "empty" : "Prezime je prazno"
+          }
+        },
+        "telephone" : {
+          "label" : "Broj mobitela ili fiksnog telefona",
+          "placeholder" : "Unesite svoj kontakt broj",
+          "feedback" : {
+            "empty" : "Kontakt broj je prazan",
+            "nok" : "Molimo unesite važeći broj"
+          }
+        }
       },
       "Contact" : {
         "formRows" : {

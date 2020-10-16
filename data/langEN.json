@@ -133,55 +133,69 @@
     },
     "Forms" : {
       "UserInfo" : {
-        "formGroups" : {
-          "username" :  "Username",
-          "email" :  "Email",
-          "first" :  "Name",
-          "last" :  "Last name",
-          "address" :  "Address",
-          "telephone" :  "Mobile or fixed phone number"
-        },
-        "Button" : [
-          "Modify user data",
-          "Delete user"
-        ]
+        "Button" : {
+          "change" : "Modify user data",
+          "delete" : "Delete user"
+        }
       },
       "Signup" : {
-        "FormGroup" : {
-          "username" : {
-            "label" : "Username",
-            "placeholder" : "Enter your username",
-            "feedback" : {
-              "empty" : "Username is empty"
-            }
-          },
-          "password" : {
-            "label" : "Password",
-            "placeholder" : "Enter your password",
-            "feedback" : {
-              "empty" : "Password is empty"
-            }
-          },
-          "email" : {
-            "label" : "Email address",
-            "placeholder" : "Enter your email",
-            "feedback" : {
-              "400" : "Email is not good",
-              "403" : "Email already exists",
-              "empty" : "Email is empty"
-            }
-          },
-          "address" : {
-            "label" : "Home address",
-            "placeholder" : "Search your home address",
-            "feedback" : {
-              "area" : "Address is not within the delivery area",
-              "empty" : "Address is empty",
-              "chosen" : "Please choose the address from the dropdown menu"
-            }
+        "Button" : "Register"
+      },
+      "FormGroup" : {
+        "username" : {
+          "label" : "Username",
+          "placeholder" : "Enter your username",
+          "feedback" : {
+            "empty" : "Username is empty"
           }
         },
-        "Button" : "Register"
+        "password" : {
+          "label" : "Password",
+          "placeholder" : "Enter your password",
+          "feedback" : {
+            "empty" : "Password is empty"
+          }
+        },
+        "email" : {
+          "label" : "Email address",
+          "placeholder" : "Enter your email",
+          "feedback" : {
+            "400" : "Email is not good",
+            "403" : "Email already exists",
+            "empty" : "Email is empty"
+          }
+        },
+        "address" : {
+          "label" : "Home address",
+          "placeholder" : "Search your home address",
+          "feedback" : {
+            "area" : "Address is not within the delivery area",
+            "empty" : "Address is empty",
+            "chosen" : "Please choose the address from the dropdown menu"
+          }
+        },
+        "first" : {
+          "label" : "First name",
+          "placeholder" : "Enter your first name",
+          "feedback" : {
+            "empty" : "First name is empty"
+          }
+        },
+        "last" : {
+          "label" : "Last name",
+          "placeholder" : "Enter your last name",
+          "feedback" : {
+            "empty" : "Last name is empty"
+          }
+        },
+        "telephone" : {
+          "label" : "Mobile or fixed phone number",
+          "placeholder" : "Enter your contact number",
+          "feedback" : {
+            "empty" : "Contact number is empty",
+            "nok" : "Please enter a valid number"
+          }
+        }
       },
       "Contact" : {
         "formRows" : {

@@ -1,14 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import { useContext } from 'react';
+import { LanguageContext } from 'context/Language';
+
 import suggestAddreses from 'util/suggestAddresses';
 
-export default function FormGroup({ group, setGroup, content }){
+export default function FormGroup({ group, setGroup }){
+  
+  // language
+  const { language } = useContext(LanguageContext);
+  const content = language.content.component.Forms.FormGroup;
 
   // group values 
-  const { id, value, error, isInvalid } = group;
+  const { id, value, error, isInvalid, readOnly } = group;
 
   // form values
-  const { label, placeholder, feedback } = content;
+  const { label, placeholder, feedback } = content[id];
 
   // addresses debounce states
   const [ timer, setTimer ] = useState(null);
@@ -23,11 +30,9 @@ export default function FormGroup({ group, setGroup, content }){
     clearTimeout(timer);
     const newTimer = setTimeout(() => {
       suggestAddreses(value)
-        .then(res => res.json())
-        .then(res => {
+        .then( addresses => {
           setShow(false);
-          const { suggestions } = res;
-          setAddresses(suggestions.map( suggestion => suggestion.text ));
+          setAddresses(addresses);
         })
         .catch(() => setAddresses([]));
     }, 1000);
@@ -83,6 +88,13 @@ export default function FormGroup({ group, setGroup, content }){
     </li>
   );
 
+  // form control className
+  const className = [
+    isInvalid ? 'is-invalid' : '',
+    readOnly ? 'font-weight-bold' : '',
+    readOnly ? 'form-control-plaintext' : 'form-control' ,
+  ].join(' ');
+
   // render
   return (
     <div className="form-group w-100">
@@ -90,14 +102,14 @@ export default function FormGroup({ group, setGroup, content }){
       <input {...{
         id,
         value,
+        readOnly,
+        className,
         placeholder,
-        required: true,
-        type: id === 'password' || id === 'email' ? id : 'text',
-        className: isInvalid ? 'form-control is-invalid' : 'form-control',
         onChange: (event) => handleOnChange(event),
+        type: id === 'password' || id === 'email' ? id : 'text',
       }}/>
       <div className="invalid-feedback">
-        { feedback[error] }
+        {  feedback[error] }
       </div>
       <div
         ref={target}

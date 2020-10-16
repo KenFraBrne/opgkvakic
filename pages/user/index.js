@@ -21,10 +21,12 @@ const UserPage = () => {
 
   return (
     <UserLayout>
-      <Container fluid className="py-2 px-3">
+      <div
+        className="container py-3"
+        style={{ maxWidth: 550 }}>
         <UserInfoForm {...props}/>
         <UserEraseModal {...props}/>
-      </Container>
+      </div>
     </UserLayout>
   );
 };

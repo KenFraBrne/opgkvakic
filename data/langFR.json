@@ -133,55 +133,69 @@
     },
     "Forms" : {
       "UserInfo" : {
-        "formGroups" : {
-          "username" : "Pseudo",
-          "email" :  "Email",
-          "first" :  "Prénom",
-          "last" :  "Nom de famille",
-          "address" : "Adresse",
-          "telephone" : "Numéro de téléphone"
-        },
-        "Button" : [
-          "Modifier les données",
-          "Supprimer le compte"
-        ]
+        "Button" : {
+          "change" : "Modifier les données",
+          "delete" : "Supprimer le compte"
+        }
       },
       "Signup" : {
-        "FormGroup" : {
-          "username" : {
-            "label" : "Nom d'utilisateur",
-            "placeholder" : "Entrez votre nom d'utilisateur",
-            "feedback" : {
-              "empty" : "Le nom d'utilisateur est vide"
-            }
-          },
-          "password" : {
-            "label" : "Mot de passe",
-            "placeholder" : "Entrez votre mot de passe",
-            "feedback" : {
-              "empty" : "Le mot de passe est vide"
-            }
-          },
-          "email" : {
-            "label" : "Adresse e-mail",
-            "placeholder" : "Entrez votre email",
-            "feedback" : {
-              "400" : "L'e-mail n'est pas bon",
-              "403" : "L'e-mail existe déjà",
-              "empty" : "L'e-mail est vide"
-            }
-          },
-          "address" : {
-            "label" : "Adresse du domicile",
-            "placeholder" : "Cherchez votre adresse domicile",
-            "feedback" : {
-              "area" : "L'adresse ne se trouve pas dans la zone de livraison",
-              "empty" : "L'adresse est vide",
-              "chosen" : "Veuillez choisir l'adresse avec le menu déroulant"
-            }
+        "Button" : "S'inscrire"
+      },
+      "FormGroup" : {
+        "username" : {
+          "label" : "Nom d'utilisateur",
+          "placeholder" : "Entrez votre nom d'utilisateur",
+          "feedback" : {
+            "empty" : "Le nom d'utilisateur est vide"
           }
         },
-        "Button" : "S'inscrire"
+        "password" : {
+          "label" : "Mot de passe",
+          "placeholder" : "Entrez votre mot de passe",
+          "feedback" : {
+            "empty" : "Le mot de passe est vide"
+          }
+        },
+        "email" : {
+          "label" : "Adresse e-mail",
+          "placeholder" : "Entrez votre email",
+          "feedback" : {
+            "400" : "L'e-mail n'est pas bon",
+            "403" : "L'e-mail existe déjà",
+            "empty" : "L'e-mail est vide"
+          }
+        },
+        "address" : {
+          "label" : "Adresse du domicile",
+          "placeholder" : "Cherchez votre adresse domicile",
+          "feedback" : {
+            "area" : "L'adresse ne se trouve pas dans la zone de livraison",
+            "empty" : "L'adresse est vide",
+            "chosen" : "Veuillez choisir l'adresse avec le menu déroulant"
+          }
+        },
+        "first" : {
+          "label" : "Prénom",
+          "placeholder" : "Entrez votre prénom",
+          "feedback" : {
+            "empty" : "Le prénom est vide"
+          }
+        },
+        "last" : {
+          "label" : "Nom de famille",
+          "placeholder" : "Entrez votre nom de famille",
+          "feedback" : {
+            "empty" : "Le nom de famille est vide"
+          }
+        },
+        "telephone" : {
+          "label" : "Numéro de téléphone mobile ou fixe",
+          "placeholder" : "Entrez votre numéro de contact",
+          "feedback" : {
+            "empty" : "Le numéro de contact est vide",
+            "nok" : "Veuillez saisir un numéro valide"
+          }
+        }
       },
       "Contact" : {
         "formRows" : {
