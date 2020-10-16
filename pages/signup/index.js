@@ -23,7 +23,7 @@ export default function HomePage() {
     switch(status) {
       case 201: // OK
       case 511: // Signup required
-        setTimeout(() => router.replace('/'), 3000);
+        setTimeout(() => router.replace('/'), 1500);
         return (
           <Container>
             { content.status[201].p.map( ( line, ind ) => <p key={ind}>{line}</p> ) }
