@@ -1,7 +1,7 @@
 export default function searchAddress(address){
 
   // treat output from arcgis
-  const [ street, postalcode, city, county, ...rest ] = address.split(', ');
+  const [ street, postalcode, city, ..._ ] = address.split(', ');
   const re = /\d+/;
   const number = re.test(street) ? re.exec(street)[0] : '';
   const name = number.length > 0 ? street.replace(` ${number}`, '') : street;
@@ -10,7 +10,6 @@ export default function searchAddress(address){
   const url = new URL("https://nominatim.openstreetmap.org/search");
   url.searchParams.append('street', number.length > 0 ? `${number} ${name}` : name);
   url.searchParams.append('city', city);
-  url.searchParams.append('county', county);
   url.searchParams.append('postalcode', postalcode);
   url.searchParams.append('countrycodes', 'hr');
   url.searchParams.append('addressdetails', '1');
@@ -31,7 +30,7 @@ export default function searchAddress(address){
       return entries.reduce( ( obj, entry ) => {
         const [ key, val ] = entry;
         if ( Number(val) ) return {...obj, [ key ]: Number(val)};
-        else return {...obj, ...entry}
+        else return {...obj, [key]: val}
       }, {})
     });
   return response;

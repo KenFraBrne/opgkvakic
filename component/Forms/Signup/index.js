@@ -27,8 +27,8 @@ export default function Signup({ setStatus }){
   const addressGroup = useState({ ...initGroup, id: 'address' });
   const groupList = [
     usernameGroup,
-    emailGroup,
     passwordGroup,
+    emailGroup,
     addressGroup,
   ];
 
@@ -39,7 +39,6 @@ export default function Signup({ setStatus }){
       key: id,
       group,
       setGroup,
-      content: content.FormGroup[id],
     }}/>
   });
 
