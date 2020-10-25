@@ -1,9 +1,15 @@
-import searchAddress from 'util/searchAddress';
-import inPolygon from 'util/inPolygon';
+import searchAddress from 'util/addressAutocomplete/searchAddress';
+import inPolygon from 'util/addressAutocomplete/inPolygon';
 import geojson from 'data/area.json';
 
+/**
+ * Test if arcGIS address is in delivery area
+ *
+ * @param {string} address - arcGIS suggest result
+ * @return {Promise<Object>} response
+ */
 export default function inDeliveryArea(address){
-  return searchAddress(address)
+  const response = searchAddress(address)
     .then( addressVerbose => {
       const { lon, lat } = addressVerbose;
       const [ polygon ] = geojson.geometry.coordinates;
@@ -13,4 +19,5 @@ export default function inDeliveryArea(address){
         addressVerbose,
       }
     });
+  return response;
 };

@@ -1,3 +1,10 @@
+/**
+ * Tests if point is in polygon (based on https://wrf.ecse.rpi.edu//Research/Short_Notes/pnpoly.html)
+ *
+ * @param {number[]} point - [x, y]
+ * @param {number[][]} polygon - [[x0, y0], ...]
+ * @return {boolean} isInPolygon
+*/
 module.exports = function inPolygon( point, polygon ){
   const [ x, y ] = point;
   const counter = (polygon) => {
@@ -7,5 +14,6 @@ module.exports = function inPolygon( point, polygon ){
     if (polygon.length == 2) return Number(inc);
     else return Number(inc) + counter(polygon.slice(1));
   }
-  return counter(polygon)%2 === 1;
+  const isInPolygon = counter(polygon)%2 === 1;
+  return isInPolygon;
 }

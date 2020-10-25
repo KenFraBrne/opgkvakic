@@ -5,7 +5,7 @@ import { LanguageContext } from 'context/Language';
 
 import FormGroup from 'component/Forms/FormGroup';
 
-import inDeliveryArea from 'util/inDeliveryArea';
+import { inDeliveryArea } from 'util/addressAutocomplete';
 
 export default function Signup({ setStatus }){
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useContext } from 'react';
 import { LanguageContext } from 'context/Language';
 
-import suggestAddreses from 'util/suggestAddresses';
+import { suggestAddreses } from 'util/addressAutocomplete';
 
 export default function FormGroup({ group, setGroup }){
   
