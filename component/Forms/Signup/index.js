@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import { LanguageContext } from 'context/Language';
 
-import FormGroup from 'component/Forms/FormGroup';
+import { FormGroup } from 'component/Forms/FormGroup';
 
 import { inDeliveryArea } from 'util/addressAutocomplete';
 

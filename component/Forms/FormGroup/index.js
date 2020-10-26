@@ -5,13 +5,31 @@ import { LanguageContext } from 'context/Language';
 
 import { suggestAddreses } from 'util/addressAutocomplete';
 
-export default function FormGroup({ group, setGroup }){
+/**
+ * @typedef Group
+ * @property {string} id
+ * @property {string} value
+ * @property {string} error
+ * @property {boolean} isChosen
+ * @property {boolean} isInvalid
+ * @property {boolean=} readOnly
+ */
+
+/**
+ * FormGroup component
+ *
+ * @param {object} props - form group props
+ * @param {Group} props.group - group state
+ * @param {React.Dispatch<React.SetStateAction<Group>>} props.setGroup - group setState
+ */
+export function FormGroup(props){
   
   // language
   const { language } = useContext(LanguageContext);
   const content = language.content.component.Forms.FormGroup;
 
   // group values 
+  const { group, setGroup } = props;
   const { id, value, error, isInvalid, readOnly } = group;
 
   // form values
