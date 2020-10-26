@@ -16,13 +16,18 @@ import { suggestAddreses } from 'util/addressAutocomplete';
  */
 
 /**
+ * @typedef Props
+ * @property {number | string} key
+ * @property {Group} group
+ * @property {React.Dispatch<React.SetStateAction<Group>>} setGroup
+ */
+
+/**
  * FormGroup component
  *
- * @param {object} props - form group props
- * @param {Group} props.group - group state
- * @param {React.Dispatch<React.SetStateAction<Group>>} props.setGroup - group setState
+ * @param {Props} props - form group props
  */
-export function FormGroup(props){
+const FormGroup = (props) => {
   
   // language
   const { language } = useContext(LanguageContext);
@@ -140,4 +145,6 @@ export function FormGroup(props){
     </div>
   );
 
-}
+};
+
+export default FormGroup;
